@@ -137,7 +137,7 @@
     <view class="goots-left">
       <image src="{{activity_img}}" mode="widthFix" class='goots-img'></image>
       <view class="goots-text"></view>
-      <view class="goods_yang">倒计时：{{residue_time}}</view>
+      <view class="goods_yang">{{residue_time}}后结束</view>
     </view>
     <view class="goots-right">
       <view class="titleColor">{{activity_name}}</view>

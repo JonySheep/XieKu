@@ -47,7 +47,8 @@
 
         <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav" >已结束</view>
      
-    
+  
+
       </view>
       <import src="/pages/common/lib/templet.wxml"/>
       

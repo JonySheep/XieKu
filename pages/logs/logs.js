@@ -55,7 +55,9 @@ Page({
               //var ceshi = genre == 1 ? 'ceshi' : (genre == 2 ? 'ceshi1' : 'ceshi2' );
               var data  = rsf.data.data    
               var lg    = data.length
+              
               for (var i = 0; i < lg;i++){
+                console.log(data[i].residueTime)
                   data[i].residue_time = that.hms(data[i].residueTime,1)
               }
               //如果是进行中的活动
