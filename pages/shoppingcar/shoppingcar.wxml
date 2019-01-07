@@ -1,0 +1,48 @@
+<!--购物车页面-->
+<view class="shoppingcarmain">
+    <view style='margin-bottom: 100rpx;'>
+      <view class='carlist-item' wx:for="{{shoplist}}"  wx:key="*this" wx:for-index="cindex">
+        <view class='checkicon'>
+          <image bindtap="switchSelect" data-index="{{cindex}}" src="{{item.status==0?'../../image/circle.png':'../../image/money.png'}}" style='margin-top:50rpx'></image>
+        </view>
+        <view class='carlist-item-img'>
+          <image src='{{imgUrl+item.image}}'></image>
+        </view>
+        <view class='carlist-item-info'>
+          <view class='carlist-item-info-title color_33 font-size28'>{{item.goods_name}}fasdfadsfasdfasdfadfasdfads</view>
+          
+          <view class='flex'>
+              <view>
+                <view class='color_ff0 font-size28 m_top25' wx:if='{{item.allprice}}'>￥{{item.allprice}}</view>
+                <view class='color_ff0 font-size28 m_top25' wx:if='{{!item.allprice}}'>￥{{item.price}}</view>
+                <view class='font-size24 color_a3 m_top15' style='font-size:24rpx;color:#a3a3a3'>库存： {{item.stock}}件                      </view>
+          </view>
+            
+            <view class='addnum font-size24'>
+
+                <view data-index='{{cindex}}' data-id='{{item.id}}'  class='color_ffe' bindtap='jia'>+</view>
+                <view style='position: relative;'>
+                  <input style='height:50rpx;line-height: 50rpx;' data-val='' value='{{item.goods_num}}'></input>
+                </view>
+                <view data-index='{{cindex}}' data-num='{{item.goods_num}}' data-id='{{item.id}}' bindtap='jian'>-</view>
+              </view>
+          </view>      
+        </view>
+      </view>
+    </view>
+    
+    <view class='fxiedbtm flex'>
+      <view class='allchecked'bindtap="allSelect">
+        <image src="{{isAllSelect?'../../image/money.png':'../../image/circle.png'}}"></image>
+        <text class='font-size28 color_33'>全选</text>
+      </view>
+      <view class='font-size28' style='padding-top:5rpx'>       
+        <text class='color_ff0' style='margin-left:20rpx'>总计:￥{{totalMoney}}</text>
+      </view>
+      <view class='btngroup'>
+        <view class='bg_color00 color_ffe' bindtap='onRemoveFn'>移除</view>
+        <view bindtap='overpayFn' class='bg_colorffe color_33'>结算</view>
+      </view>
+    </view>
+  
+</view>

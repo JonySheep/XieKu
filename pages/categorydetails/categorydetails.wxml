@@ -1,0 +1,30 @@
+<view class='search'>
+  <view class='header-bd'>
+      <image class='sea' src="https://www.swahouse.com/index.php/image/search.png"></image>
+    <input placeholder-class="center" class='search_input' type='text' bindinput='getkeyFn' placeholder='搜索'>
+    </input>
+
+  </view>
+</view>
+<view class='header'>
+  <text class="{{sort==0?'checolor': ''}}" data-sort='0' bindtap='changeinfoFn'>综合</text>
+  <text class="{{sort==1?'checolor': ''}}" data-sort='1' bindtap='changeinfoFn'>最新</text>
+  <text class="{{sort==2?'checolor': ''}}" data-sort='2' bindtap='changeinfoFn'>价格</text>
+  <text class="{{sort==3?'checolor': ''}}" data-sort='3' bindtap='changeinfoFn'>销量</text>
+</view>
+<view class='display'>
+<view class='main' wx:for='{{categorydetail}}' wx:for-item="cate" wx:key="*this" data-goodsid='{{cate.id}}' bindtap='gotoInfoFn'>
+<view class='img_box'>
+  <image src='{{cate.cover1}}' class='image'></image>
+</view>
+  <view class='main-title'>
+    <text>{{cate.title}}</text>
+  </view>
+  <view class='main-price'>
+    <text>￥{{cate.price}}</text>
+  </view>
+  <view class='main-brandavailable'>
+    <text>销量：{{cate.sale}}</text>
+  </view>
+</view>
+</view>

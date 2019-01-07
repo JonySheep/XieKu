@@ -1,0 +1,58 @@
+/* pages/shoplist/shoplist.wxss */
+.box-title{
+  text-align: center;
+  height: 104rpx;
+  line-height: 104rpx;
+  font-size: 28rpx;
+  color: #a1a1a1;
+  width: 710rpx;
+  margin: 0 auto;
+  border-bottom:solid 1px #ddd;
+}
+.item-box{
+  height: 131rpx;
+  width: 710rpx;
+  border-bottom:solid 1px #ddd;
+  margin: 0 auto;
+  line-height: 131rpx;
+}
+.name-box{
+  width: 460rpx;
+  height: 96rpx;
+  padding-top: 35rpx;
+  margin-left: 35rpx;
+  float: left;
+}
+.name{
+  font-size: 26rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+.tips{
+  font-size: 26rpx;
+  color: #a6a6a6;
+  height: 30rpx;
+  line-height: 30rpx;
+  margin-top: 10rpx;
+}
+.juli{
+  width: 140rpx;
+  font-size: 26rpx;
+  color: #a6a6a6;
+  float: left;
+}
+.img-box{
+  height: 67rpx;
+  width: 69rpx;
+  border-left: solid 1px #ddd;
+  float: left;
+  margin-top: 30rpx;
+  text-align: center;
+}
+.img-box image{
+  height: 40rpx;
+  width: 36rpx;
+  display: block;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}

@@ -1,0 +1,165 @@
+<import src="../common/lib/templet.wxml" />
+<view class="common-wrapper bgf5f5f5" class="{{login ? '' : 'hidden'}}" >
+ <view class='header'>
+   <view class="header-center">
+    <view class="header-top-nouser header-top">
+      <view class='display'>
+        <view class='div'>
+        
+        <block  wx:if="{{userinfo['avatarUrl'] != undefined}}">
+        <image class='image' style="margin-bottom:2rpx;" src="{{userinfo['avatarUrl']}}"></image>
+        </block>
+         <block wx:else>
+         <image class='image' style="margin-bottom:2rpx;" src="../../image/touxiang.png"></image>
+         </block>
+      </view>
+
+     <view class='display1'>
+       <view class='username'>
+     
+        <block  wx:if="{{userinfo['nickName'] != undefined}}">
+             <text>{{userinfo['nickName']}}\n</text>
+        </block>
+         <block wx:else>
+              <text>请您注册\n</text>
+         </block>   
+      </view>
+      <view class='mobile'>
+        <block  wx:if="{{userinfo['mobile'] != undefined}}">
+        <text>会员用户<text class='mobile-tel'>（{{userinfo['mobile'] ? userinfo['mobile'] : '手机号授权送积分'}}）</text></text>
+        </block>
+         <block wx:else>
+         <text>未注册<text class='mobile-tel'>（手机号授权送积分）</text></text>
+         </block>
+      </view>
+     </view>
+     <image src='../../image/xieku.png' class='xieku'></image>
+      </view>
+
+      <view class='integral'>
+        <block  wx:if="{{userinfo['integral'] != undefined}}">           
+            <text class="wocao">{{userinfo['integral']}}</text>
+            <text>积分</text>         
+          </block>
+           <block wx:else>
+           <text>0积分</text>
+        </block>
+      </view>
+      <view class="duihuan" >
+        <button class='integral-button' bindtap="getLogs">积分兑换</button>
+      </view>
+    </view>
+   
+  </view>
+  
+ </view>
+
+  <view class="myInfo-order">
+    <view class="myInfo-title" id='0' bindtap="goOrderlist">我的订单
+    </view>
+    <view class='order'>
+      <view class="order_status" id='0' bindtap="goOrderlist">
+        <image src='https://www.swahouse.com/image/dai.png'>
+        </image>
+        <view style='color:#666666'>待付款</view>
+      </view>
+      <view class="order_status" id='1' bindtap="goOrderlist">
+        <image src='https://www.swahouse.com/image/shou.png'>
+        </image>
+        <view style='color:#666666'>待发货</view>
+      </view>
+      <view class="order_status" id='2' bindtap="goOrderlist">
+        <image src='https://www.swahouse.com/image/pin.png'>
+        </image>
+        <view style='color:#666666' id='10' bindtap="goOrderlist">待收货</view>
+      </view>
+      <view class="order_status" id='5' bindtap="goOrderlist">
+        <image src='/image/dui.png'>
+        </image>
+        <view style='color:#666666'>已完成</view>
+      </view>
+    </view>
+    <block>
+      <view style="padding:24rpx 40rpx 0 40rpx;font-size: 28rpx;">我的优惠券
+      </view>
+    </block>
+    <scroll-view wx:if="{{coupons}}" scroll-x="true" style="width:100%;white-space:nowrap; padding:12px 20px 0 20px;">
+      <block>
+        <view class='coupon' wx:for="{{coupons}}" wx:for-item="coupon" wx:key="index" >
+          <image class='coupon_img' src="{{coupon.is_use ? 'https://www.swahouse.com/image/grey.png' : 'https://www.swahouse.com/image/yellow.png'}}"></image>
+          <view class="coupon_two">
+            <view class='cou_y'>￥</view>
+            <view class='cou_pri'>{{coupon.info.face_money}}</view>
+            <view class="cou_yang">
+                <view class='cou_y3'>优惠券</view>
+                <view class='cou_y2'>{{coupon.info.top_money ? '满'+coupon.info.top_money+'元即可使用' : '无使用门槛'}}</view>
+            </view>            
+            <view class='cou_status' >{{coupon.is_use == 1? '已使用' : '未使用'}}</view>
+            
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <scroll-view wx:if="{{coupons.length<1}}" scroll-x="true" style=" white-space: nowrap;">
+      <view style="text-align:center;">
+        <image class="img" src="https://www.swahouse.com/image/icon-noorder.png"></image>
+        <view style="font-size:24rpx;color:#ccc">没有优惠券</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="myInfo-con">
+    <view bindtap="toSc" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+      <image class='left' src="https://www.swahouse.com/../../image/mon.png"></image>
+      <text>我的积分\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+    <view bindtap="toCurproject" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+      <image class='left' src="https://www.swahouse.com/../../image/coll.png"></image>
+      <text>我的收藏\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+    <view bindtap="toCall" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+      <image class='left' src="https://www.swahouse.com/../../image/add.png"></image>
+      <text>我的地址\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+    <view bindtap="toRegisterTel" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+      <image class='left' src="https://www.swahouse.com/../../image/phone.png"></image>
+      <text>绑定手机\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+   <view bindtap="goToOrder" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+      <image class='left' src="https://www.swahouse.com/../../image/mine.png"></image>
+      <text>预约服务\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+    <view bindtap="goToQuestion" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+      <image class='left' src="https://www.swahouse.com/../../image/question.png"></image>
+      <text>常见问题\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+    <view bindtap="goToOurs" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+      <image class='left' src="https://www.swahouse.com/../../image/mine.png"></image>
+      <text>关于我们\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+    <view bindtap="toFeedback" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+      <image class='left' src="https://www.swahouse.com/../../image/mine.png"></image>
+      <text>意见反馈\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+    <view bindtap="callTel" data-id="{{id}}" hover-class="tapclass" class="myInfo-item">
+      <image class='left' src="https://www.swahouse.com/../../image/call.png"></image>
+      <text>联系我们\t</text>
+      <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
+    </view>
+  </view>
+</view>
+
+<!-- 未授权显示 -->
+<view  class="{{login ? 'hidden' : ''}} yxgayp" >
+  <image src="http://bb3.cqjydjsm.com/image/xieshelogo.png" class="shoquda" ></image>
+  <view class="yxgaaa">给您不一样的生活体验</view>
+  <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="button_yang">授权登录</button>
+</view>

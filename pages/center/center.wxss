@@ -1,0 +1,406 @@
+@import "../common/lib/public.wxss";
+
+page {
+  background-color: #f5f5f5;
+  height: 100%;
+}
+
+.common-wrapper {
+  text-align: left;
+}
+
+.header{
+  display:flex;
+  justify-content:center;
+  width:100%;
+  height:340rpx;
+  background-color:white;
+  border-bottom:18rpx #f5f5f6 solid;
+}
+.yxgayp{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.shoquda{
+    width:152rpx;
+    height:152rpx;
+    top:10%;
+    position:absolute;
+    left:40%;
+}
+.yxgaaa{
+    position:absolute;
+    text-align:center;
+    top:30%;
+    width:100%;
+    font-weight:bold;
+    font-size:20px;
+}
+.yxgaa{
+    position:absolute;
+    top:34%;
+    text-align:center;
+    width:100%;
+    font-size:17px;
+    font-weight:400;
+}
+.header-center {   
+    background: url(https://www.swahouse.com/image/top_bck.png);
+    width:690rpx;
+    height:280rpx;
+    border-radius:10rpx;
+    margin-top:30rpx;
+}
+.header-top {
+ 
+  padding-bottom: 60rpx;
+
+}
+.button_yang{
+  position:absolute;
+  top:50%;
+  width:600rpx;
+  height:86rpx;
+  left:10%;
+  background: #ffe202;
+  font-weight:500;
+  
+}
+.wocao{
+  font-size:60rpx;
+}
+.div{
+
+  margin-left: 40rpx;
+  margin-top: 25rpx;
+  
+}
+.integral{
+  padding-left: 70rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+  float: left;
+  padding-top:5rpx;
+}
+
+.integral-button{
+
+  font-size: 25rpx;
+  line-height: 50rpx;
+  text-align: center;
+  background-color: #ffe202;
+  height: 50rpx;
+  width: 170rpx;
+  border: black 2rpx solid;
+  margin-left: 460rpx;
+}
+.hidden{
+
+  display: none;
+}
+.display{
+
+  display:flex;
+  
+}
+.duihuan{
+  margin-top:30rpx;
+}
+.display1{
+  display: flex;
+  flex-direction :column;
+}
+
+.header-top .image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  margin-right: 10rpx;
+
+}
+
+.header-top .username {
+  font-size: 30rpx;
+  height: 50rpx;
+  width: 350rpx;
+  padding-top: 40rpx;
+  font-weight: bold;
+}
+
+.header-top .mobile {
+  font-size: 25rpx;
+font-weight: bold;
+}
+
+.mobile-tel{
+ font-size: 20rpx;
+ font-weight:normal;
+}
+
+.xieku{
+  height: 160rpx;
+  width: 115rpx;
+  margin-left:40rpx;  
+}
+
+.header-info {
+  font-size: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.info-title{
+  margin-bottom:10rpx;
+}
+
+.info-number text {
+  position: relative;
+  font-size: 48rpx;
+}
+
+.myInfo-order {
+  color: #999999;
+  overflow: hidden;
+  background-color: #fff;
+  padding-bottom: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.myInfo-title {
+  font-size: 28rpx;
+  padding: 24rpx 40rpx;
+  height: 30rpx;
+  border-bottom: 5rpx  #f5f5f6 solid;
+  margin-bottom: 20rpx;
+}
+
+.myInfo-order .img {
+  width: 73rpx;
+  height: 40rpx;
+}
+
+.prolist-content-show {
+  padding-bottom:10rpx;
+  width: 620rpx;
+  height: 210rpx;
+  font-size: 26rpx;
+  margin-right: 40rpx;
+  background-color: #fff;
+  display: inline-block;
+}
+
+.prolist-content-show .pro-item {
+   height: 176rpx;   
+  display: flex;
+  display: -webkit-flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 30rpx 20rpx 0 30rpx;
+  border: 1rpx solid rgba(71, 95, 124, 0.25);
+  border-radius: 2px;
+  box-shadow: 0rpx 6rpx 10rpx 0rpx rgba(28, 60, 97, 0.15);
+}
+
+.prolist-content-show:first-child {
+  padding-left: 40rpx;
+}
+
+.prolist-content-show .pro-image {
+  position: relative;
+  border: 1rpx solid #FFFFFF;
+}
+
+.prolist-content-show .pro-image .pro-ordered-bg {
+  display: flex;
+  width: 140rpx;
+  height: 104rpx;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(28, 60, 97, 0.75);
+}
+
+.prolist-content-show .pro-image .pro-ordered-text {
+  font-size: 20rpx;
+  color: #1c3c61;
+  text-align: center;
+  width: 100%;
+  height: 32rpx;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 2rpx solid rgba(28, 60, 97, 0.75);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.prolist-content-show .pro-image image {
+  width: 140rpx;
+  height: 104rpx;
+  background-color: #444749;
+  box-shadow: 0 6rpx 10rpx 0 rgba(28, 60, 97, 0.25);
+}
+
+.prolist-content-show .pro-detail {
+  text-align: left;
+  margin-top: 10rpx;
+  margin-left: 24rpx;
+  font-size: 26rpx;
+}
+
+.prolist-content-show .pro-detail .item-detail {
+  height: 50rpx;
+}
+
+.myInfo-con {
+  color: #999999;
+  font-size: 28rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  padding-left: 40rpx;
+  overflow: hidden;
+}
+
+.myInfo-con .myInfo-item {
+  height: 104rpx;
+  padding-right: 40rpx;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.myInfo-con .bb {
+  border-bottom: 1rpx solid #eee;
+}
+.myInfo-con text{
+  margin-right: 72%;
+}
+.myInfo-con .right {
+  float: right;
+  width: 12rpx;
+  height: 24rpx;
+}
+.myInfo-con .left{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.myInfo-bottom {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.myInfo-bottom .call {
+  font-size: 11px;
+  width: 97px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 16px;
+  border: 2rpx solid #b5b5b5;
+  margin: 30px auto 16px;
+  background-color: #fff;
+}
+
+.myInfo-bottom .call image {
+  width: 15px;
+  height: 12px;
+  vertical-align: middle;
+  margin-bottom: 4px;
+  margin-right: 5px;
+}
+
+.tapclass {
+  background-color: #fff;
+}
+
+.txt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.photo{
+  width:16px;
+  height:16px;
+  background-color:#fff;
+  border-radius: 8px;
+  position: relative;
+  margin-left: 30%;
+  top:-14px;
+}
+.order{
+
+  width: 100%;
+  height:80rpx;
+  display: flex;
+  justify-content:space-around;
+}
+.coupon_img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width : 100%;
+  height: 100%;
+}
+.coupon_two{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.order_status{
+
+  font-size:12px;
+  color: black;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.order_status image{
+  width: 24px;
+  height: 24px;
+}
+.coupon{
+  position: relative;
+  display: inline-flex;
+  width:170px;
+  height:67px;
+  margin-right: 15rpx;
+}
+.cou_yang{
+  float: left;
+  margin-top:35rpx;
+}
+.cou_pri{
+  font-size:24px;  
+  color: white; 
+  float: left;
+  margin-top:35rpx;
+}
+.cou_y{
+  color: white;
+  padding-top:55rpx;
+  padding-left:10px;
+  font-size:14px;
+  float: left;
+}
+.cou_y2{
+ color: white;
+ font-size: 10px;
+}
+.cou_y3{
+  color:white;  
+  font-size:14px;
+}
+.cou_status{
+  color:#d8d8d6;
+  position:absolute;
+  right:10px;
+  top:26px;
+  font-size:12px;
+}

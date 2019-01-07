@@ -1,0 +1,8 @@
+<!--pages/adress/adress.wxml-->
+<view class="address">杭州市-滨江区-市民中心</view>
+<view>
+<button class='btn' >保存</button>
+</view>
+<view>
+<button class='btn2' >删除</button>
+</view>

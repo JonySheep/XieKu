@@ -1,0 +1,15 @@
+<view>
+  <view class='logisticsinfo'>
+
+  <view class='logisticsinfo-title' >{{company}}  {{order_sn}}</view>
+  <view class='logisticsinfo-list' wx:for="{{speedlist}}" wx:key="index">
+      <view class='speed-border'></view>
+      <view class='speed-dian'></view>
+      <view style='padding:20rpx;'>
+        <view class='info-context' style=''>{{item.context}}</view>
+        <view class='info-time'>{{item.time}}</view>
+      </view>      
+  </view>
+    
+  </view>
+</view>

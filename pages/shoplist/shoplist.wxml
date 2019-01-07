@@ -1,0 +1,17 @@
+<!--pages/shoplist/shoplist.wxml-->
+<view class='box-title'>仅显示距离你最近的20家门店</view>
+<scroll-view scroll-y="true" style='height:{{(winHeight/46*41.5)}}px;'>
+  <view class='item-box' wx:for="{{storeList}}" wx:key="index">
+      <view class='name-box' data-name="{{item.title}}" data-id="{{item.id}}" bindtap='chosestroe'>
+        <view class='name'>{{item.title}}</view>
+        <view class='tips'>{{item.address}}</view>
+      </view>
+      <view class='juli'>
+        {{item.distance}}
+      </view>
+      <view class='img-box'>
+        <image src='../../image/dinwei_03.png' data-lat="{{item.lat}}" data-lng="{{item.lng}}"
+         data-name="{{item.title}}" data-address="{{item.address}}" bindtap='openMapFn'></image>
+      </view>
+  </view>
+</scroll-view>

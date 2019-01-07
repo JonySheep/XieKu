@@ -1,0 +1,91 @@
+
+  <swiper indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" indicator-active-color="#ffe202"> 
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode='widthFix'  style="width:100%;" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="functional">
+    <view class="functional1">
+      <view>我的积分：<span style="color:red;">{{integral}}</span></view>
+      <view bindtap="dhjl" >兑换记录</view>
+    </view>
+    <view class="functional2">
+      <view>
+        <image src='https://www.swahouse.com/image/welfare2.png' style="width:120rpx;" mode="widthFix" bindtap="preferenceCombo" ></image>
+        <text style='display:block;line-height:2rpx;'>积分说明</text>
+        
+      </view>
+    
+      <view bindtap='toCoupons'>
+        <image src='https://www.swahouse.com/image/welfare4.png' style="width:120rpx;" mode="widthFix" ></image>
+        <text style='display:block;line-height:2rpx;' >领优惠券</text>
+      </view>
+         <view>
+        <image src='https://www.swahouse.com/image/welfare3.png' style="width:120rpx;" mode="widthFix" bindtap="preferenceCombo" ></image>
+        <text style='display:block;line-height:2rpx;'>去赚积分</text>
+      </view>
+    </view>
+ 
+  </view>
+
+
+  <view class="advertisement">
+    <view class="adver-1"><image src='https://www.swahouse.com/image/welfare5.png'mode="widthFix" style='width:80%;'></image></view>
+   <view class='adver-2'>
+    <text>如何获取积分？ \n请点击查看</text>
+   </view>
+   <view class="adver-3"><image src='https://www.swahouse.com/image/welfare6.png'mode="widthFix" style='width:90%;'></image></view>
+  </view>
+   <view class='goods'>
+     <view class="swiper-tab">
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav"> 进行中</view>
+
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav" >即将开始</view>
+
+        <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav" >已结束</view>
+     
+    
+      </view>
+      <import src="/pages/common/lib/templet.wxml"/>
+      
+      <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="min-height:1000rpx; " bindchange="bindChange">  
+        <swiper-item>  
+          <view>
+            <scroll-view scroll-y style="height: 1100rpx;" >
+              <block wx:for="{{ceshi}}" wx:for-item="item" wx:key="*this">
+                <!-- is就是模板名字name值 -->
+                <template is="welfare-goots" data="{{...item}}" />
+              </block>
+              </scroll-view>          
+          </view>  
+        </swiper-item>  
+
+        <swiper-item>  
+          <view>
+            <scroll-view scroll-y style="height: 1100rpx;" >
+              <block wx:for="{{ceshi1}}" wx:for-item="item" wx:key="*this">
+                <!-- is就是模板名字name值 -->
+                <template is="welfare-goots" data="{{...item}}" />
+              </block>
+            </scroll-view>  
+          </view>  
+        </swiper-item>  
+
+        <swiper-item>  
+          <view>
+            <scroll-view scroll-y style="height: 1100rpx;" >         
+              <block wx:for="{{ceshi2}}" wx:for-item="item" wx:key="*this">
+                <!-- is就是模板名字name值 -->
+                <template is="welfare-goots" data="{{...item}}" />
+              </block>
+            </scroll-view>  
+          </view>  
+        </swiper-item>  
+ 
+      </swiper>  
+
+      
+    </view> 

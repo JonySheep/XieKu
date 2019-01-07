@@ -1,0 +1,17 @@
+<view class='main'>
+  <view>
+    <image src='../../image/tel.png' class='image'></image>
+  </view>
+  <view>
+     <text class='text1'>斜库舒适家</text>
+  </view>
+  <view  class='text2'>
+    <text>已绑定手机</text>
+  </view>
+  <view  class='text1'>
+    <text>{{tel}}</text>
+  </view>
+  
+  
+  <button class='button' bindtap='changeTel'>更换绑定</button>
+</view>

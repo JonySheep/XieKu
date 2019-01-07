@@ -1,0 +1,36 @@
+.logisticsinfo-title{
+  font-size: 28rpx;
+  padding: 20rpx;
+  line-height: 40rpx;
+  border-bottom: 1px solid #ddd;
+  margin-bottom:40rpx
+}
+.logisticsinfo-list{
+  min-height: 180rpx;
+  padding-left: 20rpx
+}
+.speed-border{
+  position:absolute;
+  width:1rpx;
+  height:180rpx;
+  border-left:2rpx dashed #ddd
+}
+.speed-dian{
+  position:absolute;
+  left:10rpx;
+  margin-top:-10rpx; 
+  width:20rpx;
+  height:20rpx;
+  background: rgb(255,226,2);
+  border-radius: 10rpx
+}
+.info-context{
+  font-size: 28rpx;
+  color:#333;
+}
+.info-time{
+  font-size: 24rpx;
+  color:#999;
+  margin-top: 20rpx;
+  padding-left: 5rpx
+}

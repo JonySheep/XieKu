@@ -1,0 +1,10 @@
+<view>
+  <view style='padding: 20rpx'>
+    <view>
+      <textarea bindinput='onChangeFn' class='textareabox' value='{{text}}' placeholder='请填写反馈信息'></textarea>
+    </view>
+    <view class='commit' bindtap='onSubmitFn'>
+      <text class='commit-btn'>提交</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,121 @@
+page{
+  background-color:#e8e9ed;
+}
+.page{
+
+  background-color: #e8e9ed;
+  width: 100%;
+ 
+}
+.yjlq{
+  position:absolute;
+  top:100rpx;
+  right:150rpx;
+  width:40%;
+  height:40%;
+}
+.main{
+  height:300rpx;
+  width: 100%;
+  position: relative;
+}
+
+.main-background{
+  height: 270rpx;
+  width: 700rpx;
+  padding-left: 30rpx;
+  padding-top: 30rpx; 
+}
+
+.main-div{
+  height: 130rpx;
+  width: 500rpx;
+  position:absolute;
+  top:40rpx;
+  left: 105rpx;
+  text-align: center;
+}
+
+.main-dollar{
+    color:white;
+    font-size:80rpx;
+    width:60rpx;
+    display:inline-block;
+    position:relative;
+    height:100%;
+}
+
+.main-price{
+  color: white;
+  font-size: 70rpx;
+}
+.yangzong{
+  display: inline-block;
+  position: absolute;
+  top: -10;
+  left: 0;
+}
+.main-number{
+
+  font-size: 100rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.main-image1{
+  height: 40rpx;
+  width: 40rpx;
+  position:absolute;
+  top:250rpx;
+  left:70rpx;
+
+}
+
+.main-image2{
+  height: 40rpx;
+  width: 40rpx;
+  position:absolute;
+  top:200rpx;
+  left:70rpx;
+}
+
+.main-text1{
+  position:absolute;
+  top:207rpx;
+  left: 130rpx;
+  font-size: 25rpx;
+  color: #ffdc01;
+}
+
+.main-text2{
+  position:absolute;
+  top:253rpx;
+  left: 130rpx;
+  font-size: 25rpx;
+  color: #e5e5e5;
+}
+
+.main-button{
+
+  position: absolute;
+  top: 230rpx;
+  left: 550rpx;
+  width: 150rpx;
+  height: 60rpx;
+  font-size: 23rpx;
+  background-color: #ffdc01;
+  color: white;
+  line-height: 60rpx;
+}
+.main-button-use{
+  position:absolute;
+  top:230rpx;
+  left:550rpx;
+  width:150rpx;
+  height:60rpx;
+  font-size:23rpx;
+  background-color:#cccccc;
+  color:white;
+  line-height:60rpx;
+
+}

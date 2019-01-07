@@ -1,0 +1,58 @@
+<!--pages/newAdd/newAdd.wxml-->
+<form bindsubmit="{{action}}">
+  <view class='new-add'>
+    <view class='new-add-list'>
+      <text>收货人</text>
+      <input type='text' name='users_name' value="{{users_name}}" focus='true' placeholder='请输入姓名'></input>
+    </view>
+    <view class='new-add-list'>
+      <text>手机号码</text>
+      <input type='number' maxlength='11' name='users_tel' value="{{users_tel}}" placeholder='请输入手机'></input>
+    </view>
+    <view class='new-add-list' bindtap="areaInfoClick">
+      <text>地区信息</text>
+      <view class='add-api'>{{areaInfo}}</view>
+      <input type='text' name='city_id' value="{{areaInfo}}" style="display: none;"></input>
+    </view>
+    <view class='new-add-list'>
+      <text>详细地址</text>
+      <view class='add-api'>
+        <input type='text'name='details' value="{{details}}" placeholder='请输入详细地址'></input>
+      </view>
+    </view>
+    <view class='new-add-list'>
+      <text>邮政编码</text>
+      <view class='add-api'>
+        <input type='number' maxlength='6' name='postcode' value="{{postcode}}" placeholder='请输入邮编'></input>
+      </view>
+    </view>
+    <view class='new-add-list'>
+      <text>设为默认地址</text>
+      <view class='switch-btn'>
+        <switch name='is_default' checked="{{is_default}}" color='#00a0e9' bindchange="defaultAddress"></switch>
+      </view>
+    </view>
+  </view>
+  <button formType="submit" hover-class='none' class='add-btn'>确认地址</button>
+</form>
+
+<view class="alertSelect" style="display: {{isHiddenSelect?'none':'block'}}">
+  <!-- 确认取消 -->
+  <view class="affirmCancel">
+    <view class="cancel" bindtap="cancelChange" >取消</view>
+    <view class="affirm" bindtap="affirmChage" >确认</view>
+  </view>
+  <view>
+      <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{province}}" style="line-height: 50px;text-align:center;">{{item.name}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{city}}" style="line-height: 50px;text-align:center;">{{item.name}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{range}}" style="line-height: 50px;text-align:center;">{{item.name}}</view>
+          </picker-view-column>
+      </picker-view>
+  </view>
+</view>

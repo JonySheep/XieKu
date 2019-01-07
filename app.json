@@ -1,0 +1,78 @@
+{
+  "pages": [
+    "pages/logs/logs",
+    "pages/center/center",
+    
+    "pages/home/home",
+    "pages/gainintegral/gainintegral",
+    "pages/score/score",
+    "pages/category/category",
+    "pages/activityindent/activityindent",
+    "pages/registerSuccess/registerSuccess",
+    "pages/coupons/coupons",
+    "pages/register/register",
+    "pages/login/login",
+    "pages/categorydetails/categorydetails",
+    "pages/collect/collect",
+    "pages/address/address",
+    "pages/index/index",
+    
+    "pages/bankcard/bankcard",
+    "pages/recharge/recharge",
+    "pages/withdraw/withdraw",
+    "pages/order/order",
+    "pages/activity/activity",
+    "pages/productdetails/productdetails",
+    "pages/activitydetails/activitydetails",
+    "pages/newAdd/newAdd",
+    "pages/xiadan/xiadan",
+    "pages/logisticsinfo/logisticsinfo",
+    "pages/feedbackinfo/feedbackinfo",
+    "pages/shoppingcar/shoppingcar",
+    
+    "pages/shoplist/shoplist"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffe202",
+    "navigationBarTitleText": "斜厍",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#000000",
+    "color": "#ffffff",
+    "selectedColor": "#ffe202",
+    "list": [
+      {
+        "selectedIconPath": "image/user_cur.png",
+        "iconPath": "image/user.png",
+        "pagePath": "pages/center/center",
+        "text": "我的"
+      },
+      {
+        "selectedIconPath": "image/category_cur.png",
+        "iconPath": "image/category.png",
+        "pagePath": "pages/category/category",
+        "text": "分类"
+      },
+      {
+        "selectedIconPath": "image/car_cur.png",
+        "iconPath": "image/car.png",
+        "pagePath": "pages/shoppingcar/shoppingcar",
+        "text": "购物车"
+      },
+      {
+        "selectedIconPath": "image/gift_cur.png",
+        "iconPath": "image/gift.png",
+        "pagePath": "pages/logs/logs",
+        "text": "兑换"
+      },
+      {
+        "selectedIconPath": "image/home_cur.png",
+        "iconPath": "image/home.png",
+        "pagePath": "pages/home/home",
+        "text": "商城"
+      }
+    ]
+  }
+}

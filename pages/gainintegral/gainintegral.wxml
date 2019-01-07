@@ -1,0 +1,62 @@
+<!--pages/category/category.wxml-->
+<view class="main">
+  <!-- <view class='swiper-tab'>  
+    <view wx:for='{{topList}}' id='{{index}}' wx:key="*this" class="swiper-tab-list1 {{topTab==index ? 'tabon' : ''}}"  data-current="{{index}}" bindtap="swichtopNav">{{item.name}}</view>  
+  </view>  -->
+
+  <!-- <scroll-view class=" swiper-tab" scroll-x  scroll-x="true" style="width: 100%">  
+    <view wx:for='{{topList}}' id='{{index}}' wx:key="*this" class="scroll-view-item_H swiper-tab-list1 {{topTab==index ? 'tabon' : ''}}"  data-current="{{index}}" bindtap="swichtopNav">{{item.name}}</view>  
+  </scroll-view>  -->
+  <scroll-view scroll-x="true" class='swiper-tab'>
+    <view wx:for='{{topList}}' id='{{index}}' wx:key="*this" class="swiper-tab-list1 {{topTab==index ? 'tabon' : ''}}" data-current="{{index}}" data-lid="{{item.id}}" bindtap="swichtopNav">{{item.name}}</view>
+  </scroll-view>
+  <view class='content'>
+    <!-- <view class="left">
+      <view wx:for="{{leftgory}}" wx:key="*this" class="swiper-tab-list {{currentTab==index ? 'on' : ''}}" data-current="{{index}}" bindtap="swichNav">{{item.sunb_name}}</view>
+    </view> -->
+
+    <view class="right">
+      <!-- <import src="/pages/common/lib/templet.wxml" /> -->
+      <view wx:for="{{category}}" wx:key="*this">
+        <!-- <template is="sharejifen" data="{{...item,imgUrl:imgUrl}}" ></template> -->
+
+        <view style='padding:20px;border-bottom:1px solid #ddd;background:white'>
+          <view style='display:flex'>
+            <view class='' style='width:160rpx;height:160rpx;border:1rpx solid #ddd;margin-right:20rpx'>
+              <image src="{{imgUrl+item.cover1}}" mode="widthFix" class="" style='width:160rpx;height:160rpx'></image>
+            </view>
+            <view class='' style='flex:1'>
+              <view class='' style='font-size:30rpx;color:#333333;overflow: hidden;'>{{item.title}}</view>
+              <view class="" style='margin-top: 10rpx;font-size:28rpx;color:#999999'>房型：{{item.room_name?item.room_name: '暂无'}}</view>
+              <view class="" style='margin-top: 10rpx;font-size:28rpx;color:#999999'>销量：{{item.sale}}</view>
+              <view class="" style='margin-top: 10rpx;font-size:28rpx;color:#999999'>￥{{item.price}}</view>
+            </view>
+          </view>
+          <view style='display:flex;margin-top:20rpx'>
+            <view>
+              <view style='font-size:28rpx;color:rgb(231,32,26)'>分享成功后送积分:</view>
+              <view style='font-size:20rpx;color:#999999;text-align:center'>(具体以成交订单为准)</view>
+            </view>
+            <view style='font-size:50rpx;color:red;margin-left:5rpx;margin-top:-10rpx'>{{item.integral}}</view>
+            <view style='flex:1;text-align: right;align-items: right;'>
+            <button data-id="{{item.id}}" bindtap='getShareUrl' style='width:150rpx;background:#ffe202;border:none;font-size:24rpx;padding:0rpx 20rpx;border-radius: 10rpx;height:60rpx;float:right;' class='share user-motto' id="shareBtn"  hover-class="other-button-hover">立即分享</button></view>
+            <!-- </view> -->
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>
+  <!-- 确认分享弹窗 -->
+<view class='model' wx:if="{{isshowmodel}}">
+    <view class='model-box'>
+       <view class='model-box-top'>
+          确认分享此商品？
+       </view>
+       <view class='model-box-bottom'>
+          <button class='cancel button' bindtap='closeModelFn'>取消</button>
+          <button class='quer button' id="shareBtn" open-type="share">确认</button>
+       </view>
+    </view>
+</view>

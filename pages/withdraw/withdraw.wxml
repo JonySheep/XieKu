@@ -1,0 +1,27 @@
+<!--pages/withdraw/withdraw.wxml-->
+<view class="bankcard">
+  <view class="logo">
+    <image src='https://www.swahouse.com/index.php/image/cardlogo1.png' mode='widthFix' style='width:80%;'></image>
+  </view >
+  <view class="text"><text>中国银行 \n尾号0256储蓄卡</text>
+  
+  </view>
+  <view class="gt"> >
+  </view>
+</view>
+<view class="money">
+  <view style='color:#666; font-weight: bolder;'>提现金额</view>
+  <view class="money-2">
+    <!-- <span style="font-size:84rpx;color:#666; float: left;"></span> -->
+    <input value='￥ 'type='number'focus="true" class='input'></input>
+    <view style='background:#858585;height:2rpx;clear:left;width:90%;'></view>
+  </view>
+  <view class="money-3">
+   <view class='a'>可用余额1000元</view> 
+   <view class='b'> 全部提现</view>
+   
+  </view>
+</view>
+<view>
+<button class='btn'>确认提现</button>
+</view>

@@ -1,0 +1,50 @@
+<!--pages/address/address.wxml 用户地址管理-->
+<!-- address-list -->
+<block wx:if='{{addressList.length>0}}'>
+  <block wx:for="{{addressList}}" wx:key='id' >
+    <view class='address-list' data-id="{{item.id}}" data-is_default="{{item.is_default}}" bindtap="orderChoose">
+      <view class='address-title'>
+        <text class='add-name'>{{item.fullname}}</text>
+        <text class='add-phone'>{{item.mobile}}</text>
+      </view>
+      <view class='add-detail'>{{item.address}}</view>
+      <view class='add-default'>
+        <block wx:if="{{item.is_default==1}}">
+          <view class='add-left-cont default-color'>
+            <image src='https://www.swahouse.com/image/add-icon-slt.png'></image>
+            <text>默认地址</text>
+          </view>
+        </block>
+        <block wx:else>
+          <text data-address_id="{{item.id}}" bindtap="tapSetDefault">设为默认</text>
+        </block>
+
+        <view class='add-right-cont'>
+          <text catchtap="tapEditAddress" data-address_id="{{item.id}}">编辑</text>
+          <block wx:if='{{item.is_default==0}}'>
+            <text>丨</text>
+            <text catchtap='tapDelAddress' data-address_id="{{item.id}}">删除</text>
+          </block>
+        </view>
+      </view>
+    </view>
+  </block>
+</block>
+
+<block  >
+    <view style="margin-top: 20px; text-align: center;color: #666" wx:if='{{addressList.length==0}}'>暂无收货地址</view> 
+    <view class="nwe_address">
+        <view>
+            <button class="xinzengaaa" bindtap="addRess">手动添加</button>
+        </view> 
+        <view>
+            <button class="yjkh" bindtap='onAutoFn' style="color: #fff">一键获取</button>
+        </view>
+    </view>
+</block>
+<!-- bottom-button -->
+<block>
+  <navigator url='/pages/user/user' open-type='switchTab' hidden='{{!newAddHide}}'>
+    <view class='add-address'>请前往地址管理中添加</view>
+  </navigator>
+</block>

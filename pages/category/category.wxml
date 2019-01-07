@@ -1,0 +1,13 @@
+<!--pages/category/category.wxml-->
+<view class="content">
+  <view class="left">
+    <view wx:for="{{category}}" wx:for-item="cate" wx:key="*this" class="swiper-tab-list {{currentTab==index ? 'on' : ''}}" data-current="{{index}}" bindtap="swichNav"> {{cate.name}}</view>
+  </view>
+
+  <view class="right" >
+    <import src="/pages/common/lib/templet.wxml" />
+    <view  wx:for="{{category}}" wx:for-item="cate" wx:key="*this"   class="{{index==currentTab ? '':'hide'}}">
+       <template is="categoryitems" data="{{...cate,imgUrl:imgUrl}}" ></template>
+    </view>
+  </view>
+</view>

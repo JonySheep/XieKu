@@ -1,0 +1,55 @@
+<scroll-view scroll-y="true" >
+  <view class='adress'>
+
+    <button class='adress-jia' bindtap='toadress' wx:if='{{!address}}'>+添加地址</button>
+    <view class='choice' bindtap='toadress' wx:else>
+      <view>订单配送至:</view>
+      <view>{{address.address}}</view>
+      <view  class="yuil">{{address.fullname}}(电话):{{address.mobile}}</view>
+    </view>
+
+    <view class='adress-line'>
+      <image src="https://www.swahouse.com/image/line.png" mode='widthFix' style="width:800rpx;"></image>
+    </view>
+  </view>
+
+  <view class="fukuang">
+    <view style='font-size:28rpx;  font-weight:bolder;'>支付方式：
+      <span style="color:#999;">线上支付</span>
+    </view>
+    <view style='padding-top:0px;font-size:28rpx; font-weight:bolder;'>配送方式：
+      <span style="color:#999;">送货上门</span>
+    </view>
+  </view>
+  
+  <view class='details'>
+    <view style='font-size:16px;padding-bottom:20rpx;margin-bottom；20rpx;'>商品清单</view>
+    <view class="goots">
+      <view class='img'>
+        <image src="{{goods.activity_img}}"  style='width:200rpx;height: 220rpx;margin-top:66rpx'></image>
+      </view>
+      <view class='title'>{{goods.activity_name}} <text style="padding-left:30%;">×1</text></view>
+      <view class='nub'>{{goods.integral}}积分</view>
+    </view>
+  </view>
+  
+
+  <view class='mengdian' style="margin-bottom:100rpx;padding-bottom:40rpx;">
+    <view style='font-size:30rpx;'>订单编号:
+      <span style="color:red;margin-left:10px">{{IndentDetails.order_number}}</span>
+    </view>
+
+    <view style='font-size:30rpx;display:flex;text-align:left;'>
+      <view style='margin:20rpx 0;'>订单备注:</view>
+      <view style='margin:20rpx 0;'>
+        <textarea style="height:200rpx;width:500rpx; border:1rpx solid #999;position:static"  bindblur="bindTextAreaBlur" placeholder="请输入订单备注" ></textarea>
+      </view>
+    </view>
+  </view>
+ </scroll-view> 
+
+<!-- foot -->
+<view class="bottom">
+    <view class="bottom1">总计积分：{{goods.integral}}</view>
+    <view class="bottom2" bindtap="sublimeIndent">提交订单</view>
+</view>

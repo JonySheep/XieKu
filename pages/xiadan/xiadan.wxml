@@ -1,0 +1,154 @@
+
+<!-- <scroll-view scroll-y="true" style='height:{{(winHeight/46*41)}}px;'> -->
+<view style='position:relative;left:0;top:0;width:100%;overflow:hidden'>
+  <view class='adress'>
+
+    <button class='adress-jia' bindtap='toadress' hidden='{{address_id>0}}'>+添加地址</button>
+    <view class='choice' bindtap='toadress' hidden='{{address_id==0}}'>
+      <view>订单配送至:</view>
+      <view>{{address_detail['address']}}</view>
+      <view style='font-size:28rpx;'>{{address_detail['fullname']}}(电话):{{address_detail['mobile']}}</view>
+    </view>
+
+    <view class='adress-line'>
+      <image src="https://www.swahouse.com/image/line.png" mode='widthFix' style="width:800rpx;"></image>
+    </view>
+  </view>
+
+  <view class="fukuang">
+    <view style='font-size:30rpx;font-weight:bolder' bindtap='changeStyle'>
+      <text style="display:block;float:left">支付及配送方式</text>
+      <text style="display:block;float:left;line-height:42rpx;margin-left:10rpx;color:red;font-size:24rpx;">[\t点击修改\t]</text>
+    </view>
+    <view style='font-size:28rpx;  font-weight:bolder;'>支付方式：
+      <span style="color:#999;" wx:if="{{pay_integory == 1}}">线上支付</span>
+      <span style="color:#999;" wx:else>到店支付</span>
+    </view>
+    <view style='padding-top:0px;font-size:28rpx; font-weight:bolder;'>配送方式：
+      <span style="color:#999;" wx:if="{{shipping_way == 1}}">送货上门</span>
+      <span style="color:#999;" wx:else>普通快递</span>
+    </view>
+  </view>
+
+  <view class='mengdian'>
+    <!-- <view wx:if='{{store_show}}' style='font-size:12px; font-weight:bolder;'>查看当地斜库门店的库存:</view> -->
+    <!-- <view wx:if='{{store_show}}' style='width:100%;height:21px'>
+      <view style='float:left;text-align:center;color:#999;background-color:#999;height:1px;margin: 10px 0 10px 0;width:40%'>
+      </view>
+      <view style='float:right;text-align:center;color:#999;background-color:#999;height:1px;margin: 10px 0 10px 0;width:40%'>
+      </view>
+    </view> -->
+
+    <view class="mendian" bindtap="showitem" wx:if='{{store_show}}'>
+    <view style='float:left'>{{stroename?stroename: '请选择门店'}}</view>
+    <image style='float:right;margin-right:15px;height:11px;width:11px;margin-top:12px;' src='https://www.swahouse.com/../../image/go_icon.png'></image>
+    </view>
+
+    <view class='coupon-box' style='' bindtap="showcoupon">
+     <view wx:if='{{!order_coupom_id}}'>{{couponlist.length>0?'使用优惠券' :'暂无优惠券'}}</view>
+     <view wx:else>-￥{{face_money}}</view>
+     <view style='text-algin: right'>
+      <text class='font_size24 color_99'>{{order_coupom_id?'已选择优惠券': ''}}</text>
+      <image style='height:11px;width:11px;margin-left:10rpx' src='https://www.swahouse.com/../../image/go_icon.png'></image>
+     </view>
+    </view>
+
+    <view wx:for="{{couponlist}}" wx:key="index" class="{{opencoupan?'coupan-display_show':'coupan-display_none'}}" >         
+      <view class='coupon'>
+        <view class='coupon-left'>
+          <view class='color_33'>
+            <text class='font_size24'>￥</text>
+            <text class='font_size40'>{{item.face_money}}</text>
+            <text class='font_size28'>优惠券</text>
+          </view>           
+          <view class='font_size24'>               
+              <view class='color_66'>{{item.coupon.top_money!=0 ? '满'+item.top_money+'元即可使用' : '无使用门槛'}}</view>
+              <view class='color_99'> 使用期限： {{item.end_time}}</view>                
+          </view>          
+        </view>
+        <view class='coupon-right'>
+          <view class='coupon-btn' data-id='{{item.user_coupon_id}}' data-face_money='{{item.face_money}}' bindtap='usecouponFn'>使用</view>
+        </view>
+      </view>    
+    </view>
+
+    <view hidden='{{reminder}}'>
+      <view>当前库存为：255
+        <span style="color:#ffe202;">刷新</span>
+      </view>
+      <view>
+        <view>友情提醒:</view>
+        <view style="font-size:24rpx;color:#999;padding-left:60rpx;">线上订单与实体商场的价格和产品系列可能有所差异， 凭订单号可参与享受门店优惠活动。
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='height:8px;background-color:#e8e9ed;margin-top:20px'>
+  </view>
+
+  <view class='details'>
+    <view style='font-size:16px;padding-bottom:20rpx;margin-bottom；20rpx;'>商品清单</view>
+    <view class="goots" wx:for="{{order_detailedlist}}" :key="index">
+      <view class='img'>
+        <image src="{{imgUrl}}{{item.goods_images}}" mode='widthFix' style='width:100%;'></image>
+      </view>
+      <view class='title'>{{item.goods_title}} <span>×{{item.goods_number}}</span></view>
+      <view class='nub'>￥{{item.goods_ingegory}}</view>
+    </view>
+  </view>
+  <view style='height:8px;background-color:#e8e9ed;'>
+  </view>
+
+
+  <view class='mengdian' style="margin-bottom:0px;padding-bottom:40rpx;">
+    <view style='font-size:30rpx;'>订单编号:
+      <span style="color:red;margin-left:10px">{{order_num}}</span>
+    </view>
+    <view style='font-size:30rpx;display:flex;text-align:left;'>
+      <view style='margin:20rpx 0;'>订单备注:</view>
+      <view style='margin:20rpx 0;'>
+        <textarea style="height:180rpx;width:480rpx; border:1rpx solid #999;padding:10rpx;position:static" placeholder='请输入备注信息'></textarea>
+      </view>
+    </view>
+  </view>
+  </view>
+ <!-- </scroll-view> -->
+
+  <view class='footer1' style='height:{{winHeight/46*3.3}}px;'>
+    <button class='btn1' bindtap='orderFn'>确认订单</button>
+  </view>
+
+<view class='guanggao' hidden='{{peisongHidden}}'>
+  <view class="peisong">
+    <view style='text-align:left;font-size:30rpx;'>修改及配送方式</view>
+    <view class='middle'>
+      <view style='display:flex;padding-left:40rpx;margin:20rpx 0;'>
+        <view class='box-title'>支付方式:</view>
+        <view class='box-cont'>
+          <radio-group class="radio-group" bindchange="onPayChangeFn">
+            <label class="radio" wx:for="{{items}}" wx:key="index">
+              <radio color="#ffe202" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+
+      <view style='display:flex;padding-left:40rpx;margin:20rpx 0;'>
+        <view class='box-title'>送货方式:</view>
+        <view class='box-cont'>
+          <radio-group class="radio-group" bindchange="onShippingFn">
+            <label class="radio" wx:for="{{goots}}" wx:key="index">
+              <radio color="#ffe202" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view style='font-size:26rpx;'>请点击网点分布查询当前地址是否在配送范围内，若不在范围导致退件将不退积分。</view>
+    </view>
+    <view class='peisongbut-1' bindtap="saveStyle">
+      <view class='peisongbut'>保存支付方式及配送方式</view>
+    </view>
+  </view>
+
+</view>

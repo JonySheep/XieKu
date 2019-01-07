@@ -1,0 +1,117 @@
+.shoppingcarmain{
+  padding: 20rpx 0rpx;
+}
+.carlist-item{
+  display: flex;
+  height: 145rpx;
+  padding: 20rpx;
+  border-bottom: 1px solid #ddd;
+}
+.checkicon{
+  width: 40rpx; 
+  padding-right: 20rpx;
+}
+.checkicon image{
+  width:40rpx;
+  height: 40rpx;
+  vertical-align: middle
+
+}
+.allchecked{
+   width:100rpx;
+   line-height: 100rpx;
+}
+.allchecked image{
+  width:40rpx;
+  height: 40rpx;
+  vertical-align: middle
+}
+.carlist-item-img{
+  border:1px solid #ddd;
+  width: 140rpx;
+  height: 140rpx
+}
+.carlist-item-img image{
+  width: 100%;
+  height: 100%
+}
+.carlist-item-info{
+  flex: 1;
+  padding-left:20px;
+}
+.m_top25{
+  margin-top: 25rpx;
+}
+.m_top15{
+  margin-top: 15rpx;
+}
+.font-size28{
+  font-size: 28rpx;
+}
+.font-size24{
+  font-size: 24rpx;
+}
+.color_33{
+  color: #333333;
+}
+.color_ff0{
+  color: #ff0202;
+}
+.color_a3{
+  color: #a3a3a3
+}
+.color_ffe{
+  color:#ffe202
+}
+.bg_color00{
+  background: #000;
+}
+.bg_colorffe{
+  background: #ffe202;
+}
+.flex{
+  display: flex;
+}
+.addnum{
+  flex:1;
+  margin-top: 40rpx;
+  width: 100%;
+  text-align: right;
+}
+.addnum view{
+  /* margin-left: 100rpx; */
+  float: right;
+  width:69rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align:center;
+  border:1rpx solid #999;
+}
+.fxiedbtm{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: #f7f7f7;
+  padding-left: 20rpx;
+  z-index: 99;
+  box-sizing: border-box;
+}
+.btngroup{
+  flex: 1;
+  text-align: right
+}
+.btngroup view{
+  width: 180rpx;
+  display: inline-block;
+  font-size: 34rpx;
+  text-align: center;
+}
+.carlist-item-info-title{ 
+  width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
