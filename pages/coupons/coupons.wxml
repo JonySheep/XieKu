@@ -17,7 +17,7 @@
         <view>
 
            <image src='../../image/money.png' class='main-image2'></image>
-          <text class='main-text2'>使用时间：即日起至{{coupon.end_time}}{{coupon.is_use}}</text>
+          <text class='main-text2'>使用时间：即日起至{{coupon.end_time}}</text>
         </view>
         <button class="{{coupon.is_use?'main-button-use':'main-button'}}" bindtap='addCoupons'  data-couponId="{{coupon.id}}">{{coupon.is_use?'已领取':'立即领取'}}</button>
         <!-- img 已经领取-->       
