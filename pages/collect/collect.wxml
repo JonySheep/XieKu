@@ -5,4 +5,5 @@
     <!-- is就是模板名字name值 -->
     <template is="collectitem" data="{{...item}}" />
   </block>
+  <view wx:if="{{activity.length === 0}}" class='no-collect-prompt'>当前暂无收藏，快去逛逛吧</view>
   

@@ -16,6 +16,7 @@ Page({
     winHeight: 0,
     // tab切换   
     currentTab: 0,
+    currentTabName: "待付款",
   },
 
   /**
@@ -106,9 +107,11 @@ Page({
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
-    } else {    
+    } else {
+      var promptList = ["待付款", "待发货", "待收获", "已完成"];
       that.setData({
         currentTab: e.target.dataset.current,
+        currentTabName: promptList[e.target.dataset.current],
         state:"已完成",
       })
       that.getorderList()

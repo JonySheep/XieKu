@@ -3,6 +3,12 @@ page{
     font-family: PingFang SC Regular;
 }
 
+.no-collect-prompt {
+  text-align: center;
+  margin-top: 100rpx;
+  color:  #999;
+  font-size: 25rpx;
+}
 
 .functional{
   width: 100%;
