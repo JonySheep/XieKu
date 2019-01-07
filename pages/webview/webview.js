@@ -34,6 +34,10 @@ Page({
       that.setData({
         url: that.data.appurl + "/page/view/id/5",
       });
+    } else if (type == 'order') {
+      that.setData({
+        url: "htt􏰀ps://www.swah􏰁ouse.c􏰁􏰂om/m􏰂/􏰀price/i􏰃ndex.ht􏰂􏰄ml",
+      })
     }
     else{
       that.setData({
