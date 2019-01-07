@@ -155,11 +155,11 @@ page {
   border-radius:10rpx; 
 }
 .model-box-top{
-  height: 180rpx;
+  height: 140rpx;
   width: 100%;
   font-size: 30rpx;
   text-align: center;
-  line-height: 180rpx;
+  padding-top: 40rpx;
 }
 .model-box-bottom{
   height: 79rpx;

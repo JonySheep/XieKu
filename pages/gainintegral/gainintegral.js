@@ -10,6 +10,7 @@ Page({
     currentTab: 0,
     topTab: 0,
     topList: [],
+    good_integral: 0, // 分享可获积分
     obj1: {
       img1: "https://www.swahouse.com/index.php/image/welfare7.png",
       title1: "ONG 冷凝系列***",
@@ -147,6 +148,7 @@ Page({
   getShareUrl: function (ele){
     var openid = wx.getStorageSync('openid');
     var goods_id = ele.target.dataset.id;
+    var good_integral = this.getGoodIntegral(goods_id);
     var self = this;
     wx.request({
       url: self.data.appurl + 'Share/getShareUrl',
@@ -163,10 +165,20 @@ Page({
             isshowmodel: true,
             shareId: res.data.data.share_token,
             goods_id: res.data.data.goods_id,
+            good_integral: good_integral
           });
         }
       }
     })
+  },
+
+  getGoodIntegral: function(goodId) {
+    var goodList = this.data.category;
+    for (var i=0; i<goodList.length; i++) {
+      if (goodId = goodList[i].id) {
+        return goodList[i].integral;
+      }
+    }
   },
 
   // 关闭分享窗口
