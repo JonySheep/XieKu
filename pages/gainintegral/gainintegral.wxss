@@ -5,20 +5,31 @@ page {
   font-family: PingFang SC Regular;
 }
 .swiper-tab{  
+  position: fixed;
   display: flex;
   width: 100%;   
-  position: fixed;
   white-space: nowrap;
   /* height: 60px ;  */
   line-height: 60rpx; 
   top: 0rpx;
   left: 0rpx;
-  z-index: 999;
+  z-index: 998;
   background: white; 
   text-align: center;    
   justify-content: space-around;
   border-bottom: 1rpx solid #ddd;
+  overflow: scroll-x;
 } 
+
+.expand-style {
+  z-index: 999;
+  position: absolute;
+  top: 0rpx;
+  right: 0rpx;
+  width: 40rpx;
+  height: 105rpx;
+  background: linear-gradient(to left, #ffe202, white);
+}
 
 /**index.wxss**/
  
@@ -28,6 +39,7 @@ page {
 }
 .swiper-tab-list1 {
   /* border-bottom: 3rpx solid #bfbfbf; */
+  /* position: absolute; */
   display:inline-block;
   font-size: 38rpx;
   width: 100px;
@@ -35,6 +47,7 @@ page {
   text-align: center;
   height: 100rpx;
   line-height: 100rpx;
+  margin-right: 30rpx;
 }
 
 .tabon{  

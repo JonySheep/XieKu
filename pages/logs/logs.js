@@ -181,6 +181,11 @@ Page({
         url: '../score/score',
       })
   },
+  scoreDeclare : function() {
+    wx.navigateTo({
+      url: '../webview/webview?type=scoreDeclare',
+    })
+  },
   //特惠套餐
   preferenceCombo : function()
   {
@@ -189,9 +194,10 @@ Page({
       //     icon: 'none',
       //     duration: 2000
       // })
-      wx.navigateTo({
-        url: '../webview/webview?type=scoreDeclare',
-      })
+    wx.navigateTo({
+      url: '../gainintegral/gainintegral',
+    })
+    
   },
   //获取详情跳转
   activitydetails : function(e)
