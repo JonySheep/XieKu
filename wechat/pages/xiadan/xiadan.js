@@ -238,6 +238,7 @@ Page({
 
   //确认订单
   orderFn: function() {
+
     var self = this
     var oid = wx.getStorageSync('openid');
     if (self.data.store_show){
@@ -314,6 +315,7 @@ Page({
                       })
                       return
                     }
+                    console.log(data.data.data);
                     wx.requestPayment({
                       'timeStamp': data.data.data.timeStamp.toString(),
                       'nonceStr': data.data.data.nonceStr,

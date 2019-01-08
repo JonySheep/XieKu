@@ -44,7 +44,6 @@ Page({
         self.setData({
           coupons: res.data.data
         });
-        console.log(res.data.data);
       }
     })
 
