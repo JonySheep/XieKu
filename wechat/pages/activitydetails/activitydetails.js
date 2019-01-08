@@ -195,7 +195,11 @@ Page({
                   if( rsf.data.code === 200 )
                   { 
                     console.log('aaa')
-                      that.setData({ collectTxt : 1 })
+                      if(that.data.collectTxt === 0) {
+                        that.setData({ collectTxt: 1 })
+                      } else {
+                        that.setData({ collectTxt: 0 })
+                      }
                       console.log(that.data.collectTxt)
                   }else{
                       wx.showToast({
