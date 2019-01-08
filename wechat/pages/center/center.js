@@ -21,34 +21,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    var that = this
-    common.httpG('order/orderList', {
-      openid: wx.getStorageSync('openid'),
-      status: 0
-    }, function (data) {
-      that.setData({ readyPayCount: data.data.length })
-    })
+    if (wx.getStorageSync("userinfo") !== "") {
+    
+      var that = this
+      common.httpG('order/orderList', {
+        openid: wx.getStorageSync('openid'),
+        status: 0
+      }, function (data) {
+        that.setData({ readyPayCount: data.data.length })
+      })
 
-    common.httpG('order/orderList', {
-      openid: wx.getStorageSync('openid'),
-      status: 1
-    }, function (data) {
-      that.setData({ readySendCount: data.data.length })
-    })
+      common.httpG('order/orderList', {
+        openid: wx.getStorageSync('openid'),
+        status: 1
+      }, function (data) {
+        that.setData({ readySendCount: data.data.length })
+      })
 
-    common.httpG('order/orderList', {
-      openid: wx.getStorageSync('openid'),
-      status: 2
-    }, function (data) {
-      that.setData({ readyReceiveCount: data.data.length })
-    })
+      common.httpG('order/orderList', {
+        openid: wx.getStorageSync('openid'),
+        status: 2
+      }, function (data) {
+        that.setData({ readyReceiveCount: data.data.length })
+      })
 
-    common.httpG('order/orderList', {
-      openid: wx.getStorageSync('openid'),
-      status: 3
-    }, function (data) {
-      that.setData({ finishCount: data.data.length })
-    })
+      common.httpG('order/orderList', {
+        openid: wx.getStorageSync('openid'),
+        status: 5
+      }, function (data) {
+        that.setData({ finishCount: data.data.length })
+      })
+    }
+
+    
   },
 
   //用户授权
