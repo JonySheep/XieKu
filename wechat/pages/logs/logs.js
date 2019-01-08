@@ -170,7 +170,7 @@ Page({
       this.getBanner()
       //获取活动
       this.getActivity(1)
-
+    var app = getApp()
     app.globalData.isaddcar = true
     app.changecarNumFn()
 

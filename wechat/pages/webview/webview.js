@@ -13,6 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var type = options.type;
     var that = this;
     if (type == 'ours'){
@@ -25,14 +26,9 @@ Page({
         url: that.data.appurl + "/page/view/id/5",
       });
     } else if (type == 'banner') {
-      // todo
+      // todo 
       that.setData({
         url: options.url,
-      });
-    } else if (type == 'scoreDeclare') {
-      // todo
-      that.setData({
-        url: that.data.appurl + "/page/view/id/5",
       });
     } else if (type == 'order') {
       that.setData({

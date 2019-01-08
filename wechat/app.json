@@ -28,7 +28,7 @@
     "pages/logisticsinfo/logisticsinfo",
     "pages/feedbackinfo/feedbackinfo",
     "pages/shoppingcar/shoppingcar",
-    
+    "pages/webview/webview",
     "pages/shoplist/shoplist"
   ],
   "window": {
