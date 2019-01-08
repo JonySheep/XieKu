@@ -59,21 +59,25 @@
     </view>
     <view class='order'>
       <view class="order_status" id='0' bindtap="goOrderlist">
+        <view wx:if="{{readyPayCount > 0}}" class="counter">{{readyPayCount}}</view>
         <image src='https://www.swahouse.com/image/dai.png'>
         </image>
         <view style='color:#666666'>待付款</view>
       </view>
       <view class="order_status" id='1' bindtap="goOrderlist">
+      <view wx:if="{{readySendCount > 0}}" class="counter">{{readySendCount}}</view>
         <image src='https://www.swahouse.com/image/shou.png'>
         </image>
         <view style='color:#666666'>待发货</view>
       </view>
       <view class="order_status" id='2' bindtap="goOrderlist">
+      <view wx:if="{{readyReceiveCount > 0}}" class="counter">{{readyReceiveCount}}</view>
         <image src='https://www.swahouse.com/image/pin.png'>
         </image>
         <view style='color:#666666' id='10' bindtap="goOrderlist">待收货</view>
       </view>
       <view class="order_status" id='5' bindtap="goOrderlist">
+      <view wx:if="{{finishCount > 0}}" class="counter">{{finishCount}}</view>
         <image src='/image/dui.png'>
         </image>
         <view style='color:#666666'>已完成</view>

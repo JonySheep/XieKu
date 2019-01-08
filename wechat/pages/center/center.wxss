@@ -5,6 +5,17 @@ page {
   height: 100%;
 }
 
+.counter {
+  height: 25rpx;
+  width: 25rpx;
+  border-radius: 20rpx;
+  font-size: 18rpx;
+  color: white;
+  font-weight: bold;
+  background-color: red;
+  float: right;
+}
+
 .common-wrapper {
   text-align: left;
 }

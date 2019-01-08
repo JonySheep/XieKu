@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    promptList:["待付款", "待发货", "待收获", "", "", "已完成"],
     appurl: getApp().globalData.globalUrl,
     imgUrl: getApp().globalData.globalStaticUrl,
     ceshi:[],
@@ -16,7 +17,7 @@ Page({
     winHeight: 0,
     // tab切换   
     currentTab: 0,
-    currentTabName: "待付款",
+    currentTabName: "",
   },
 
   /**
@@ -108,10 +109,10 @@ Page({
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
-      var promptList = ["待付款", "待发货", "待收获", "已完成"];
+      var promptList = ["待付款", "待发货", "待收获","","", "已完成"];
       that.setData({
         currentTab: e.target.dataset.current,
-        currentTabName: promptList[e.target.dataset.current],
+        currentTabName: that.data.promptList[e.target.dataset.current],
         state:"已完成",
       })
       that.getorderList()
