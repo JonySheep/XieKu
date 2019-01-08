@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+
+                </div>
+                <div class="ibox-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">付款二维码</label>
+                            <img src="{:url('qrCode',['code_url'=>$code_url])}" alt="">
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <a class="btn btn-primary" href="{:url('index')}">返回</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin_res/js/ajaxfileupload.js"></script>
+<script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+<script src="/static/admin_res/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/static/admin_res/js/plugins/toastr/toastr.min.js"></script>
+<script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>
+{present name='editmode'}
+<script>
+    function deleteBrand(){
+        swal({
+            title: "您确定要删除该Banner吗",
+            text: "删除后将无法恢复，请谨慎操作！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "删除",
+            cancelButtonText: "取消",
+            closeOnConfirm: false
+        }, function () {
+            window.location.href="{:url('admin/banner/delete')}";
+        });
+    }
+</script>
+{/present}
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+    });
+    function ShowToastr(title,msg,type){
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "showDuration": "400",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "slideDown",
+            "hideMethod": "fadeOut"
+        }
+        toastr[type](msg,title);
+    }
+    function ajaxFileUpload(fileinput,type)
+    {
+        url = '{:url("admin/Coupon/upload")}';
+        $.ajaxFileUpload({
+            url:url,
+            secureuri:false,
+            fileElementId:fileinput,
+            dataType: 'json',
+            success: function (data, status)
+            {
+                switch(data.result){
+                    case -1:
+                        ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+                        break;
+                    case 0:
+                        ShowToastr("请求未成功",data.msg,"warning");
+                        break;
+                    case 1:
+                        $("#banner_img").attr('src',data.src);
+                        $("#banner_address").val(data.src);
+                        break;
+                }
+            },
+            error: function (data, status, e)
+            {
+                ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+            }
+        });
+        return true;
+    }
+</script>
+</body>
+</html>

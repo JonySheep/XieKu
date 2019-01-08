@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>一分钟报价 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/price.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="bg">
+    <div class="info">
+        <span>请填写以下信息</span>
+        <h2>我们的工作人员会尽快与您取得联系</h2>
+        <div class="info-item">
+            <div class="text">
+                <input class="f-l" type="text" placeholder="您的姓名">
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="text">
+                <input class="f-l" type="text" placeholder="房屋建筑面积"><div class=" m2 f-r">M<sup>2</sup></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="info-item">
+            <select>
+                {volist name="regionList" id="region"}
+                <option value ="{$region.id}">{$region.region}</option>
+                {/volist}
+            </select>
+        </div>
+        <div class="info-item">
+            <select>
+                {volist name="modelList" id="model"}
+                <option value ="{$model.id}">{$model.name}</option>
+                {/volist}
+            </select>
+        </div>
+
+        <div class="system">
+            <span>系统选择</span>
+            {volist name="categoryList" id="category"}
+            <label><input type="checkbox"  name="system[]" value="{$category.id}">{$category.name}</label>
+            {/volist}
+        </div>
+        <a href="">提交报价</a>
+    </div>
+</div>
+{include file="public/footer"}
+</body>
+</html>

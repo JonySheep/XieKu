@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>应用案例 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" href="/static/css/filter.css">
+    <link rel="stylesheet" href="/static/css/case.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/page.css">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="index@public/header"}
+<div class="banner">
+    <img src="/static/images/banner.png">
+</div>
+<div class="main">
+    <div class="top center">
+        <a href="/">首页</a> >
+        应用案例
+    </div>
+    <div class="clear"></div>
+    <div class="filter">
+        <ul>
+            <li class="inline">系统：</li>
+            <li data-id="0" class="classify1 inline{if condition='$category eq 0'} on{/if}">全部</li>
+            {volist name="categoryList" id="category_item"}
+            <li data-id="{$category_item.id}" class="classify1 inline{if condition='$category eq $category_item.id'} on{/if}">{$category_item.name}</li>
+            {/volist}
+        </ul>
+        <ul>
+            <li class="inline">户型：</li>
+            <li data-id="0" class="classify2 inline{if condition='$model eq 0'} on{/if}">全部</li>
+            {volist name="modelList" id="model_item"}
+            <li data-id="{$model_item.id}" class="classify2 inline{if condition='$model eq $model_item.id'} on{/if}">{$model_item.name}</li>
+            {/volist}
+        </ul>
+    </div>
+    <div class="area-select">
+        <div  data-id="0" class="area inline{if condition='$region eq 0'} active{/if}">全部</div>
+        {volist name="regionList" id="region_item"}
+        <div data-id="{$region_item.id}" class="area inline{if condition='$region eq $region_item.id'} active{/if}">{$region_item.region}</div>
+        {/volist}
+    </div>
+    <div class="clear"></div>
+    <div class="parameter-block">
+        {volist name="caseList" id="case"}
+        <div class="case-block inline">
+            <a href="{:url('cases/index/view',['id'=>$case['id']])}">
+                <div class="bulid">
+                    <img src="{$case.cover}">
+                    {if condition="$case.status eq 1"}
+                    <div class="bulid-sg bulid-ok"></div>
+                    {else/}
+                    <div class="bulid-sg bulid-ing"></div>
+                    {/if}
+                </div>
+                <div class="case-intro">
+                    <div class="case-name">{$case.title}</div>
+                    <div class="click">阅读指数：<span>{$case.click}</span></div>
+                </div>
+            </a>
+        </div>
+        {/volist}
+    </div>
+    <form id="page_controller" method="get" action="{:url('cases/index/index')}">
+        <input type="hidden" id="page" name="page" value="{$NowPage}">
+        <input type="hidden" id="model" name="model" value="{$model}">
+        <input type="hidden" id="region" name="region" value="{$region}">
+        <input type="hidden" id="category" name="category" value="{$category}">
+    </form>
+    <div class="page">
+        {if condition="$NowPage neq 1"}<a class="p prevPage">&lt;</a>{/if}
+        {for start="1" end="$PageCount+1"}
+        <a class="p page_button{if condition='$i eq $NowPage'}  active{/if}">{$i}</a>
+        {/for}
+        {if condition="$NowPage lt $PageCount"}<a class="p nextPage">&gt;</a>{/if}
+    </div>
+</div>
+</form>
+<script>
+    var NowPage = {$NowPage};
+    $(function(){
+        $(".page_button").on("click",function () {
+            $("#page").val($(this).html());
+            $("#page_controller").submit();
+        });
+        $(".nextPage").on("click",function () {
+            $("#page").val(NowPage + 1);
+            $("#page_controller").submit();
+        });
+        $(".prevPage").on("click",function () {
+            $("#page").val(NowPage - 1);
+            $("#page_controller").submit();
+        });
+        $("#search_button").on("click",function(){
+            keyword = $("#search_keyword").val().trim();
+            $("#search").val(keyword);
+            $("#page").val(1);
+            $("#page_controller").submit();
+        });
+        $(".classify1").on("click",function(){
+            $("#category").val($(this).data("id"));
+            $("#page_controller").submit();
+        });
+        $(".classify2").on("click",function(){
+            $("#model").val($(this).data("id"));
+            $("#page_controller").submit();
+        });
+        $(".area").on("click",function(){
+            $("#region").val($(this).data("id"));
+            $("#page_controller").submit();
+        });
+    });
+</script>
+{include file="index@public/footer"}
+</body>
+</html>

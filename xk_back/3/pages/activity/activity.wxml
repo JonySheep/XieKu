@@ -1,0 +1,9 @@
+<!--pages/activity/activity.wxml-->
+
+ <import src="/pages/common/lib/templet.wxml"/>
+  <template is="activityitem" data="{{...obj1}}"></template>
+  <template is="activityitem" data="{{...obj1}}"></template>
+  <template is="activityitem" data="{{...obj1}}"></template>
+  <template is="activityitem" data="{{...obj1}}"></template>
+  
+ 

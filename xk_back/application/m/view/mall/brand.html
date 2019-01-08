@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>{$nowCategory.name} - 商城 -斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/filter.css">
+    <link rel="stylesheet" href="/static/m/css/brand-intro.css">
+    <link rel="stylesheet" href="/static/m/css/brand.css">
+    <link rel="stylesheet" href="/static/m/css/list.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="logo-banner inline"><img src="{$nowCategory.cover}"></div>
+<div class="filter">
+    <div class="filter-item">
+        <div class="filter-item-title">类别：</div>
+        <div class="filter-item-list">
+            <ul>
+                {volist name="categoryList" id="category"}
+                <li class="{if condition='$category.id eq $nowCategory.id'}on{/if}"><a href="{:url('m/mall/brand',['type'=>$category.id])}">{$category.name}</a></li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="brand-intro">
+    
+    <div class="intro inline">
+        <div class="brand">{$nowCategory.name}</div>
+        {$nowCategory.introduce}
+    </div>
+</div>
+
+<div class="brand-list center">
+    <div class="parameter-title">合作品牌</div>
+    <div class="intro">
+        <div class="intro-pad">
+            {volist name="brandList" id="brand"}
+            <div class="brand inline">
+                <a title="{$brand.name}" href="{:url('m/mall/index',['type'=>$nowCategory.id])}?brand={$brand.id}"><img src="{$brand.logo}"></a>
+            </div>
+            {/volist}
+        </div>
+    </div>
+</div>
+{include file="public/footer"}
+</body>
+</html>

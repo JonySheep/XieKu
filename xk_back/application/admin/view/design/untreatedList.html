@@ -1,0 +1,45 @@
+<table style="text-align: center" class="table table-bordered">
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>手机号</th>
+        <th>地区</th>
+        <th>户型</th>
+        <th>面积</th>
+        <th>系统类型</th>
+        <th>提交时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="untreatedList" id="untreated"}
+    <tr>
+        <td>{$untreated.name}({if condition="$untreated.sex eq 1"}先生{else}女士{/if})</td>
+        <td>{$untreated.phone}</td>
+        <td>{:GetRegionName($untreated.region)}</td>
+        <td>{:GetModelName($untreated.model)}</td>
+        <td>{$untreated.area} M<sup>2</sup></td>
+        <td>{$untreated.category}</td>
+        <td>{:date("Y-m-d",$untreated.timestamp)}</td>
+        <td data-model="{:GetModelName($untreated.model)}" data-name="{$untreated.name}" data-category="{$untreated.category}" data-region="{:GetRegionName($untreated.region)}" data-area="{$untreated.area}" data-phone="{$untreated.phone}"  data-id="{$untreated.id}" width="200px" align="center">
+            <button class="btn btn-danger dodelete" type="button"><i class="fa fa-remove"></i> 删除
+            </button>
+            <button class="btn btn-primary dotreated" type="button"><i class="fa fa-check"></i> 处理
+            </button>
+        </td>
+    </tr>
+    {/volist}
+    </tbody>
+</table>
+<div class="hr-line-dashed"></div>
+<div class="text-center">
+    <div class="btn-group">
+        {if condition="$untreatedNowPage neq 1"}<button data-page="{$untreatedNowPage-1}" data-type="untreated" style="height:34px;" class="btn btn-white page_button" type="button"><i class="fa fa-chevron-left"></i>
+        </button>{/if}
+        {for start="1" end="$untreatedPageCount+1"}
+        <button data-type="untreated" data-page="{$i}" class="btn btn-white page_button{if condition='$i eq $untreatedNowPage'} active{/if}">{$i}</button>
+        {/for}
+        {if condition="$untreatedNowPage lt $untreatedPageCount"}<button data-page="{$untreatedNowPage+1}" data-type="untreated" style="height:34px;" class="btn btn-white page_button" type="button"><i class="fa fa-chevron-right"></i>
+        </button>{/if}
+    </div>
+</div>

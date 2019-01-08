@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>{$case.title} - 应用案例 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/case-contg.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="main-top">
+    <div class="center">
+        <div class="title">{$case.title}</div>
+        <div class="f-l">
+            <span>{$case.introduce}</span>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="step-unit">
+        <div class="unit">
+            <div class="title"><div class="num inline">1</div><span>基本信息</span></div>
+            <div class="content">
+                <div><img src="{$case.cover}" alt=""></div>
+                <div class="info">{$case.details}
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-unit">
+        <div class="unit">
+            <div class="title"><div class="num inline">2</div><span>方案设计</span></div>
+            <div class="content">
+                {$case.plan}
+                <a href="{:url('m/price/index')}">获取免费设计方案</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-unit">
+        <div class="unit">
+            <div class="title"><div class="num inline">3</div><span>施工详情</span></div>
+            <div class="content">
+                {$case.construction_details}
+            </div>
+        </div>
+    </div>
+
+    <div class="step-unit">
+        <div class="unit">
+            <div class="title"><div class="num inline">&nbsp;</div><span>业主反馈</span></div>
+            <div class="content">
+                <div class="feed-back">
+                    {$case.feedback}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer"}
+</body>
+</html>

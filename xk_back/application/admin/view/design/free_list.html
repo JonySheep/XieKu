@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <style>
+        .modal-body span{
+            font-weight: bold;
+            color: #34b1e9;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>未处理申请记录<!--({$untreatedCount})--></h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input id="untreated_search_keyword" value="" type="text" placeholder="按客户姓名搜索" class="input-sm form-control"> <span class="input-group-btn">
+                                <button id="untreated_search_button" type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="untreatedList">{include file="design/untreatedList" /}</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>已处理申请记录<!--({$treatedCount})--></h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input id="treated_search_keyword" value="" type="text" placeholder="按客姓名话搜索" class="input-sm form-control"> <span class="input-group-btn">
+                                <button id="treated_search_button" type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                            </div>
+                        </div>
+                    </div>
+                   <div id="treatedList">{include file="design/treatedList" /}</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal inmodal" id="doModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                </button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">申请记录处理</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="t_id">
+                <p>姓名: <span id="t_name"></span></p>
+                <p>电话: <span id="t_phone"></span></p>
+                <p>地区: <span id="t_region"></span></p>
+                <p>户型: <span id="t_model"></span></p>
+                <p>面积: <span id="t_area"></span> <span>M<sup>2</sup></span></p>
+                <p>系统: <span id="t_category"></span></p>
+                <div class="form-group"><label>备注信息:</label> <input type="text" id="note" class="form-control"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="tdo">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal inmodal" id="viewModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                </button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">申请记录处理结果</h4>
+            </div>
+            <div class="modal-body">
+                <p>姓名: <span id="v_name"></span></p>
+                <p>电话: <span id="v_phone"></span></p>
+                <p>地区: <span id="v_region"></span></p>
+                <p>户型: <span id="v_model"></span></p>
+                <p>面积: <span id="v_area"></span> <span>M<sup>2</sup></span></p>
+                <p>系统: <span id="v_category"></span></p>
+                <p>备注信息: <span id="v_note"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+<script>
+    var untreated_keyword = "";
+    var treated_keyword = "";
+    var ajax_address = "{:url('admin/design/free_recodes')}";
+    $(function(){
+        $(document).on("click",".page_button",function () {
+            type = $(this).data("type");
+            page = $(this).data("page");
+            switch(type){
+                case "untreated":
+                    $.post(ajax_address,{type:"untreated_list",page:page,keyword:untreated_keyword},function(data){
+                        $("#untreatedList").html(data);
+                    });
+                    break;
+                case "treated":
+                    $.post(ajax_address,{type:"treated_list",page:page,keyword:treated_keyword},function(data){
+                        $("#treatedList").html(data);
+                    });
+                    break;
+            }
+        });
+        $("#untreated_search_button").on("click",function(){
+            untreated_keyword = $("#untreated_search_keyword").val().trim();
+            $.post(ajax_address,{type:"untreated_list",page:1,keyword:untreated_keyword},function(data){
+                $("#untreatedList").html(data);
+            });
+        });
+        $("#treated_search_button").on("click",function(){
+            treated_keyword = $("#treated_search_keyword").val().trim();
+            $.post(ajax_address,{type:"treated_list",page:1,keyword:treated_keyword},function(data){
+                $("#treatedList").html(data);
+            });
+        });
+        $(document).on("click",".dotreated",function(){
+           id = $(this).parent().data('id');
+           model = $(this).parent().data('model');
+           area = $(this).parent().data('area');
+           phone = $(this).parent().data('phone');
+           name = $(this).parent().data('name');
+           category = $(this).parent().data('category');
+           region = $(this).parent().data('region');
+           $("#t_name").html(name);
+           $("#t_model").html(model);
+           $("#t_area").html(area);
+           $("#t_phone").html(phone);
+           $("#t_category").html(category);
+           $("#t_region").html(region);
+           $("#t_id").val(id);
+           $('#doModal').modal();
+        });
+        $(document).on("click",".doview",function(){
+            model = $(this).parent().data('model');
+            area = $(this).parent().data('area');
+            phone = $(this).parent().data('phone');
+            name = $(this).parent().data('name');
+            category = $(this).parent().data('category');
+            region = $(this).parent().data('region');
+            note = $(this).parent().data('note');
+            $("#v_name").html(name);
+            $("#v_model").html(model);
+            $("#v_area").html(area);
+            $("#v_phone").html(phone);
+            $("#v_category").html(category);
+            $("#v_region").html(region);
+            $("#v_note").html(note);
+            $('#viewModal').modal();
+        });
+        $("#tdo").on("click",function(){
+            id = $("#t_id").val();
+            note = $("#note").val();
+            $.post("{:url('admin/design/treated_recode')}",{id:id,note:note},function(data){
+                switch (data.result){
+                    case -1:
+                        alert("信息处理失败！");
+                        break;
+                    case 1:
+                        $("#note").val("");
+                        page = $(".page_button.active[data-type='untreated']").html();
+                        $.post(ajax_address,{type:"untreated_list",page:page,keyword:untreated_keyword},function(data){
+                            $("#untreatedList").html(data);
+                        });
+                        $.post(ajax_address,{type:"treated_list",page:1,keyword:treated_keyword},function(data){
+                            $("#treatedList").html(data);
+                        });
+                        break;
+                }
+            });
+        });
+        $(document).on("click",".dodelete",function(){
+            id = $(this).parent().data('id');
+            name = $(this).parent().data('name');
+            phone = $(this).parent().data('phone');
+            swal({
+                title: "您确定要删除这条记录吗",
+                text: name+"("+phone+")",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
+                closeOnConfirm: true
+            }, function () {
+                $.post("{:url('admin/design/delete_recode')}",{id:id},function(){
+                    page = $(".page_button.active[data-type='untreated']").html();
+                    $.post(ajax_address,{type:"untreated_list",page:page,keyword:untreated_keyword},function(data){
+                        $("#untreatedList").html(data);
+                    });
+                });
+            });
+        });
+    });
+</script>
+</body>
+</html>

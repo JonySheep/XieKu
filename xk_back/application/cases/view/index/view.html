@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$case.title} - 应用案例 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css">
+    <link rel="stylesheet" href="/static/css/case-contg.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="index@public/header"}
+<div class="banner">
+    <img src="/static/images/banner.png">
+</div>
+<div class="center">
+    <div class="top">
+        <a href="/">首页</a> >
+        <a href="{:url('cases/index/index')}">应用案例</a> >
+        案例详情
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="main-top">
+    <div class="center">
+        <div class="title">{$case.title}</div>
+        <div class="f-l">
+            {$case.introduce}
+        </div>
+        <div class="f-r">
+        <span class="view">
+          <em id="viewnum">{$case.click}</em>人气
+        </span>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="step-unit">
+        <div class="num">1</div>
+        <div class="unit">
+            <div class="title">基本信息</div>
+            <div class="content">
+                <div class="f-l"><img class="cover" src="{$case.cover}" alt=""></div>
+                <div class="info f-r">
+                    {$case.details}
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-unit">
+        <div class="num">2</div>
+        <div class="unit">
+            <div class="title">方案设计</div>
+            <div class="content">
+                {$case.plan}
+            </div>
+        </div>
+    </div>
+
+    <div class="step-unit">
+        <div class="num">3</div>
+        <div class="unit">
+            <div class="title">施工详情</div>
+            <div class="content">
+                {$case.construction_details}
+            </div>
+        </div>
+    </div>
+
+    <div class="step-unit">
+        <div class="num"></div>
+        <div class="unit">
+            <div class="title">业主反馈</div>
+            <div class="content">
+                <div class="feed-back">{$case.feedback}</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="more center">
+    <div class="title"><span>查看更多工程案例</span></div>
+    <div class="more-list">
+        {volist name="RandomCaseList" id="random_case"}
+        <div class="more-item inline">
+            <a href="{:url('cases/index/view',['id'=>$random_case[0]])}">
+                <img width="250px" height="154px" src="{$random_case[2]}">
+                <span>{$random_case[1]}</span>
+            </a>
+        </div>
+        {/volist}
+    </div>
+</div>
+{include file="index@public/footer"}
+</body>
+</html>

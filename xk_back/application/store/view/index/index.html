@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>线下门店 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" href="/static/css/store.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+<div class="big-thumb" style="display:none;"><img src=""></div>
+{include file="index@public/header"}
+<div class="banner-bg">
+    <div class="banner">
+        <div class="banner-left f-l">
+            <div class="title">
+                <div>上海区域</div>
+                <span>线下体验店</span>
+            </div>
+            <div class="area-list">
+                <ul>
+                <li><span>A、</span><a href="/store/index.html?r=1">黄浦区</a></li>
+                    <li><span>B、</span><a href="/store/index.html?r=3#store">徐汇区</a></li>
+                    <li><span>C、</span><a href="/store/index.html?r=4#store">长宁区</a></li>
+                    <li><span>D、</span><a href="/store/index.html?r=5#store">静安区</a></li>
+                    <li><span>E、</span><a href="/store/index.html?r=6#store">普陀区</a></li>
+                    <li><span>F、</span><a href="/store/index.html?r=8#store">虹口区</a></li>
+                    <li><span>G、</span><a href="/store/index.html?r=9#store">杨浦区</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="map f-r"><img src="/static/images/map2.png" width="638" height="784" usemap="#Map" border="0" ></div>
+        <map name="Map" id="Map">
+          <area style="outline:none;" shape="rect" coords="315,112,372,135" href="/store/index.html?r=19#store" />
+          <area style="outline:none;" shape="rect" coords="202,319,252,343" href="/store/index.html?r=16#store" />
+          <area style="outline:none;" shape="rect" coords="283,297,344,322" href="/store/index.html?r=15#store" />
+          <area style="outline:none;" shape="rect" coords="154,416,211,441" href="/store/index.html?r=14#store" />
+          <area style="outline:none;" shape="rect" coords="468,483,553,531" href="/store/index.html?r=10#store" />
+          <area style="outline:none;" shape="rect" coords="299,509,372,536" href="/store/index.html?r=11#store" />
+          <area style="outline:none;" shape="rect" coords="371,609,432,644" href="/store/index.html?r=13#store" />
+          <area style="outline:none;" shape="rect" coords="188,540,250,567" href="/store/index.html?r=12#store" />
+          <area style="outline:none;" shape="rect" coords="231,670,293,696" href="/store/index.html?r=17#store" />
+        </map>
+    </div>
+</div>
+
+<div class="main">
+    <div class="search">
+        <div class="title" id="store">查找当地体验店</div>
+        <form id="search_form" onsubmit="return false;">
+            <input type="text" id="kw" value="{$keyword}" placeholder="输入体验店区域名">
+            <input type="submit" id="searchbutton" value="快速查找">
+            <a href="{:url('design/index/free')}">获取免费设计方案</a>
+        </form>
+    </div>
+    <div class="area-select">
+        <div data-rid="0" class="area inline{if condition='$regionid eq 0'} active{/if}">全部</div>
+        {volist name="regionList" id="region"}
+        <div data-rid="{$region.id}" class="area inline{if condition='$regionid eq $region.id'} active{/if}">{$region.region}</div>
+        {/volist}
+    </div>
+    <form id="controller_form" action="#store" method="get">
+        <input type="hidden" name="k" id="keyword" value="{$keyword}">
+        <input type="hidden" name="r" id="regionid" value="{$regionid}">
+    </form>
+    <div class="item-list">
+        {volist name="storeList" id="store"}
+        <div class="item inline">
+            <div class="item-top">
+                <div class="left f-l">
+                    <div class="shop-name">{$store.title}</div>
+                    <div class="address">联系地址：{$store.address}</div>
+                    <div class="tel">服务电话：{$store.telephone}</div>
+                </div>
+                <div class="qr f-r"><img width="90px" height="90px" src="{$store.qrcode}"></div>
+            </div>
+            <div class="thumb">
+                {volist name="store.coverlist" id="cover"}
+                <img width="146px" height="120px" src="{$cover}" class="s-thumb">
+                {/volist}
+            </div>
+        </div>
+        {/volist}
+    </div>
+    <!-- <div class="offer">
+        <div class="title">我们为您提供</div>
+        <div class="line"></div>
+        <div class="offer-item">
+            <div class="block inline">
+                <img src="/static/images/offer1.fw.png">
+                <div class="text">产品</div>
+            </div>
+
+            <div class="block inline">
+                <img src="/static/images/offer2.fw.png">
+                <div class="text">设计</div>
+            </div>
+
+            <div class="block inline">
+                <img src="/static/images/offer3.fw.png">
+                <div class="text">安装</div>
+            </div>
+
+            <div class="block inline">
+                <img src="/static/images/offer4.fw.png">
+                <div class="text">售后</div>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+
+
+<script>
+    $(function(){
+        $('.area').on('click',function(){
+            $("#regionid").val($(this).data('rid'));
+            controller_form.submit();
+        });
+        $('#searchbutton').on('click',function(){
+            $("#keyword").val($("#kw").val());
+            controller_form.submit();
+        });
+
+        $('.s-thumb').on('click',function(){
+          var img = $(this).attr('src');
+          $('.big-thumb img').hide();
+          $('.big-thumb').fadeIn(150,function(){
+            $('.big-thumb img').attr('src',img);
+            var height = -($('.big-thumb img').height()/2);
+            var width = -($('.big-thumb img').width()/2);
+            $('.big-thumb img').css('margin-top',height);
+            $('.big-thumb img').css('margin-left',width);
+            $('.big-thumb img').fadeIn(150);
+          });
+        });
+        $('.big-thumb').on('click',function(){
+          $(this).fadeOut(150);
+        });
+
+
+
+    });
+</script>
+{include file="index@public/footer"}
+</body>
+</html>

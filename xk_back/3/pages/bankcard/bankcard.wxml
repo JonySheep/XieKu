@@ -1,0 +1,6 @@
+<!--pages/bankcard/bankcard.wxml-->
+
+  <view class="text">编辑</view>
+  <import src="/pages/common/lib/templet.wxml"/>
+  <template is="bankcard" data="{{...cards}}"></template>
+  <view class='footer'>添加银行卡</view>

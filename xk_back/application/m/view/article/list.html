@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>{$article_typename} - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/fashion.css">
+    <link rel="stylesheet" href="/static/m/css/page.css">
+    <link rel="stylesheet" href="/static/m/css/list.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="main">
+    <ul>
+        {volist name="articlelist" id="article"}
+        <li>
+            <a href="{:url('m/article/view',['id'=>$article['id']])}">
+                <div class="thumb inline">
+                    <img src="{$article.cover}">
+                </div>
+                <div class="right inline">
+                    <div class="case-title">{$article.title}</div>
+                    <div class="state">
+                        <span class="f-l">发布者:{$article.user}</span>
+                        <span class="f-r">
+                {$article.updatetime}
+              </span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {/volist}
+    </ul>
+</div>
+{include file="article/page"}
+{include file="public/list"}
+{include file="public/footer"}
+</body>
+</html>

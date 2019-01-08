@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5><a href="{:url('admin/store/index')}"><i class="fa fa-chevron-left"></i></a> {present name='editmode'}{$store.title} - 门店编辑{else/}添加门店{/present}</small></h5>
+                    <div class="ibox-tools">
+                        {present name='editmode'}
+                        <a href="javascript:;" onclick="deleteStore();" class="btn btn-danger btn-outline btn-xs"><span class="fa fa-trash" aria-hidden="true"></span> 删除该门店</a>
+                        {/present}
+                    </div>
+                </div>
+                <div class="cover_templete" style="display: none;">
+                    <div style="display: inline-block;">
+                        <div style="display: inline-block;width: 146px;">
+                            <a style="position: relative;left: 130px;top: 20px;" class="cover_delete"><i style="color:red;text-shadow:1px 1px 0px black;" class="fa fa-times"></i></a>
+                            <img style="height:120px;width: 146px;border:1px #e7eaec solid;" src="">
+                            <input type="hidden" value="" name="cover[]">
+                            <input type="text" style="width:146px;text-align: center;border: none;" name="cover_sort[]" value="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" action="{:url('admin/store/update')}" class="form-horizontal">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店名称</label>
+                            <div class="col-sm-10">
+                                <input value="{present name='editmode'}{$store.title}{/present}" name="title" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店所属地区</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="region">
+                                    {volist name="regionList" id="region"}
+                                    <option{present name='editmode'}{if condition="$region.id eq $store.regionid"} selected{/if}{/present} value="{$region.id}">{$region.region}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店服务电话</label>
+                            <div class="col-sm-10">
+                                <input value="{present name='editmode'}{$store.telephone}{/present}" name="telephone" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店联系地址</label>
+                            <div class="col-sm-10">
+                                <input value="{present name='editmode'}{$store.address}{/present}" name="address" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店经纬度</label>
+                            <div class="col-sm-6">
+                                <input value="{present name='editmode'}{$store.address_number}{/present}" name="address_number" type="text" class="form-control">
+                            </div>
+                            <div class="col-sm-2">
+                                 <a href="https://lbs.amap.com/console/show/picker" target="_Blank">通过输入地址获取经纬度</a>        
+                             </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店预览图</label>
+                            <div class="col-sm-10" style="border:1px #e7eaec solid;height: 160px;">
+                                <div style="display: inline-block;vertical-align: top;" class="cover_box">
+                                    {present name='editmode'}
+                                    {volist name="coverList" id="cover"}
+                                    <div style="display: inline-block;width: 146px;">
+                                        <div>
+                                            <a style="position: relative;left: 130px;top: 20px;" class="cover_delete"><i style="color:red;text-shadow:1px 1px 0px black;" class="fa fa-times"></i></a>
+                                            <img style="height:120px;width: 146px;border:1px #e7eaec solid;" src="{$cover}">
+                                            <input type="hidden" value="{$cover}" name="cover[]">
+                                            <input type="text" style="width:146px;text-align: center;border: none;" name="cover_sort[]" value="0">
+                                        </div>
+                                    </div>
+                                    {/volist}
+                                    {/present}
+                                </div>
+                                <div style="display: inline-block;">
+                                    <img id="add_cover" style="cursor: pointer;margin-top:10px;" onclick="cover_file.click();" src="/static/admin_res/img/webuploader.png">
+                                </div>
+                            </div>
+                            <input onchange="ajaxFileUpload('cover_file','cover')" name="cover_file" id="cover_file" style="display:none;" type="file" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店二维码</label>
+                            <div class="col-sm-3">
+                                <img id="qrcode_img" style="cursor: pointer;height:90px;width:90px;" onclick="qrcode_file.click();" src="{empty name='$store.qrcode'}/static/admin_res/img/webuploader.png{else/}{$store.qrcode}{/empty}">
+                                <input onchange="ajaxFileUpload('qrcode_file','qrcode')" id="qrcode_file" name="qrcode_file" style="display:none;" type="file" class="form-control">
+                                <input type="hidden" value="{present name='editmode'}{$store.qrcode}{/present}" name="qrcode" id="qrcode">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序权重</label>
+                            <div class="col-sm-2">
+                                <input value="{present name='editmode'}{$store.sort}{else/}0{/present}" type="text" class="form-control" name="sort">
+                                <span class="help-block m-b-none">权重越小排序越靠前</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        {present name='editmode'}<input type="hidden" value="{$store.id}" name="edit_id">{/present}
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin_res/js/ajaxfileupload.js"></script>
+<script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+<script src="/static/admin_res/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/static/admin_res/js/plugins/toastr/toastr.min.js"></script>
+<script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/static/admin_res/js/plugins/layer/laydate/laydate.js"></script>
+{present name='editmode'}
+<script>
+    function deleteStore(){
+        swal({
+            title: "您确定要删除该门店吗",
+            text: "删除后将无法恢复，请谨慎操作！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "删除",
+            cancelButtonText: "取消",
+            closeOnConfirm: false
+        }, function () {
+            window.location.href="{:url('admin/store/delete',['id'=>$store.id])}";
+        });
+    }
+</script>
+{/present}
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $(document).on("click",".cover_delete",function(){
+            $(this).parent().parent().remove();
+            if( $(".cover_box>div").length<3){
+                $("#add_cover").show();
+            }
+        });
+        if($(".cover_box>div").length>=3){
+            $("#add_cover").hide();
+        }
+    });
+    function addCover(src){
+        $(".cover_box").append($(".cover_templete").html());
+        $(".cover_box>div:last>div>img").attr("src",src);
+        $(".cover_box>div:last>div>input[type='hidden']").val(src);
+        if( $(".cover_box>div").length>=3){
+            $("#add_cover").hide();
+        }
+    }
+    function ShowToastr(title,msg,type){
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "showDuration": "400",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "slideDown",
+            "hideMethod": "fadeOut"
+        }
+        toastr[type](msg,title);
+    }
+    function ajaxFileUpload(fileinput,type)
+    {
+        switch(type){
+            case 'cover':
+                url = '{:url("admin/store/coverupload")}';
+                break;
+            case 'qrcode':
+                url = '{:url("admin/store/qrcodeupload")}';
+                break;
+        }
+        $.ajaxFileUpload({
+            url:url,
+            secureuri:false,
+            fileElementId:fileinput,
+            dataType: 'json',
+            success: function (data, status)
+            {
+                switch(data.result){
+                    case -1:
+                        ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+                        break;
+                    case 0:
+                        ShowToastr("请求未成功",data.msg,"warning");
+                        break;
+                    case 1:
+                        switch(type) {
+                            case 'cover':
+                                addCover(data.src);
+                                break;
+                            case 'qrcode':
+                                $("#qrcode_img").attr('src', data.src);
+                                $("#qrcode").val(data.src);
+                                break;
+                        }
+                        break;
+                }
+            },
+            error: function (data, status, e)
+            {
+                ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+            }
+        });
+        return true;
+    }
+</script>
+</body>
+</html>

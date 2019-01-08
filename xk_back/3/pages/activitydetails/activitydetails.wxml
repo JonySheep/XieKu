@@ -1,0 +1,57 @@
+<view>
+  <!-- banner -->
+  <view class="activityBanner">
+      <image src="{{activitydetails.activity_img}}" class="slide-image" mode='widthFix'  style="width:100%;" />
+  </view>   
+  <!-- content -->
+  <view class="activityContent">
+      <!-- title -->
+      <view class="activityTitle">{{activitydetails.activity_name}}</view>  
+      <!-- 浏览收藏 -->
+      <view class="pvAndCt">
+          <view>浏览：<text>{{activitydetails.pv}}</text></view>
+          <view>收藏：<text>{{activitydetails.cn}}</text></view>
+      </view>
+      <view class="activityTime">时间：<text>{{activitydetails.start_time}}  至  {{activitydetails.end_time}}</text></view>
+      <view class="activityTime">地点：<text>{{activitydetails.city_particulars}}</text></view>
+      <view class="activityTime">名额：<text>{{activitydetails.places}}</text></view>
+      <view class="activityTime">剩余：<text>{{activitydetails.residue_places}}</text></view>
+      <view class="activityTime">价格：<text>￥{{activitydetails.price}}</text></view>
+      <view class="activityTime">积分：<text class="activityIn">{{activitydetails.integral}}积分</text></view>
+  </view>
+  <!-- 活动详情 -->
+  <view class="activityDetails">
+      <view class="activityDetailsTitle">活动详情</view>
+  </view>
+  <import src="../../wxParse/wxParse.wxml"/>
+  <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  <!-- floot -->
+  <view class="floot">
+    <!-- 首页 -->
+      <view bindtap="redirectHome">
+          <view class="flootImg">
+            <image src="https://www.swahouse.com/image/indexome.png"  />
+          </view>
+          <view class="wocc" >首页</view>
+      </view>
+      <!-- 收藏 -->
+      <view bindtap="activityCollect">
+          <view class="flootImg">
+            <image src="https://www.swahouse.com/image/collect.png"  />
+          </view>
+          <view class="wocc">{{collectTxt?'已收藏':'收藏'}}</view>
+      </view>
+      <!-- 分享 -->
+      <view class="fenxiang">
+          <view class="flootImg">
+            <image src="https://www.swahouse.com/image/share.png"  />
+          </view>
+          <view class="wocc" >分享</view>
+          <button class="zhuanfa" open-type="share" data-name="pageShare" ></button>
+      </view>
+      <!-- 立即兑换 -->
+      <view class="ljdh" bindtap="activityConversion">
+        <button>立即兑换</button>
+      </view>
+  </view>
+</view>

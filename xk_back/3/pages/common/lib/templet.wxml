@@ -1,0 +1,238 @@
+<!--自定义弹窗-模板start-->
+<template name="login">
+  <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+</template>
+
+<template name="showToast">
+  <block wx:if="{{showToast.isShow? showToast.isShow: false}}">
+    <view class="toast-bg" wx:if="{{showToast.mask==false? false : true}}"></view>
+    <view class="toast-center">
+      <view class="toast">
+        <image class="toast-icon" src="{{showToast.icon}}" mode="scaleToFill" binderror="errImg" data-err-img="showToast.icon" data-err-type="showToast" wx:if="{{showToast.icon}}" />
+        <text class="toast-text">{{showToast.title}}</text>
+      </view>
+    </view>
+  </block>
+</template>
+
+<!--项目列表-未预约-模板start-->
+<template name="prolist-unorder">
+  <view class="pro-item" bindtap="toProDetail" data-id="{{id}}">
+    <view class="pro-image">
+      <image src="{{images.full_url}}" mode="widthFill"></image>
+    </view>
+    <view class="pro-detail">
+      <view class="item-detail" style="color:#EA5A49;margin-bottom: 6px;margin-top:4px">
+        <image src="../../images/project/icon-lend.png" style="margin-bottom: 7px"></image>
+        <text class="text-loan">{{loan}}<text class="text-unit">万</text></text>\t
+        <text style="color:#ddd">/</text>\t
+        <text class="col444796">年息</text>\t{{annual_interest}}%\t
+        <text style="color:#ddd">/</text>\t
+        <text class="col444796">{{loan_cycle}}个月</text>
+      </view>
+      <view class="item-detail">
+        <image src="../../images/project/icon-diya.png"></image>
+        <text>{{city}}·{{housing}}<text wx:if="{{area != 0}}">{{area}}㎡</text>{{apartment_laytout==null?"":apartment_laytout}}</text>
+      </view>
+      <view class="item-detail">
+        <image src="../../images/project/icon-yue.png"></image>
+        <text>{{planned_sign_date_ps}}</text>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--项目列表-已预约-模板start-->
+<template name="prolist-order">
+  <view class="pro-item" bindtap="toProDetail" data-id="{{id}}">
+    <view class="pro-image">
+      <image src="{{images.full_url}}" mode="widthFill"></image>
+      <view class="pro-ordered-bg">
+        <text class="pro-ordered-text">已预约</text>
+      </view>
+    </view>
+    <view class="pro-detail">
+      <view class="item-detail" style="color:#EA5A49;margin-bottom: 6px;margin-top:4px">
+        <image src="../../images/project/icon-lend.png" style="margin-bottom: 7px"></image>
+        <text class="text-loan">{{loan}}<text class="text-unit">万</text></text>\t
+        <text style="color:#ddd">/</text>\t
+        <text class="col444796">年息</text>\t{{annual_interest}}%\t
+        <text style="color:#ddd">/</text>\t
+        <text class="col444796">{{loan_cycle}}个月</text>
+      </view>
+      <view class="item-detail">
+        <image src="../../images/project/icon-diya.png"></image>
+        <text>{{city}}·{{housing}}<text wx:if="{{area != 0}}">{{area}}m²</text>{{apartment_laytout==null?"":apartment_laytout}}</text>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--项目列表-已签约-模板start-->
+<template name="prolist-sign">
+  <view class="pro-item" bindtap="toProDetail" data-id="{{id}}">
+    <view class="pro-image">
+      <image src="{{images.full_url}}" mode="widthFill"></image>
+      <view class="pro-signed-bg">
+        <text class="pro-signed-text">已签约</text>
+      </view>
+    </view>
+    <view class="pro-detail">
+      <view class="item-detail" style="color:#EA5A49;margin-bottom: 6px;margin-top:4px">
+        <image src="../../images/project/icon-lend.png" style="margin-bottom: 7px"></image>
+        <text class="text-loan">{{loan}}<text class="text-unit">万</text></text>\t
+        <text style="color:#ddd">/\t</text>
+        <text class="col444796">年息</text>\t{{annual_interest}}%\t
+        <text style="color:#ddd">/</text>\t
+        <text class="col444796">{{loan_cycle}}个月</text>
+      </view>
+      <view class="item-detail">
+        <image src="../../images/project/icon-diya.png"></image>
+        <text class="">{{city}}·{{housing}}<text wx:if="{{area != 0}}">{{area}}m²</text>{{apartment_laytout==null?"":apartment_laytout}}</text>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--项目列表-收益计划-模板start-->
+<template name="prolist-benefitPlan">
+  <view class="clearfix mb20">
+    <text class="left br w27p">第{{id+1}}期初</text>
+    <text class="right w73p">收益\t<text style="color: #EA5A49;font-weight: bold">{{data}}</text>元</text>
+  </view>
+</template>
+
+<!-- 个人中心-我的-模板start -->
+<template name="customer-center">
+  <navigator class="prolist-content-show" url="../myorder/myorder?id={{id}}">
+    <!--已预约-->
+    <view class="pro-item"  data-id="{{id}}">
+      <view class="pro-image">
+        <image src="{{image}}"></image>
+        <view class="pro-ordered-bg">
+          <text class="pro-ordered-text">已预约</text>
+        </view>
+      </view>
+      <view class="pro-detail txt">
+        <view class="item-detail" style="color:#EA5A49;">
+          <text style="margin-right:3px;">借{{loan}}万</text>
+          <text style="color:#ddd;">/</text>
+          <text class="col444796;"style="margin-left:3px;">年息</text >\t{{annual_interest}}%
+          <text style="color:#ddd;">/</text>
+          <text class="col444796"style="margin-left:3px;">{{loan_cycle}}个月</text>
+        </view>
+        <view class="item-detail">
+          <text>{{city}}·{{housing}}{{area}}㎡{{apartment_laytout==null?"":apartment_laytout}}</text>
+        </view>
+        <view class="item-detail">
+          <text style="color: #37AA65;">预约时间：{{sign_date==null?"":sign_date}}</text>
+        </view>
+      </view>
+    </view>
+  </navigator>
+</template>
+<!-- 福利商品模板 -->
+ <template name="welfare-goots">
+     <view class="goods-item">
+      <view class="goots-left">
+        <image src="{{activity_img}}" mode="widthFix" class='goots-img' ></image>
+        <view class="goots-text"></view> 
+        <view class="goods_yang">倒计时：{{residue_time}}</view>
+      </view>
+      <view class="goots-right">
+        <view class="titleColor">{{activity_name}}</view>
+        <view class="right-2">
+          <view style='color:red;'>{{integral}}积分</view>
+          <view>市场价￥{{price}}</view>
+        </view>
+        <view class='right-3'>名额：{{places}}</view>
+        <view class="right-3">剩余：{{residue_places}}</view>
+        <view class="right-5">
+            <view > <button size='mini' plain="true" style='border: 2rpx solid #ddd;' data-current="{{id}}" bindtap="activitydetails" >活动详情</button></view>
+            <view ><button size="mini" plain="true" style='border: 2rpx solid #ddd;'  data-current="{{id}}" bindtap="activityConversion" >立即兑换</button></view>
+        </view>
+      </view>
+    </view> 
+    <!-- 银行卡项目 -->
+</template>
+<template name="bankcard">
+    <view class="card">
+      <image src="{{img}}" mode='widthFix'style="width:100%;"></image>
+      <view class="card-text" style="letter-spacing:10rpx;"> <text>**** ****  ****  {{cardNumber}}</text></view>
+    </view>
+</template>
+<!-- 分类页面商品模板 -->
+<template name="categoryitems">
+    <scroll-view style='height:100%;'>
+    <!-- {{brands[0]['name']}} -->
+        <view wx:for="{{category}}" wx:for-item="cate" wx:key="*this" >
+  
+        <image src="{{cate.logo}}"class='swiper-image swiper-box' data-categoryID="{{cate.id}}" bindtap="toCategoryDetail"></image>
+        
+
+           
+         
+          <!--
+          <view class='cate-item' wx:for="{{brand['goods']}}"  wx:for-item="good" wx:key="*this" data-goodsID="{{good.id}}" bindtap="toGoodsDetail">
+            <view class='a'><image src="{{imgUrl}}{{good['cover1']}}" mode="widthFix" class="img"></image></view>
+            <view class='b'>
+              <view class='title'>{{good['title']}}</view>
+              <view class="score">￥{{good['price']}}</view>
+              <view style='text-align:right;'>
+              <button size="mini" bindtap="toGoodsDetail" data-goodsID="{{good.id}}"  plain="true" style='border: 2rpx solid #ddd;width:60%;'>购买</button>
+              </view>
+            </view>
+          </view>
+          
+          -->
+        </view>
+    </scroll-view>
+</template>
+  <!-- 活动模板 -->
+<template name="activityitem">
+  <view class='item'>
+              <view class='a'><image src="{{img1}}" mode="widthFix" class="img"></image></view>
+              <view class='b'>
+                <view class='title'>{{title1}}</view>
+                <view class="score">积分：{{score1}}</view>
+                <view style='text-align:right;'><button size="mini" plain="true" style='border: 2rpx solid #ddd;width:40%;'>参加</button></view>
+              
+              </view>
+  </view>
+</template>
+<!-- 收藏 -->
+<template name="collectitem">
+  <view class="goods-item">
+      <view class="goots-left">
+        <image src="{{activity_img}}" mode="widthFix" class='goots-img' ></image>
+        <view class="goots-text"></view> 
+        <view class="goods_yang" bindtap="cancelCollectActivity"  data-current="{{id}}">{{is_collect?'收藏':'取消收藏'}}</view>
+      </view>
+      <view class="goots-right">
+        <view class="titleColor">{{activity_name}}</view>
+        <view class="right-2">
+          <view style='color:red;'>{{integral}}积分</view>
+          <view>市场价￥{{price}}</view>
+        </view>
+        <view class='right-3'>结束时间：{{end_time}}</view>
+        <view class="right-3">剩余名额：{{residue_places}}</view>
+        <view class="right-5">
+            <view > <button size='mini' plain="true" style='border: 2rpx solid #ddd;' data-current="{{id}}" bindtap="activitydetails" >活动详情</button></view>
+            <view ><button size="mini" plain="true" style='border: 2rpx solid #ddd;'  data-current="{{id}}" bindtap="activityConversion" >立即兑换</button></view>
+        </view>
+      </view>
+    </view> 
+</template>
+<!-- 订单状态页面模板 -->
+<template name="dingdan">
+          <view class='cate-item'>
+            <view class='a'><image src="{{img1}}" mode="widthFix" class="img"></image></view>
+            <view class='b'>
+              <view style='text-align:right;  font-size: 28rpx; color: #666;'>{{title1}}</view>
+              <view style='text-align:right;  font-size: 28rpx; color: red; margin:20rpx 0;'>积分：{{score1}}</view>
+              <view style='text-align:right;  font-size: 28rpx; color: #666;'>{{state}}</view>
+            
+            </view>
+          </view>
+
+</template>

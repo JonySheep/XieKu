@@ -1,0 +1,7 @@
+<div class="page">
+    {if condition="$NowPage neq 1"}<a href="{:url('m/store/index')}?page={$NowPage-1}" class="p prevPage">&lt;</a>{/if}
+    {for start="1" end="$PageCount+1"}
+    <a href="{:url('m/store/index')}?page={$i}" class="p page_button{if condition='$i eq $NowPage'}  active{/if}">{$i}</a>
+    {/for}
+    {if condition="$NowPage lt $PageCount"}<a href="{:url('m/store/index')}?page={$NowPage+1}" class="p nextPage">&gt;</a>{/if}
+</div>

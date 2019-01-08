@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/static/css/brand.css">
+{volist name="categoryList" id="category"}
+<div class="intro">
+    <title>{$category.name}</title>
+    <div class="intro-list">
+        <ul>
+            {volist name="brandList" id="brand"}
+            {if condition="in_array($category.id,$brand.category)"}
+            <li>
+                <a href=""><img width="240px" height="90px" src="{$brand.logo}"></a>
+            </li>
+            {/if}
+            {/volist}
+        </ul>
+    </div>
+</div>
+{/volist}

@@ -1,0 +1,45 @@
+<table style="text-align: center" class="table table-bordered">
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>手机号</th>
+        <th>地区</th>
+        <th>户型</th>
+        <th>面积</th>
+        <th>系统类型</th>
+        <th>提交时间</th>
+        <th>处理时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="treatedList" id="treated"}
+    <tr>
+        <td>{$treated.name}({if condition="$treated.sex eq 1"}先生{else}女士{/if})</td>
+        <td>{$treated.phone}</td>
+        <td>{:GetRegionName($treated.region)}</td>
+        <td>{:GetModelName($treated.model)}</td>
+        <td>{$treated.area} M<sup>2</sup></td>
+        <td>{$treated.category}</td>
+        <td>{:date("Y-m-d",$treated.timestamp)}</td>
+        <td>{:date("Y-m-d",$treated.treatedtime)}</td>
+        <td data-model="{:GetModelName($treated.model)}" data-note="{$treated.note}" data-name="{$treated.name}" data-category="{$treated.category}" data-region="{:GetRegionName($treated.region)}" data-area="{$treated.area}" data-phone="{$treated.phone}"  data-id="{$treated.id}" width="100px" align="center">
+            <button class="btn btn-info doview" type="button"><i class="fa fa-search"></i> 查看处理结果
+            </button>
+        </td>
+    </tr>
+    {/volist}
+    </tbody>
+</table>
+<div class="hr-line-dashed"></div>
+<div class="text-center">
+    <div class="btn-group">
+        {if condition="$treatedNowPage neq 1"}<button data-page="{$treatedNowPage-1}" data-type="treated" style="height:34px;" class="btn btn-white page_button" type="button"><i class="fa fa-chevron-left"></i>
+    </button>{/if}
+        {for start="1" end="$treatedPageCount+1"}
+        <button data-type="treated" data-page="{$i}" class="btn btn-white page_button{if condition='$i eq $treatedNowPage'} active{/if}">{$i}</button>
+        {/for}
+        {if condition="$treatedNowPage lt $treatedPageCount"}<button data-type="treated" data-page="{$treatedNowPage+1}" style="height:34px;" class="btn btn-white page_button" type="button"><i class="fa fa-chevron-right"></i>
+    </button>{/if}
+    </div>
+</div>

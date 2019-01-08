@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>所有品牌 ({:sizeof($brandlist)})</h5>
+                    <div class="ibox-tools">
+                        <a href="{:url('admin/brand/add')}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 创建新品牌</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="project-list">
+                        <div class="row">
+                            {volist name="brandlist" id="brand"}
+                            <div class="col-sm-2">
+                                <div class="contact-box">
+                                    <a href="{:url('admin/brand/edit','id='.$brand['id'])}">
+                                        <div class="col-sm-12">
+                                            <div class="text-center">
+                                                <img style="margin:5px auto;height:40px;" alt="image" class="m-t-xs img-responsive" src="{$brand.logo}">
+                                                <div class="m-t-xs font-bold">{if condition="$brand.available eq 0"}<i style="color:red;" class="fa fa-ban"></i> {/if}{$brand.name}</div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </div>
+                            </div>
+                            {/volist}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+    <script>
+        $(document).ready(function () {
+            $('.contact-box').each(function () {
+                animationHover(this, 'pulse');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$type_name} - 一站式服务 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/left-list.css">
+    <link rel="stylesheet" href="/static/css/about.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="index@public/header"}
+<div class="banner">
+    <img src="/static/images/about_banner.jpg">
+</div>
+<div class="main">
+    <div class="top">
+        <a href="/">首页</a> >
+        一站式服务 >
+        <a href="{$type_link}">{$type_name}</a>
+    </div>
+    <div class="clear"></div>
+    <div class="in_page_left">
+        <div class="inpage_left_tit">
+            <h1><b>一站式服务</b></h1>
+            <ul class="inleft_list_con">
+                <li><a href="javascript:;" id="bzgf"><span>○</span>安装标准与规范</a>
+                <ul style="display:none">
+                    {volist name="categoryList" id="category"}
+                    <li><a href="{:url('swa/service/help',['typeid'=>$category['id']])}">· {$category.name}系统</a></li>
+                    {/volist}
+                </ul>
+
+                </li>
+                <li><a href="{:url('swa/service/view','id=3')}"><span>○</span>安装服务流程</a></li>
+                <li><a href="{:url('swa/service/view','id=4')}"><span>○</span>售后服务流程</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $(".inleft_list_con>li").each(function(){
+                var url = "{$type_link}";
+                var sub_nav = $(this).find("ul");
+                if(sub_nav.length==0){
+                  var link = $(this).find("a");
+                  if(link.attr("href")==url){
+                      link.addClass("li_on");
+                  }
+                }else{
+                  sub_nav.find('li').each(function(){
+                    var link = $(this).find("a");
+                    if(link.attr("href")==url){
+                        link.addClass("li_on");
+                    }
+                  });
+                }
+            });
+            $('#bzgf').on('click',function(){
+                $(this).parent().find("ul").slideToggle();
+            });
+        });
+    </script>
+    <div class="in_page_right f-r">
+        <div class="parameter-title">{$subpage_name}</div>
+        <div class="intro">
+            {$page_content}
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+{include file="index@public/footer"}
+</body>
+</html>

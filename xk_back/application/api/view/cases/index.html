@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>应用案例 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/case.css">
+    <link rel="stylesheet" href="/static/m/css/page.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="main">
+    <ul>
+        {volist name="caseList" id="case"}
+        <li>
+            <a href="{:url('m/cases/view',['id'=>$case['id']])}">
+                <div class="thumb inline">
+                    <img src="{$case.cover}">
+                    {if condition="$case.status eq 1"}
+                    <div class="bulid-sg bulid-ok"></div>
+                    {else/}
+                    <div class="bulid-sg bulid-ing"></div>
+                    {/if}
+                </div>
+                <div class="right inline">
+                    <div class="case-title">{$case.title}</div>
+                    <div class="state">
+                <span class="state-bg">
+                  {:GetCategoryName($case['category'])}
+                </span>
+                        <span class="state-bg">
+                            {:GetModelName($case['model'])}
+                </span>
+                        <span class="state-bg">{:GetRegionName($case['region'])}</span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {/volist}
+    </ul>
+</div>
+{include file="cases/page"}
+{include file="public/footer"}
+</body>
+</html>

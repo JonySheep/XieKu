@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台 - 登录</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;url={:url('admin/user/ie')}" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name">SWA</h1>
+            </div>
+            <h3>斜厍舒适集成后台</h3>
+            <form class="m-t" role="form" method="post" action="{:url('admin/user/login')}">
+                <div class="form-group">
+                    <input name="username" id="username" type="text" class="form-control" placeholder="用户名" required="">
+                </div>
+                <div class="form-group">
+                    <input name="password" id="password" type="password" class="form-control" placeholder="密码" required="">
+                </div>
+                <div class="geetest_form">
+                    <input type="hidden" id="geetest_challenge" name="geetest_challenge" value="">
+                    <input type="hidden" id="geetest_validate" name="geetest_validate" value="">
+                    <input type="hidden" id="geetest_seccode" name="geetest_seccode" value="">
+                </div>
+                <button id="login-submit" class="btn btn-primary block full-width m-b">登 录</button>
+            </form>
+            <div style="display: none;" class="alert alert-danger alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <span id="info"></span>
+            </div>
+        </div>
+    </div>
+    <script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/static/js/gt.js"></script>
+    <script type="text/javascript">
+        var error_info = "{$error_info}";
+        $(function(){
+            if(error_info!=""){
+                $("#info").html(error_info);
+                $(".alert").show();
+            }
+        });
+        jQuery.fn.shake = function (intShakes,intDistance,intDuration) {
+            this.each(function () {
+                var jqNode = $(this);
+                jqNode.css({ position: 'relative' });
+                for (var x = 1; x <= intShakes; x++) {
+                    jqNode.animate({ left: (intDistance * -1) }, (((intDuration / intShakes) / 4)))
+                    .animate({ left: intDistance }, ((intDuration / intShakes) / 2))
+                    .animate({ left: 0 }, (((intDuration / intShakes) / 4)));
+                }
+            });
+            return this;
+        };
+        var handlerEmbed = function (captchaObj) {
+            captchaObj.onSuccess(function () {
+                var result = captchaObj.getValidate();
+                $("#geetest_challenge").val(result.geetest_challenge);
+                $("#geetest_validate").val(result.geetest_validate);
+                $("#geetest_seccode").val(result.geetest_seccode);
+                if($("#username").val()==""||$("#password").val()=="")return;
+                $("form").submit();
+            });
+            $("#login-submit").click(function (e) {
+                if($("#username").val()==""||$("#password").val()=="")return;
+                var validate = captchaObj.getValidate();
+                if (!validate) {
+//                    $("#gee-captcha").shake(5, 10, 400);
+                    captchaObj.verify();
+                    e.preventDefault();
+                }
+            });
+           // captchaObj.appendTo("#gee-captcha");
+//            captchaObj.onReady(function () {
+//                $(".captcha-info").hide();
+//            });
+        };
+        $.ajax({
+            url: "{:url('index/geetest/init')}?t=" + (new Date()).getTime(),
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                initGeetest({
+                    gt: data.gt,
+                    challenge: data.challenge,
+                    new_captcha: data.new_captcha,
+                    product: "bind",
+                    offline: !data.success,
+                    width: '350px'
+                }, handlerEmbed);
+            }
+        });
+    </script>
+</body>
+</html>

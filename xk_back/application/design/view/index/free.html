@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>免费方案设计 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" href="/static/css/free.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="index@public/header"}
+<div class="banner">
+    <img src="/static/images/free-banner.png">
+</div>
+
+<div class="grey">
+    <div id="form" class="apply">
+        <div class="overplus f-l">今日还剩<span class="num">&nbsp;{$FreeDesignRemain}&nbsp;</span>个免费名额</div>
+        <div class="success f-r">目前已有<span class="num">&nbsp;{$FreeDesignSuccess}&nbsp;</span>人申请成功</div>
+        <div class="clear"></div>
+        <form id="applyform" method="post" action="{:url('design/index/apply')}">
+        <div class="info">
+            <div class="inline call">
+                <input class="name" id="name" maxlength="4" name="name" type="text" placeholder="您的称呼">
+                <select name="sex">
+                    <option value ="1">先生</option>
+                    <option value ="0">女士</option>
+                </select>
+            </div>
+            <input type="text" id="phone" maxlength="11" id="phone" name="phone" placeholder="您的手机号">
+            <select name="region" id="region">
+                {volist name="regionList" id="region"}
+                <option value ="{$region.id}">{$region.region}</option>
+                {/volist}
+            </select>
+            <select name="model" id="model">
+                {volist name="modelList" id="model"}
+                <option value ="{$model.id}">{$model.name}</option>
+                {/volist}
+            </select>
+            <input class="area" id="area" maxlength="4" name="area" type="text" placeholder="面积">
+            <input class="code" id="code" maxlength="8" name="code" type="text" placeholder="验证码">
+
+            <input type="hidden" id="geetest_challenge" value="">
+            <input type="hidden" id="geetest_validate" value="">
+            <input type="hidden" id="geetest_seccode" value="">
+            <input type="button" id="sendverify" value="发送验证码">
+        </div>
+        <div class="system">
+            <div class="system-title">系统类型（可多选）</div>
+            {volist name="categoryList" id="category"}
+            <label><input type="checkbox" value="{$category.id}" name="category[]">{$category.name}</label>
+            {/volist}
+        </div>
+        </form>
+        <a href="javascript:;" id="apply">免费获取设计方案及报价</a>
+        <div>我们承诺：斜厍舒适集成提供该项<span>免费服务，无需支付任何费用！</span>,为了您的权益，您的隐私将被严格保密</div>
+    </div>
+</div>
+<div class="grey">
+    <div class="customer center">
+        <div class="overplus f-l">近期获得设计客户</div>
+        <div class="success f-r">目前已有<span class="num">&nbsp;{$FreeDesignSuccess}&nbsp;</span>人申请成功</div>
+        <div class="clear"></div>
+        <ul>
+            <li style="border-top:none">
+                <span>手机号码</span>
+                <span>地 区</span>
+                <span>房屋户型</span>
+                <span>面积</span>
+                <span>系统类型</span>
+            </li>
+        </ul>
+        <div id="content" class="infocontent">
+            <div id="top"  class="infolist">
+                <ul>
+                    {volist name="freeDesignList" id="freedesign"}
+                     <li>
+                        <span>{$freedesign.phone}</span>
+                        <span>{$freedesign.region}</span>
+                        <span>{$freedesign.model}</span>
+                        <span>{$freedesign.area}  M<sup>2</sup></span>
+                        <span>{$freedesign.category}</span>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+            <div id="bottom" class="infolist"></div>
+        </div>
+
+
+        <script type="text/javascript">
+            var interval=3000;
+            var stepsize=65;
+            var objInterval=null;
+            $(document).ready( function(){
+                var count = $("#top li").length;
+                if (count>10) {
+                    $("#bottom").html($("#top").html());
+                    $("#content").bind("mouseover",function(){StopScroll();});
+                    $("#content").bind("mouseout",function(){StartScroll();});
+                    StartScroll();
+                };
+            });
+
+            function StartScroll(){
+                objInterval=setInterval("verticalloop()",interval);
+            }
+
+            function StopScroll(){
+                window.clearInterval(objInterval);
+            }
+
+            function verticalloop(){
+                if($("#content").scrollTop()>=$("#top").outerHeight()){
+                    $("#content").scrollTop($("#content").scrollTop()-$("#top").outerHeight());
+                }
+                $("#content").animate({
+                    "scrollTop":$("#content").scrollTop()+stepsize+"px"
+                },600);
+            }
+        </script>
+
+
+    </div>
+</div>
+
+<div class="case">
+    <div class="title">我们的案例</div>
+    <div class="line"></div>
+    <div class="ad">
+        好方案更省钱  海量工程案例真实见证<br>
+        服务总机：400-821-7980
+    </div>
+    <div class="center">
+        {volist name="RandomCaseList" id="random_case"}
+        <div class="case-block inline">
+            <a href="{:url('cases/index/view',['id'=>$random_case[0]])}">
+                <div class="bulid">
+                    <img src="{$random_case[2]}">
+                    {if condition="$random_case[4] eq 0"}
+                    <div class="bulid-sg bulid-ing"></div>
+                    {else/}
+                    <div class="bulid-sg bulid-ok"></div>
+                    {/if}
+                </div>
+                <div class="case-intro">
+                    <div class="case-name">{$random_case[1]}</div>
+                    <div class="click">阅读指数：<span>{$random_case[3]}</span></div>
+                </div>
+            </a>
+        </div>
+        {/volist}
+    </div>
+
+</div>
+
+<div class="owner center">
+    <div class="title">业主真实评价</div>
+    <div class="line"></div>
+    <div id="content2" class="infocontent">
+        <div id="top2"  class="infolist" style="line-height:normal;">
+            <ul>
+                <!--<li>-->
+                    <!--<div class="grid inline">-->
+                        <!--用户-->
+                        <!--<div class="text">张先生</div>-->
+                    <!--</div>-->
+                    <!--<div class="grid inline">-->
+                        <!--所在地区-->
+                        <!--<div class="text">宝山区</div>-->
+                    <!--</div>-->
+                    <!--<div class="grid inline">-->
+                        <!--系  统-->
+                        <!--<div class="text">中央空调 中央净水</div>-->
+                    <!--</div>-->
+                    <!--<div class="grid inline">-->
+                        <!--<div class="text">朋友介绍给我的斜厍，从刚开始装就让我很放心。我相信我朋友的眼光不会差的，结果也让人满意。最让人感到贴心的是师傅安装后家里没有感到一丝灰尘，特别棒的团队。以后我也会介绍朋友来这里的。</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <div id="bottom2" class="infolist"></div>
+    </div>
+    <script src="/static/js/gt.js"></script>
+    <script type="text/javascript">
+        var interval2=3000;
+        var stepsize2=162;
+        var objInterval2=null;
+        var cpObj = null;
+        $(document).ready( function(){
+            $("#bottom2").html($("#top2").html());
+            $("#content2").bind("mouseover",function(){StopScroll2();});
+            $("#content2").bind("mouseout",function(){StartScroll2();});
+            StartScroll2();
+        });
+
+        function StartScroll2(){
+            objInterval2=setInterval("verticalloop2()",interval2);
+        }
+
+        function StopScroll2(){
+            window.clearInterval(objInterval2);
+        }
+
+        function verticalloop2(){
+            if($("#content2").scrollTop()>=$("#top2").outerHeight()){
+                $("#content2").scrollTop($("#content2").scrollTop()-$("#top2").outerHeight());
+            }
+            $("#content2").animate({
+                "scrollTop":$("#content2").scrollTop()+stepsize2+"px"
+            },600);
+        }
+        var handlerEmbed = function (captchaObj) {
+            cpObj = captchaObj;
+            captchaObj.onSuccess(function () {
+                var result = captchaObj.getValidate();
+                $("#geetest_challenge").val(result.geetest_challenge);
+                $("#geetest_validate").val(result.geetest_validate);
+                $("#geetest_seccode").val(result.geetest_seccode);
+                if($("#phone").val()==""){
+                    alert("请先输入手机号码!");
+                    return;
+                }
+                getVerifyCode();
+            });
+        };
+        function getVerifyCode() {
+            $.post("{:url('design/index/sendverifycode')}",{phone:$("#phone").val(),
+                geetest_challenge:$("#geetest_challenge").val(),
+                geetest_validate:$("#geetest_validate").val(),
+                geetest_seccode:$("#geetest_seccode").val(),
+            },function(data){
+                switch(data.result){
+                    case 0:
+                        initgee();
+                        alert("请等待3分钟后再尝试发送！");
+                        break;
+                    case 1:
+                        initgee();
+                        alert("验证码已成功发送！");
+                        break;
+                    case -1:
+                        initgee();
+                        alert("手机号码不正确！请重新输入！");
+                        $("#phone").val("");
+                        break;
+                    case -2:
+                        initgee();
+                        cpObj.verify();
+                        break;
+                    case -3:
+                        alert('很抱歉，今日的免费名额已结束!请明天再来报名。');
+                        break;
+                }
+            });
+        }
+        $("#apply").click(function(){
+            name = $("#name").val();
+            phone = $("#phone").val();
+            area = $("#area").val();
+            code = $("#code").val();
+            if(name==""||phone==""||area==""||code==""){
+                alert("请先输入完整信息！");
+                return;
+            }
+            applyform.submit();
+        });
+        function initgee(){
+            $("#geetest_challenge").val("");
+            $("#geetest_validate").val("");
+            $("#geetest_seccode").val("");
+            $.ajax({
+                url: "{:url('index/geetest/init')}?t=" + (new Date()).getTime(),
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    initGeetest({
+                        gt: data.gt,
+                        challenge: data.challenge,
+                        new_captcha: data.new_captcha,
+                        product: "bind",
+                        offline: !data.success,
+                        width: '350px'
+                    }, handlerEmbed);
+                }
+            });
+        }
+        $("#sendverify").click(function (e) {
+            if(cpObj==null)return;
+            if($("#phone").val()==""){
+                alert("请先输入手机号码!");
+                return;
+            }
+            var validate = cpObj.getValidate();
+            if (!validate) {
+                cpObj.verify();
+                e.preventDefault();
+            }else{
+                getVerifyCode();
+            }
+        });
+        initgee();
+    </script>
+
+</div>
+<div class="portal">
+    <a href="#form">免费获取设计方案</a>
+</div>
+{include file="index@public/footer"}
+</body>
+</html>

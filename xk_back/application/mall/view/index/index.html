@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商城 -斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" href="/static/css/index-mall.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/banner.css">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" href="/static/m/css/swiper-3.4.2.min.css">
+
+    <script type="text/javascript" src="/static/m/js/swiper-3.4.2.jquery.min.js"></script>
+
+    <style>
+        .swiper-container {
+            width: 1920px;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .swiper-wrapper img {
+            width: 1920px;
+            /*max-height: 100%;*/
+        }
+    </style>
+</head>
+<body>
+{include file="index@public/header"}
+
+
+<div class="center1">
+<div class="list-box">
+            <div class="left-menu f-l">
+                <ul>
+                    <a><li class="menu-top"><img src="/static/images/mall/3line.png">舒适集成分类</li></a>
+                    <a href="{:url('mall/index/brand',['t'=>1])}"><li><img src="/static/images/mall/air-icon.png">中央空调系统</li></a>
+                    <a href="{:url('mall/index/brand',['t'=>2])}"><li><img src="/static/images/mall/sun-icon.png">中央供热系统</li></a>
+                    <a href="{:url('mall/index/brand',['t'=>3])}"><li><img src="/static/images/mall/water-icon.png">中央净水系统</li></a>
+                    <a href="{:url('mall/index/brand',['t'=>4])}"><li><img src="/static/images/mall/fan-icon.png">中央新风系统</li></a>
+                    <a href="{:url('mall/index/brand',['t'=>5])}"><li class="menu-bottom"><img src="/static/images/mall/ctrl-icon.png">智能家居系统</li></a>
+                </ul>
+            </div>      
+    </div>
+
+</div>
+<div id="swiper" style="width:100%;overflow: hidden;">
+  <div class="swiper-container">
+      <div class="swiper-wrapper">
+          {volist name="bannerlist" id="banner"}
+          <div class="swiper-slide">
+              {empty name="$banner.link"}
+                  <img src="{$banner.banneraddress}">
+              {else/}
+                  <a target="_blank" href="{$banner.link}"><img src="{$banner.banneraddress}"></a>
+              {/empty}</div>
+          {/volist}
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Arrows -->
+  </div>
+</div>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 3000,
+        loop: true,
+        autoplayDisableOnInteraction : false,
+    });
+    $(function(){
+      bannerresize();
+    })
+    window.onresize=bannerresize;
+    function bannerresize(){
+      console.debug((1920-$("#swiper").width())/2);
+      $(".swiper-container").css("margin-left",-(1920-$("#swiper").width())/2);
+    }
+</script>
+    <div class="clear"></div>
+
+
+
+
+<div class="main center">
+
+    <div class="main-block">
+        <div class="headline">
+            <span>品牌精选</span>
+            <span class="tip"></span>
+        </div>
+        <div class="items">
+            <div class="items-big inline"><a href="/mall/category/t/1.html?bd=4"><img src="/static/images/mall/brand1.png"></a></div>
+            <div class="items-big inline"><a href="/mall/category/t/4.html?bd=20"><img src="/static/images/mall/brand2.png"></a></div>
+            <div class="items-small inline"><a href="/mall/category/t/2.html?bd=11"><img src="/static/images/mall/brand3.png"></a><a href="/mall/category/t/3.html?bd=8"><img class="bottom-img" src="/static/images/mall/brand4.png"></a></div>
+        </div>
+    </div>
+
+    <!-- <div class="main-block">
+        <div class="headline">
+            <span>新品推荐</span>
+            <span class="tip">工厂直达消费者，剔除品牌溢价</span>
+        </div>
+        <div class="items">
+            {volist name="NewGoodsList" id="goods"}
+            <a href="{:url('mall/index/product',['id'=>$goods['id']])}">
+                <div class="new-item inline">
+                    <img width="146px" height="120px" src="{$goods.cover1}">
+                    <div>{$goods.title}<br><span>￥{$goods.price}</span></div>
+                </div>
+            </a>
+            {/volist}
+        </div>
+    </div> -->
+</div>
+<div class="hot">
+    <div id="tag" class="headline">
+        <span>新品推荐</span>
+        
+        <!--<span id="tag2" class="tag">人气周榜</span>-->
+    </div>
+    <div id="hot-content">
+        <div id="hot-content1" class="hot-content" style="display:block">
+            {volist name="NewGoodsList" id="r_goods"}
+            {if condition="$i eq 1"}
+            <a href="{:url('mall/index/product',['id'=>$r_goods.id])}">
+                <div class="hot-big inline">
+                    <div class="hot-big-img"><img width="390px" height="400px" src="{$r_goods.cover1}" alt=""></div>
+                    <div class="hot-bottom">
+                        <div class="name">{$r_goods.title}</div>
+                    </div>
+                </div>
+            </a>
+            <div class="hot-small-items inline">
+            {else/}
+                <a href="{:url('mall/index/product',['id'=>$r_goods.id])}">
+                    <div class="hot-small inline">
+                        <div class="hot-small-img"><img width="220px" height="180px" src="{$r_goods.cover1}" alt=""></div>
+                        <div class="hot-bottom">
+                            <div class="name">{$r_goods.title}</div>
+                        </div>
+                    </div>
+                </a>
+            {/if}
+            {/volist}
+            </div>
+        </div>
+        <div id="hot-content2" class="hot-content" style="display:none">
+            <div class="hot-big inline">
+                <div class="hot-big-img"><img src="/static/images/mall/hot1.png" alt=""></div>
+                <div class="hot-bottom">
+                    <div class="red">热卖</div>
+                    <div class="name">AB面独立弹簧床垫 进口乳胶</div>
+                    <div class="price">¥2599</div>
+                </div>
+            </div>
+            <div class="hot-small-items inline">
+                <div class="hot-small inline">
+                    <div class="hot-small-img"><img src="/static/images/mall/hot2.png" alt=""></div>
+                    <div class="hot-bottom">
+                        <div class="name">AB面独立弹簧床垫 进口乳胶</div>
+                        <div class="price">¥2599</div>
+                    </div>
+                </div>
+                <div class="hot-small inline">
+                    <div class="hot-small-img"><img src="/static/images/mall/hot2.png" alt=""></div>
+                    <div class="hot-bottom">
+                        <div class="name">AB面独立弹簧床垫 进口乳胶</div>
+                        <div class="price">¥2599</div>
+                    </div>
+                </div>
+                <div class="hot-small inline">
+                    <div class="hot-small-img"><img src="/static/images/mall/hot2.png" alt=""></div>
+                    <div class="hot-bottom">
+                        <div class="name">AB面独立弹簧床垫 进口乳胶</div>
+                        <div class="price">¥2599</div>
+                    </div>
+                </div>
+                <div class="hot-small inline">
+                    <div class="hot-small-img"><img src="/static/images/mall/hot2.png" alt=""></div>
+                    <div class="hot-bottom">
+                        <div class="name">AB面独立弹簧床垫 进口乳胶</div>
+                        <div class="price">¥2599</div>
+                    </div>
+                </div>
+                <div class="hot-small inline">
+                    <div class="hot-small-img"><img src="/static/images/mall/hot2.png" alt=""></div>
+                    <div class="hot-bottom">
+                        <div class="name">AB面独立弹簧床垫 进口乳胶</div>
+                        <div class="price">¥2599</div>
+                    </div>
+                </div>
+                <div class="hot-small inline">
+                    <div class="hot-small-img"><img src="/static/images/mall/hot2.png" alt=""></div>
+                    <div class="hot-bottom">
+                        <div class="name">AB面独立弹簧床垫 进口乳胶</div>
+                        <div class="price">¥2599</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#tag1").click(function(){
+        $("#tag").children().removeClass('on');
+        $("#tag1").addClass('on');
+        $("#hot-content").children().css('display','none');
+        $("#hot-content1").css('display','block');
+    });
+    $("#tag2").click(function(){
+        $("#tag").children().removeClass('on');
+        $("#tag2").addClass('on');
+        $("#hot-content").children().css('display','none');
+        $("#hot-content2").css('display','block');
+    });
+</script>
+{include file="index@public/footer"}
+</body>
+</html>

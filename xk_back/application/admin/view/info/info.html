@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜库舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="middle-box text-center animated fadeIn">
+                    <h3 class="font-bold">{$title}</h3>
+
+                    <div class="error-desc">
+                        {$info}
+                        <br/><a href="{$back}" class="btn btn-primary m-t">{$button}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+    <script>
+        function CloseTab(){
+            if(window.top !== window.self) {
+                $(window.parent.document).find("a.active>i").click();
+            }else{
+                window.close();
+            }
+        }
+    </script>
+</body>
+</html>

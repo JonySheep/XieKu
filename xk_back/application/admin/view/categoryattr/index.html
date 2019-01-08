@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>系统属性管理</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                            {volist name="CategoryList" id="category"}
+                            <tr>
+                                <td class="project-title">
+                                    <a href="{:url('admin/categoryattr/edit',['id'=>$category.id])}">{$category.name}</a>
+                                </td>
+                                <td width="50%">
+                                    {:htmlspecialchars_decode(strip_tags($category.introduce))}
+                                </td>
+                                <td class="project-actions">
+                                    <a href="{:url('admin/categoryattr/edit',['id'=>$category.id])}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑 </a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+</body>
+</html>

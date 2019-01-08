@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>联系我们</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/store.css">
+    <link rel="stylesheet" href="/static/m/css/page.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="main">
+    <select id="region">
+        <option value ="0">全部地区</option>
+        {volist name="regionList" id="region"}
+        <option {if condition="$region.id eq $regionid"}selected{/if} value ="{$region.id}">{$region.region}</option>
+        {/volist}
+    </select>
+    <script>
+        $(function(){
+            $("#region").on("change",function(){
+                $("#region_val").val($(this).val());
+                region_form.submit();
+            });
+        })
+    </script>
+    <form method="get" id="region_form" action="{:url('m/store/index')}">
+    <input type="hidden" id="region_val" name="r" value="{$regionid}">
+    </form>
+    <div class="item-list">
+        {volist name="storeList" id="store"}
+        <div class="item inline">
+            <div class="item-top">
+                <div class="left f-l">
+                    <div class="shop-name">{$store.title}</div>
+                    <div class="address">地址：{$store.address}</div>
+                    <div class="tel">电话：{$store.telephone}</div>
+                </div>
+                <div class="qr f-r"><img src="{$store.qrcode}"></div>
+            </div>
+            <div class="thumb">
+                {volist name="store.coverlist" id="cover"}
+                <img src="{$cover}">{/volist}
+            </div>
+        </div>
+        {/volist}
+    </div>
+</div>
+{include file="public/footer"}
+</body>
+</html>

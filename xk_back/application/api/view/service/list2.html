@@ -1,0 +1,25 @@
+<ul>
+    {volist name="HelpList" id="help"}
+   <li class="jc"><span>{$i}.{$help[1]}<img src="/static/images/down.png"></span> <div>{$help[2]}</div></li> 
+   {/volist}
+</ul>
+<script>
+    var old = $('.jc:first').find("div");
+    old.slideDown();
+    old.parent().find("img:first").attr("src","/static/images/up.png");
+    $('.jc').on('click',function(){
+        if(old!=null&&old.parent()[0]==this){
+          old.slideUp();
+          old.parent().find("img:first").attr("src","/static/images/down.png");
+          old = null;
+          return;
+        }
+        if(old!=null){
+          old.slideUp();
+          old.parent().find("img:first").attr("src","/static/images/down.png");
+        }
+        old = $(this).find("div");
+        old.slideDown();
+        old.parent().find("img:first").attr("src","/static/images/up.png");
+    });
+</script>

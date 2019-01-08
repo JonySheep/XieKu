@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$article.title} - {$article_typename} - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" href="/static/css/fashion-contg.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="index@public/header"}
+<div class="banner">
+    <img src="/static/images/about_banner.jpg">
+</div>
+<div class="top">
+    <a href="/">首页</a> >
+    <a href="#">斜厍舒适集成</a> >
+    <a href="{:url('swa/article/index',['type'=>$typeid])}">{$article_typename}</a>
+</div>
+<div class="clear"></div>
+
+<div class="s-nav">
+    <ul>
+        <li style="width:120px;"><a href="{:url('swa/context/view','id=1')}">公司介绍</a></li>
+        <li style="width:120px;"><a href="{:url('swa/article/index','type=4')}">规章制度</a></li>
+        <li style="width:120px;"><a href="{:url('swa/brand/index')}">合作品牌</a></li>
+        <li style="width:120px;"><a href="{:url('swa/article/index','type=1')}">活动与资讯</a></li>
+        <li style="width:120px;"><a href="{:url('swa/article/index','type=3')}">家装新风尚</a></li>
+        <li style="width:120px;"><a href="{:url('swa/article/index','type=2')}">舒适家居小常识</a></li>
+        <li style="width:120px;"><a href="{:url('swa/context/view','id=2')}">联系我们</a></li>
+    </ul>
+    <div class="clear"></div>
+</div>
+<script>
+    $(function(){
+        $(".s-nav>ul>li").each(function(){
+            var url = "{$type_link}";
+            var link = $(this);
+            if(link.find("a").attr("href")==url){
+                link.addClass("on");
+            }
+        });
+    });
+</script>
+<div class="main">
+    <div class="fashion-list">
+        <div class="seach">
+            <form action="{$type_link}" method="get">
+                <input type="text" name="search" placeholder="搜索你想要的信息" class="f-l"><input type="submit" value="快速查找" class="f-r">
+            </form>
+        </div>
+
+        <div class="in_page_right f-l">
+            <div class="intro">
+                <div class="intro-top">
+                    <div class="intro-title">{$article.title}</div>
+                    <div class="intro-other">
+                        <span class="time">{$article.updatetime}</span>
+                        <span class="author">发布者：{$article.user}</span>
+                        <div class="jiathis_style inline">
+                            <a class="jiathis_button_tsina"></a>
+                            <a class="jiathis_button_qzone"></a>
+                            <a class="jiathis_button_tqq"></a>
+                            <a class="jiathis_button_weixin"></a>
+                            <a class="jiathis_button_xiaoyou"></a>
+                            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+                            <a class="jiathis_counter_style"></a>
+                        </div>
+                        <script type="text/javascript" >
+                            var jiathis_config={
+                                summary:"",
+                                shortUrl:false,
+                                hideMore:false
+                            }
+                        </script>
+                        <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                    </div>
+                </div>
+                <div class="intro-content">{$article.body}</div>
+            </div>
+            <div class="prev-next">
+                {if condition="$Before eq null"}
+                <div class="prev"><span>上一篇：</span>没有了</div>
+                {else/}
+                <div class="prev"><span>上一篇：</span><a href="{:url('swa/article/view',['id'=>$Before[0]])}">{$Before[1]}</a></div>
+                {/if}
+                {if condition="$Next eq null"}
+                <div class="next"><span>下一篇：</span>没有了</div>
+                {else/}
+                <div class="next"><span>下一篇：</span><a href="{:url('swa/article/view',['id'=>$Next[0]])}">{$Next[1]}</a></div>
+                {/if}
+            </div>
+        </div>
+        <div class="other f-r">
+            <div class="new">
+                <h1><b>最新推荐</b></h1>
+                <ul class="inleft_list_con">
+                    {volist name="ArticleList" id="article"}
+                    <li><a href="{:url('swa/article/view',['id'=>$article[0]])}"><span>○</span>{$article[1]}</a></li>
+                    {/volist}
+                </ul>
+            </div>
+
+            <div class="hot">
+                <h1><b>热门阅读</b></h1>
+            </div>
+            {volist name="MostClickArticles" id="article"}
+            <div class="art2">
+                <a href="{:url('swa/article/view',['id'=>$article.id])}">
+                <div class="article">
+                    {if condition="$typeid neq 4"}
+                    <img src="{$article.cover}">
+                    {/if}
+                    <div class="title">{$article.title}</div>
+                    <div class="content">{$article.describe|mb_substr=###,0,50,"utf-8"}...</div>
+                </div>
+                </a>
+            </div>
+            {/volist}
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+{include file="index@public/footer"}
+</body>
+</html>

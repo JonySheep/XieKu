@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>每日名额总数</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{$freedesigntotal}人</h1>
+                    <small>
+                        <div style="margin-bottom: 0px;" class="progress progress-bar-default progress-striped active">
+                            <div style="width: {$freedesignremain/$freedesigntotal*100}%" class="progress-bar">
+                                <span>今日剩余{$freedesignremain}人</span>
+                            </div>
+                        </div>
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>总预约记录</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{$alltreatedCount}条</h1>
+                    <div class="stat-percent font-bold text-warning">
+                    </div>
+                    <small>
+                        <div style="margin-bottom: 0px;" class="progress progress-striped active">
+                        <div style="width: {$treatedP}%" class="progress-bar progress-bar-success">
+                            <span title="已处理记录">{$treatedCount}条</span>
+                        </div>
+                        <div style="width: {$untreatedP}%" class="progress-bar progress-bar-warning">
+                            <span title="待处理记录">{$untreatedCount}条</span>
+                        </div>
+                    </div>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>相关设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" action="{:url('admin/design/free_options')}" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">每日名额限制</label>
+                            <div class="col-sm-3">
+                                <input value="{$freedesigntotal}" name="limit" type="text" class="form-control">
+                            </div>
+                            <!--<label class="control-label" style="color:red;">* 次日生效</label>-->
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+<script src="/static/admin_res/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/static/admin_res/js/plugins/toastr/toastr.min.js"></script>
+<script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+
+</script>
+</body>
+</html>

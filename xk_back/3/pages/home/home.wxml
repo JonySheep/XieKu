@@ -1,0 +1,74 @@
+<!--pages/home/home.wxml-->
+
+<view class='search'>
+  <view class='header-bd'>
+    <image style="width: 22px; height: 22px;float:left" src="https://www.swahouse.com/image/menu.png"></image>
+    <input placeholder-class="center" class='search_input' type='text' placeholder='请输入搜索内容' confirm-type="search" bindconfirm="search">
+
+    </input>
+    <image class='sea' src="https://www.swahouse.com/image/search.png"></image>
+    <image style="margin-left:8px;width: 22px; height: 22px;float:left" src="https://www.swahouse.com/image/cart.png"></image>
+  </view>
+  
+
+</view>
+
+<swiper indicator-dots="false" class='banner' indicator-color="#dddcdc" indicator-active-color="#ffe202" autoplay="true" interval="5000" duration="1000">
+  <block>
+    <swiper-item wx:for="{{banners}}" wx:for-item="banner" wx:key="*this"  >
+      <image src="{{imgUrl}}{{banner['banneraddress']}}" class="slide-image" />
+    </swiper-item>
+    
+  </block>
+</swiper>
+
+<view class='p_c'>
+  <text class='header'>热销品牌</text>
+</view>
+
+
+<view class='content'>
+
+  <scroll-view class="recommend_scroll_x_box" scroll-x="true">
+    <view wx:for="{{brands}}" wx:for-item="brand" wx:key="*this" class="recommend_hot_box2">
+      <image src="{{imgUrl}}{{brand.logo}}" class='pinpai'></image>
+    </view>
+  </scroll-view>
+</view>
+
+
+<view class='content'>
+
+  <scroll-view class='nav' scroll-x style="width: 95%;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="red" scroll-top="100">
+    <!-- <view class=''>全部</view> -->
+    <view wx:for="{{categories}}" bindtap='choose_category' wx:for-item="cate" wx:key="*this" data-cur="{{index}}" class="{{category_cur== index ?'active':''}}">{{cate['name']}}</view>
+  </scroll-view>
+  <scroll-view class="recommend_scroll_x_box" scroll-x="true">
+    <view wx:for="{{category_products}}" wx:for-item="goods" wx:key="*this" class="recommend_hot_box" data-goodsID="{{goods['id']}}" bindtap="toGoodsDetail">
+      <view class='product'>
+        <image class='img_p' src="{{imgUrl}}{{goods['cover1']}}"> </image>
+        <text class='title'>{{goods['title']}}</text>
+        <text class='price'>￥{{goods['price']}}</text>
+
+        <text class='duihuan'>销量:{{goods['stock']}}</text>
+      </view>
+    </view>
+
+  </scroll-view>
+</view>
+
+
+<view class='p_c'>
+  <text class='header'>特惠套餐</text>
+</view>
+
+
+<view class='content'>
+  <view class='product2' wx:for="{{hotList}}"  wx:for-item="good" wx:key="*this" data-goodsID="{{good['id']}}"  bindtap='toGoodsDetail'  >
+    <image class='img_p' src="{{imgUrl}}{{good['cover1']}}"> </image>
+    <text class='title'>{{good['title']}}</text>
+    <text class='price'>￥{{good['price']}}</text>
+
+    <text class='duihuan'>销量:{{good['stock']}}</text>
+  </view>
+</view>

@@ -1,0 +1,59 @@
+<!--pages/score/sc.wxml-->
+<view class="top">
+  <view class='top-left'>
+  <view>
+   <text class='top-txt1'>您的当前积分：</text> 
+  </view>
+  <view>
+   <text  class='top-txt2'>{{score}}</text>
+   <text  class='top-txt3'>分</text> 
+  </view>
+  <view>
+    <text  class='top-txt4'>小积分,大用途,精彩福利送不完</text>
+  </view>
+  </view>
+  <view class='top-right'>
+    <view>
+      <text class='top-txt5'>积分说明</text>
+    </view>
+    <view>
+      <button class='button'>立即兑换</button>
+    </view>
+  </view>
+
+</view>
+<view class='middle'>
+  <view class="{{shouzhi ? 'middle-box1' : 'middle-box2'}}" bindtap='income'>
+    <text>收入</text>
+  </view>
+  <view class="{{shouzhi ? 'middle-box2' : 'middle-box1'}}" bindtap='income'>
+    <text>支出</text>
+  </view>
+</view>
+<view class='header'>
+  <view class="sj">时间</view>
+  <view class="sp">类型</view>
+  <view class="gxhy">贡献好友</view>
+  <view class="jf">积分</view>
+</view>
+<!-- income -->
+<view class='main' wx:for="{{income}}" wx:for-item="income" wx:key="*this" class="{{shouzhi ? '' : 'hidden'}} main">
+  <view class="sj incheight">{{income.create_time}}</view>
+  <view class="sp incheight">{{income.content}}</view>
+  <view class="gxhy">   
+      <view style="height: 35px">
+         <image src='{{income.left_users_info.avatarUrl}}' class='image'></image>
+      </view>       
+      <view> {{income.users_id == income.left_users_info.id ? '自己': income.left_users_info.nickName}} </view>  
+  </view>
+  <view class="jf incheight red">{{income.integral > 0 ? '+'+income.integral : income.integral}}</view>    
+</view>
+<!-- expenditure -->
+<view class='main' wx:for="{{expenditure}}" wx:for-item="expenditure" wx:key="*this" class="{{shouzhi ? 'hidden' : ''}}">
+  <text>{{expenditure.create_time}}</text>
+  <text>{{expenditure.explain}}</text>
+  <text>{{expenditure.content}}</text>
+  <text>{{expenditure.integral}}</text>
+</view>
+
+

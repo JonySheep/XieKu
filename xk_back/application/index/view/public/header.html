@@ -1,0 +1,102 @@
+<script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/iealert.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").iealert();
+    });
+</script>
+
+
+
+
+
+
+
+
+
+<div class="lwx_online_service">
+    <ul class="lwx_retract" style="display: none;">
+        <li class="lwx_sb"><img src="/static/images/postion/lwx_online_retract1.png"></li>
+        <li class="lwx_retract_hide"><img src="/static/images/postion/lwx_online_retract2.png"></li>
+    </ul>
+    <ul class="lwx_spread" style="display: block;">
+        <li class="lwx_sb"><a href="/"><img src="/static/images/postion/logo.png"></a></li>
+      <li><a href="{:url('design/index/free')}" title="方案设计"><img src="/static/images/postion/lwx_online_spread2.png"></a></li>
+      <li><a href="{:url('design/index/oneminute')}" title="一分钟报价"><img src="/static/images/postion/lwx_online_spread3.png"></a></li>
+      <!-- <li><a href="/design/?sj=youcedaohang" title="免费设计"><img src="./images/postion/lwx_online_spread4.png"></a></li> -->
+      <li class="go-top" onclick="$('body,html').animate({scrollTop:0},300);"><a href="javascript:void(0)" title="返回顶部"><img src="/static/images/postion/lwx_online_spread5.png"></a></li>
+      <li class="lwx_spread_hide"><img src="/static/images/postion/lwx_online_spread6.png"></li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+    $(".lwx_spread_hide").click(function(){
+        $(".lwx_spread").hide();
+        $(".lwx_retract").show();
+        $.cookie('status', 'block');
+    });
+
+    $(".lwx_retract_hide").click(function(){
+        $(".lwx_spread").show();
+        $(".lwx_retract").hide();
+        $.cookie('status', 'none');
+    });
+
+    if($.cookie('status')=='block'){
+        $(".lwx_spread").hide();
+        $(".lwx_retract").show()
+    }
+</script>
+
+<!-- header -->
+<div class="header">
+    <div class="black-line"></div>
+    <div class="header-top">
+        <div class="logo f-l"><img src="/static/images/logo.png"></div>
+        <div class="other f-r">
+            <div class="tel inline" style="letter-spacing: 1px;">服务热线：400-821-7980 (8:00－24:00)</div>
+            <div class="qq inline"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3211202927&site=qq&menu=yes">qq在线交谈</a></div>
+            <!-- <div class="user-icon inline"></div>
+            <div class="log-reg inline">
+                <a href="#">登录</a><span>|</span><a href="#">注册</a>
+            </div> -->
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="nav">
+        <div class="center">
+            <ul class="inline">
+                <li><a href="/">首页</a></li>
+                <li>
+                    <a target="_blank" href="{:url('swa/index/index')}">斜厍舒适集成</a>
+                </li>
+                <li>
+                    <a target="_blank" href="{:url('mall/index/index')}">产品与选型</a>
+                </li>
+                <li><a target="_blank" href="{:url('store/index/index')}">线下门店</a></li>
+                <li><a target="_blank" href="{:url('cases/index/index')}">应用案例</a></li>
+                <li>
+                    <a target="_blank" href="{:url('swa/service/index')}">一站式服务</a>
+                </li>
+            </ul>
+            <script type="text/javascript">
+                $("ul li").mouseover(function(){
+                    $(this).find(".ej-nav").css("display","block");
+                });
+                $("ul li").mouseout(function(){
+                    $(this).find(".ej-nav").css("display","none");
+                });
+            </script>
+            <div class="search inline">
+                <form action="{:url('mall/index/category')}" method="get">
+                <input type="text" name="kw" placeholder="请输入您想要的产品">
+                <input type="submit" value="">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- header end -->

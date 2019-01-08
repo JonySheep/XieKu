@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">                        
+                        <h5><a href="{:url('admin/banner/index')}"><i class="fa fa-chevron-left"></i></a> 添加菜单管理模块</small></h5> 
+                    </div>
+                    <div class="ibox-content">
+                        <form method="post" action="" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">活动Banner</label>
+                                <div class="col-sm-3">
+                                    <img id="banner_img" style="cursor: pointer;max-height:200px;" onclick="banner_file.click();" src="{$data.activity_img?:'/static/admin_res/img/webuploader.png'}">
+                                    <input onchange="ajaxFileUpload('banner_file')" id="banner_file" name="banner_file" style="display:none;" type="file" class="form-control"> <span class="help-block m-b-none">尺寸建议在 700 x 300 像素</span>
+                                    <input type="hidden" value="{$data.activity_img?'true':''}" name="activity_img" id="banner_address">
+                                </div>                                
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">活动Banner名称</label>
+                                <div class="col-sm-2">
+                                    <input value="{$data.activity_banner_name?:''}" type="text" class="form-control" name="activity_banner_name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">权重(权重越大越靠前)</label>
+                                <div class="col-sm-2">
+                                    <input value="{$data.weight?:''}" type="text" class="form-control" name="weight">
+                                </div>
+                            </div>
+
+                          
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="button" >保存</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/static/admin_res/js/ajaxfileupload.js"></script>
+    <script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+    <script src="/static/admin_res/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="/static/admin_res/js/plugins/toastr/toastr.min.js"></script>
+    <script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="/static/admin_res/js/plugins/layer/laydate/laydate.js"></script>
+    <script>
+        $(function(){
+            var ue = UE.getEditor('editor');
+            ue.addListener("ready", function () {
+            });
+        });
+    </script>
+    <script>
+        function ajaxFileUpload(fileinput,type)
+        {
+            url = '{:url("admin/Coupon/upload")}';
+            $.ajaxFileUpload({
+                url:url,
+                secureuri:false,
+                fileElementId:fileinput,
+                dataType: 'json',
+                success: function (data, status)
+                {
+                    switch(data.result){
+                        case -1:
+                            ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+                            break;
+                        case 0:
+                            ShowToastr("请求未成功",data.msg,"warning");
+                            break;
+                        case 1:
+                            $("#banner_img").attr('src',data.src);
+                            $("#banner_address").val(data.src);
+                            break;
+                    }
+                },
+                error: function (data, status, e)
+                {
+                    ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+                }
+            });
+            return true;
+        }
+        //表单提交
+        $(".btn-primary").click(function(){
+
+            $.ajax({  
+                url : '',    
+                type: 'POST',  
+                data: $('.form-horizontal').serialize(),                 
+                success : function(rsf)
+                {
+                    console.log(rsf);
+                    if( rsf.code === 400 )
+                    {
+                        alert(rsf.msg);
+                    }else{
+                        window.history.back(); 
+                    }
+                }
+            });
+        });
+    </script>
+   
+    
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜库舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    {present name='editmode'}
+                    <h5><a href="{:url('admin/goods/index')}"><i class="fa fa-chevron-left"></i></a> {$goods.title} - 商品编辑</small></h5>
+                    {else/}
+                    <h5><a href="{:url('admin/goods/index')}"><i class="fa fa-chevron-left"></i></a> 新增商品</small></h5>
+                    {/present}
+                    <div class="ibox-tools">
+                        {present name='editmode'}
+                        <a href="javascript:;" onclick="deleteGoods();" class="btn btn-danger btn-outline btn-xs"><span class="fa fa-trash" aria-hidden="true"></span> 删除该商品</a>
+                        {/present}
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="cover_templete" style="display: none;">
+                        <div style="display: inline-block;">
+                            <div style="display: inline-block;width: 88px;">
+                                <a style="position: relative;left: 70px;top: 20px;" class="cover_delete"><i style="color:red;text-shadow:1px 1px 0px black;" class="fa fa-times"></i></a>
+                                <img style="height:87px;width: 88px;border:1px #e7eaec solid;" src="">
+                                <input type="hidden" value="" name="cover[]">
+                                <input type="text" style="width:88px;text-align: center;border: none;" name="cover_sort[]" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="option_templete" style="display: none;">
+                        <div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label title"></label>
+                                <div class="col-sm-2">
+                                    <select style="height: 150px;" class="form-control val_select" multiple="">
+                                    </select>
+                                    <input type="hidden" value="" name="attribute_id[]">
+                                    <input type="hidden" name="category_val[]">
+                                    <br>
+                                </div>
+                                <label class="col-sm-2 control-label" style="text-align: left;">Ctrl可多选，不选即为全选.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="spec_templete" style="display: none;">
+                        <div style="margin-bottom: 30px">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-6">
+                                <div class="col-sm-4">
+                                    <input value="" name="spec_name[]" type="text" class="form-control">
+                                </div>
+                                <div class="col-sm-8">
+                                    <input value="" name="spec[]" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="javascript:;" class="btn btn-danger btn-xs deletespec"><span class="fa fa-trash" aria-hidden="true"></span></a>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    {present name='editmode'}
+                    {if condition="$goods.brandavailable eq 0"}
+                    <div class="alert alert-danger">该商品由于对应品牌被禁用或删除将在商城中隐藏.</div>
+                    {/if}
+                    {/present}
+                    <form method="post" action="{:url('admin/goods/update')}" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品预览图</label>
+                            <div class="col-sm-10" style="border:1px #e7eaec solid;height: 130px;">
+                                <div style="display: inline-block;vertical-align: top;" class="cover_box">
+                                    {present name='editmode'}
+                                    {volist name="coverList" id="cover"}
+                                    <div style="display: inline-block;width: 88px;">
+                                        <div>
+                                            <a style="position: relative;left: 70px;top: 20px;" class="cover_delete"><i style="color:red;text-shadow:1px 1px 0px black;" class="fa fa-times"></i></a>
+                                            <img style="height:87px;width: 88px;border:1px #e7eaec solid;" src="{$cover}">
+                                            <input type="hidden" value="{$cover}" name="cover[]">
+                                            <input type="text" style="width:88px;text-align: center;border: none;" name="cover_sort[]" value="0">
+                                        </div>
+                                    </div>
+                                    {/volist}
+                                    {/present}
+                                </div>
+                                <div style="display: inline-block;">
+                                    <img id="add_cover" style="cursor: pointer;margin-top:10px;" src="/static/admin_res/img/webuploader.png">
+                                </div>
+                            </div>
+                            <input onchange="ajaxFileUpload()" name="cover_file" id="cover_file" style="display:none;" type="file" class="form-control">
+                            <span class="col-sm-2 control-label">建议尺寸比例：1:1</span>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品标题</label>
+                            <div class="col-sm-5">
+                                <input value="{present name='editmode'}{$goods.title}{/present}" name="title" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品型号</label>
+                            <div class="col-sm-3">
+                                <input value="{present name='editmode'}{$goods.model}{/present}" name="model" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品价格</label>
+                            <div class="col-sm-1">
+                                <input value="{present name='editmode'}{$goods.price}{/present}" name="price" type="text" class="form-control">
+                            </div>
+                            <div class="col-sm-1" style="line-height: 34px;">
+                                <b>元</b>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品库存</label>
+                            <div class="col-sm-1">
+                                <input value="{present name='editmode'}{$goods.stock}{/present}" name="stock" type="number" class="form-control">
+                            </div>
+
+                        </div>
+
+                       <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">兑换积分</label>
+                            <div class="col-sm-1">
+                                <input value="{present name='editmode'}{$goods.integral}{/present}" name="integral" type="number" class="form-control">
+                            </div>
+                            <div class="col-sm-1" style="line-height: 34px;">
+                                <b>积分</b>
+                            </div>
+                        </div>-->
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属品牌</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="brandid">
+                                    {volist name="brandList" id="brand"}
+                                    <option {present name='editmode'}{if condition="$brand.id eq $goods.brandid"}selected{/if}{/present} value="{$brand.id}">{$brand.name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属系统分类</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="categoryid" onchange="getRoomList(this.value)">
+                                    {volist name="categoryList" id="category"}
+                                    <option {present name='editmode'}{if condition="$category.id eq $goods.categoryid"}selected{/if}{/present} value="{$category.id}">{$category.name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属房型分类</label>
+                            <div class="col-sm-3" id="roomList">
+                                <select class="form-control m-b" name="buy_room_id">
+                                    {if condition="$roomList"}
+                                    <option value="0">请选择房型</option>
+                                    {volist name="roomList" id="room"}
+                                    <option {present name='editmode'}{if condition="$room.id eq $goods.buy_room_id"}selected{/if}{/present} value="{$room.id}">{$room.title}(购买获得{$room.integral}积分)</option>
+                                    {/volist}
+                                    {else/}
+                                    <option>该分类未设置房型分类</option>
+                                    {/if}
+                                </select>
+                            </div>
+                        </div>
+                        <div id="option_block"></div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品简介</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control diff-textarea" name="introduce" id="original" rows="6">{present name='editmode'}{$goods.introduce}{/present}</textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">规格参数</label>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">
+                                <a href="javascript:addspec();" class="btn btn-primary btn-xs"><span class="fa fa-plus" aria-hidden="true"></span> 添加规格</a>
+                            </div>
+                            <div class="col-sm-12">
+                                <div>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-4">
+                                            规格名称
+                                        </div>
+                                        <div class="col-sm-8">
+                                            规格参数
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 spec_block">
+                                {present name='editmode'}
+                                {volist name="specList" id="spec"}
+                                <div style="margin-bottom: 30px">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-4">
+                                            <input value="{$spec[0]}" name="spec_name[]" type="text" class="form-control">
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input value="{$spec[1]}" name="spec[]" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <a href="javascript:;" class="btn btn-danger btn-xs deletespec"><span class="fa fa-trash" aria-hidden="true"></span></a>
+                                    </div>
+                                    <br>
+                                </div>
+                                {/volist}
+                                {/present}
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">详细介绍</label>
+                            <div class="col-sm-10">
+                                <textarea id="editor" name="detail" style="width:100%;height:500px;">{present name='editmode'}{$goods.detail}{/present}</textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">可定制
+                                <br/><small class="text-navy">该商品是否支持定制?</small>
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="checkbox i-checks">
+                                    <label>
+                                        <input name="customized" type="checkbox" {present name='editmode'}{if condition="$goods.customized eq 1"}checked{/if}{/present} > <i></i> 是</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">推荐商品
+                                <br/><small class="text-navy">是否推荐该商品?</small>
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="checkbox i-checks">
+                                    <label>
+                                        <input name="recommended" type="checkbox" {present name='editmode'}{if condition="$goods.recommended eq 1"}checked{/if}{/present} > <i></i> 是</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">禁用商品
+                                <br/><small class="text-navy">是否禁用该商品?</small>
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="checkbox i-checks">
+                                    <label>
+                                        <input name="available" type="checkbox" {present name='editmode'}{if condition="$goods.available eq 0"}checked{/if}{/present} > <i></i> 禁用</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序权重</label>
+                            <div class="col-sm-2">
+                                <input value="{present name='editmode'}{$goods.sort}{else/}0{/present}" type="text" class="form-control" name="sort">
+                                <span class="help-block m-b-none">权重越小排序越靠前</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        {present name='editmode'}<input type="hidden" value="{$goods.id}" name="edit_id">{/present}
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin_res/js/ajaxfileupload.js"></script>
+<script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+<script src="/static/admin_res/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/static/admin_res/js/plugins/toastr/toastr.min.js"></script>
+<script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="/static/admin_res/js/plugins/layer/laydate/laydate.js"></script>
+<script>
+    $(function(){
+        var ue = UE.getEditor('editor');
+    });
+</script>
+{present name='editmode'}
+<script>
+    function deleteGoods(){
+        swal({
+            title: "您确定要删除该商品吗",
+            text: "删除后将无法恢复，请谨慎操作！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "删除",
+            cancelButtonText: "取消",
+            closeOnConfirm: false
+        }, function () {
+            window.location.href="{:url('admin/goods/delete',['id'=>$goods['id']])}";
+        });
+    }
+
+
+</script>
+{/present}
+<script>
+    /**
+     * 获取房型列表
+     * @author huanghao
+     * time 2018/10/09
+     */
+    function getRoomList(cate_id) {
+        $.ajax({
+            url  : "{:url('getRoomList')}",
+            data : { cate_id : cate_id },
+            success : function(res)
+            {
+                var xqo = eval('(' + res + ')');
+                var option = '';
+                res=res.replace('[','');
+                res=res.replace(']','');
+                console.log(res);
+                res = res.split('');
+                if(res.length === 0 ) {
+                    var qu =  '<option value="0">该分类未设置房型</option>';
+                }else {
+                    var qu =  '<option value="0">请选择房型</option>';
+                    for(var i in xqo){
+                        option+='<option value="'+xqo[i].id+'">'+xqo[i].title+'(购买获得'+xqo[i].integral+'积分)</option>';
+                    }
+                }
+                var str = '<select class="form-control m-b" name="buy_room_id">' +
+                    qu +
+                    option +
+                    '</select>';
+
+                $('#roomList').html(str);
+
+
+            }
+        });
+    }
+
+
+    var category = {$categoryList_json};
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $("select[name='categoryid']").on("change",function(){
+            ChangeCategory();
+        });
+        $("#add_cover").on("click",function(){
+            $("#cover_file").click();
+        });
+        $(document).on("click",".cover_delete",function(){
+            $(this).parent().parent().remove();
+            if( $(".cover_box>div").length<5){
+                $("#add_cover").show();
+            }
+        });
+        {present name="editmode"}
+        var selectAttribute = {$attribute_json};
+        ChangeCategory(selectAttribute);
+        {else/}
+        ChangeCategory();
+        {/present}
+        $(document).on("change","select.val_select",function(){
+            $(this).siblings("input[name='category_val[]']").val($(this).val());
+        });
+        $(document).on("click",".deletespec",function(){
+            $(this).parent().parent().remove();
+        });
+        if($(".cover_box>div").length>=5){
+            $("#add_cover").hide();
+        }
+    });
+    function addCover(src){
+        $(".cover_box").append($(".cover_templete").html());
+        $(".cover_box>div:last>div>img").attr("src",src);
+        $(".cover_box>div:last>div>input[type='hidden']").val(src);
+        if( $(".cover_box>div").length>=5){
+            $("#add_cover").hide();
+        }
+    }
+    function ChangeCategory(selects){
+        $(category).each(function(){
+            if(this.id == $("select[name='categoryid']").val()){
+                $("#option_block").html("");
+                $(this.attribute).each(function(i,v){
+                    $("#option_block").append($("#option_templete").html());
+                    $("#option_block>div:last>div>label.title").html(this.name);
+                    var select = $("#option_block>div:last>div").find("select");
+                    $("#option_block>div:last>>div>input[name='attribute_id[]']").val(this.id);
+                    $(this.value).each(function(i2,v2){
+                        select.append("<option value='"+(i2+1)+"'>"+v2+"</option>");
+                    });
+                });
+                return 0;
+            }
+        });
+        if(selects!=null){
+            $(selects).each(function(i,v){
+                $(v).each(function(){
+                    if(this=="0")return;
+                    $("#option_block").find("select:eq("+i+")>option:eq("+(this-1)+")").attr("selected",true);
+                })
+            })
+        }
+        $("select.val_select").each(function(){
+            $(this).siblings("input[name='category_val[]']").val($(this).val());
+        });
+    }
+    function addspec(){
+        $(".spec_block").append($("#spec_templete").html());
+    }
+    function ShowToastr(title,msg,type){
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "showDuration": "400",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "slideDown",
+            "hideMethod": "fadeOut"
+        }
+        toastr[type](msg,title);
+    }
+    function ajaxFileUpload()
+    {
+        url = '{:url("admin/goods/upload")}';
+        $.ajaxFileUpload({
+            url:url,
+            secureuri:false,
+            fileElementId:"cover_file",
+            dataType: 'json',
+            success: function (data, status)
+            {
+                switch(data.result){
+                    case -1:
+                        ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+                        break;
+                    case 0:
+                        ShowToastr("请求未成功",data.msg,"warning");
+                        break;
+                    case 1:
+                        addCover(data.src);
+                        break;
+                }
+            },
+            error: function (data, status, e)
+            {
+                ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+            }
+        });
+        return true;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+.top{
+
+  width: 100%;
+  height: 230rpx;
+  display: flex;
+}
+
+.top-left{
+  width:60%;
+  height: 20rpx;
+  padding-left: 50rpx;
+  padding-top: 20rpx;
+
+}
+.main{
+
+  height: 80rpx;
+  width: 100%;
+  border-bottom: 2rpx #ccc solid;
+  display: flex;
+  justify-content: space-around;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #ccc;
+
+}
+
+.top-txt1{
+
+  font-size:35rpx;
+
+}
+
+.top-txt2{
+
+  font-size: 60rpx;
+
+  color: red;
+}
+
+.top-txt3{
+
+  font-size: 30rpx;
+  font-weight: bold;
+
+}
+
+.top-txt4{
+  font-weight: 900;
+  font-size: 30rpx;
+  color: #a1a1a1;
+}
+
+.top-right{
+  width: 40%;
+  height: 500rpx;
+ padding-top: 20rpx;
+}
+
+.top-txt5{
+  font-size: 25rpx;
+  color: #000000;
+  padding-left: 60rpx;
+ 
+}
+
+.button{
+    height:55rpx;
+    width:180rpx;
+    font-size:28rpx;
+    background-color:#ffe202;
+    margin-top:60rpx;
+    line-height:55rpx;
+    border-radius:10rpx;
+    border:none;
+    border-color:transparent;
+}
+
+.middle{
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 70rpx;
+}
+
+.middle-box1{
+  height:70rpx;
+  width:49.7%;
+  background-color:#ffe202;
+  font-weight:900;
+}
+
+.middle-box2{
+    height:66rpx;
+    width:49.7%;
+    border:#a1a1a1 1rpx solid;
+    border-right:0;
+    border-left:0;
+    font-weight:900;
+}
+
+.header{
+  height:70rpx;
+  width:100%;
+  border-bottom:2rpx #ccc solid;
+  display:flex;
+  line-height:70rpx;
+  font-size:25rpx;
+  color:#ccc;
+  padding: 0;
+  margin: 0
+}
+
+.main{
+  height: 140rpx;
+  width: 100%;
+  border-bottom: 2rpx #ccc solid;
+  display: flex;
+  justify-content: space-around;
+  line-height: 80rpx;
+  font-size: 25rpx;
+  color: #ccc;
+
+}
+
+.image{
+  height: 70rpx;
+  width: 70rpx;
+  margin-top: 20rpx;
+  border-radius: 50%;
+}
+
+.hidden{
+
+  display: none;
+}
+.sj{
+  text-align: center;
+  width: 25%;
+}
+.sp{
+  text-align: center;
+  width: 25%;
+}
+.gxhy{
+  text-align: center;
+  width: 25%;
+}
+.jf{
+  text-align: center;
+  width: 25%;
+
+}
+.nickName{
+  width: 100%;
+  height: 40rpx;
+}
+.incheight{
+  line-height: 140rpx;
+}
+.red{
+  color: red
+}

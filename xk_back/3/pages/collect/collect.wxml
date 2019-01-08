@@ -1,0 +1,8 @@
+<!--pages/collect/collect.wxml-->
+
+<import src="/pages/common/lib/templet.wxml"/>
+  <block wx:for="{{activity}}" wx:for-item="item" wx:key="*this">
+    <!-- is就是模板名字name值 -->
+    <template is="collectitem" data="{{...item}}" />
+  </block>
+  

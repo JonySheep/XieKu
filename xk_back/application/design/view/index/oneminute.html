@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一分钟报价 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" href="/static/css/price.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css">
+    <script src="/static/js/gt.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+    <script>
+        var Verify_address = "{:url('design/index/oneminute_sendverifycode')}";
+        var GeetTest_address = "{:url('index/geetest/init')}";
+        var Apply_address = "{:url('design/index/oneminute_apply')}";
+    </script>
+</head>
+    <body>
+{include file="index@public/header"}
+<div class="banner">
+    <img src="/static/images/price-banner.png">
+</div>
+<div class="center2">
+    <div class="step">
+        <div class="step-title">第1步 房屋信息</div>
+        <div class="line"></div>
+        <div class="info">
+            <div class="info-item inline">
+              <select>
+                <option value ="1">上海市</option>
+              </select>
+              <select>
+                <option value ="1">上海市</option>
+              </select>
+            </div>
+            <div class="info-item inline">
+                房屋面积：<select id="mj">
+                <option value ="1">70平方米以下</option>
+                <option value ="2">70-90平方米</option>
+                <option value="3">80-120平方米</option>
+                <option value="4">90-130平方米</option>
+                <option value="5">110-150平方米</option>
+                <option value="6">130-180平方米</option>
+                <option value="7">180-250平方米</option>
+                <option value="8">250以上平方米</option>
+            </select>
+            </div>
+
+            <div class="info-item inline">
+                房屋户型：<select id="hx"></select>
+            </div>
+
+            <div class="info-item inline">
+                房屋类型：<select id="lx">
+                <option value ="1">平层</option>
+                <option value ="2">复式</option>
+                <option value="3">三层别墅</option>
+                <option value="4">四层别墅</option>
+            </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-title">第2步 您想要那种享受呢 (可多选)</div>
+        <div class="line"></div>
+        <div class="system">
+            <div class="air inline">
+                <div class="system-title">中央空调系统</div>
+                <img src="/static/images/air-ico.png"><br>
+                <span class ="checkbox checked">
+            <input type="checkbox" id="air_check" value="0" checked>
+          </span>
+            </div>
+
+            <div class="heat inline">
+                <div class="system-title">中央供热系统</div>
+                <img src="/static/images/heat-ico.png"><br>
+                <span class ="checkbox">
+            <input type="checkbox"  id="heat_check" value="1">
+          </span>
+            </div>
+
+            <div class="water inline">
+                <div class="system-title">中央净水系统</div>
+                <img src="/static/images/water-ico.png"><br>
+                <span class ="checkbox">
+            <input type="checkbox"  id="water_check" value="2">
+          </span>
+            </div>
+
+            <div class="wind inline">
+                <div class="system-title">中央新风系统</div>
+                <img src="/static/images/wind-ico.png"><br>
+                <span class ="checkbox">
+            <input type="checkbox"  id="wind_check" value="3">
+          </span>
+            </div>
+
+            
+        </div>
+    </div>
+    <div class="grey">
+        <div class="step band">
+            <div class="step-title">第3步 品牌选择</div>
+            <div class="line"></div>
+            <div class="tip">(以下为推荐品牌，更多品牌请致电咨询400-821-7980)</div>
+            <div class="band-select first">
+                <div class="band-title">- 中央空调系统 -</div>
+                <input type="hidden" id="air">
+                <div class="band-body">
+                    <div data-type="air" data-id="1" class="band-item inline">
+                      <img src="/static/images/design/dz.jpg">
+                      <input type="radio"  name="air">
+                    </div>
+                    <div data-type="air" data-id="2" class="band-item inline">
+                      <img src="/static/images/design/dj.jpg">
+                      <input type="radio"  name="air">
+                    </div>
+                    <div data-type="air" data-id="3" class="band-item inline">
+                      <img src="/static/images/design/md.jpg">
+                      <input type="radio"  name="air">
+                    </div>
+                    <div data-type="air" data-id="4" class="band-item inline">
+                        <img src="/static/images/design/gl.jpg">
+                        <input type="radio"  name="air">
+                    </div>
+                </div>
+            </div>
+
+            <div class="band-select second">
+                <div class="band-title">- 中央供热系统 -</div>
+                <input type="hidden" id="heat">
+                <div class="band-body">
+                  <div class="f-heat" id="f-heat">
+                    <div class="f-h-title">地暖</div>
+                    <div data-type="heat" data-id="1"  class="band-item inline">
+                      <img src="/static/images/design/wn.jpg">
+                      <input type="radio"  name="f-heat">
+                    </div>
+                    <div data-type="heat" data-id="2" class="band-item inline">
+                      <img src="/static/images/design/alsd.jpg">
+                      <input type="radio"  name="f-heat">
+                    </div>
+                  </div>
+                    <input type="hidden" id="heat2">
+                  <div class="radiator" id="radiator">
+                    <div class="radiator-title"><input id="use_nq" style="display: inline-block;" type="checkbox"> <label for="use_nq">+ 暖气片</label></div>
+                    <div id="nqp" style="display: none;">
+                    <div data-type="heat2" data-id="1" class="band-item inline unselect">
+                      <img src="/static/images/design/guilin.jpg">
+                      <input type="radio"  name="radiator">
+                    </div>
+                      <div data-type="heat2" data-id="2" class="band-item inline unselect">
+                          <img src="/static/images/design/ykf.jpg">
+                          <input type="radio"  name="radiator">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="band-select third">
+                <div class="band-title">- 中央净水系统 - <div class="info-item inline">
+                    <select id="js-type">
+                        <option value ="1">前置过滤器</option>
+                        <option value ="2">末端直饮机</option>
+                        <option value="3">中央软水机</option>
+                        <option value="4">中央净水机</option>
+                    </select>
+                </div></div>
+                <input type="hidden" id="water">
+                <div class="band-body">
+                    <div data-type="water" data-id="1"  class="band-item inline">
+                      <img src="/static/images/design/sl.jpg">
+                      <input type="radio"  name="water">
+                    </div>
+                    <div data-type="water" data-id="2" class="band-item inline">
+                      <img src="/static/images/design/lpe.jpg">
+                      <input type="radio"  name="water">
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="wind">
+            <div class="band-select forth">
+                <div class="band-title">- 中央新风系统 -</div>
+                <div class="band-body">
+                  <div data-type="wind" data-id="1" class="band-item inline">
+                    <img src="/static/images/design/bl.jpg">
+                    <input type="radio"  name="wind">
+                  </div>
+                  <div  data-type="wind" data-id="2" class="band-item inline">
+                    <img src="/static/images/design/sx.jpg">
+                    <input type="radio"  name="wind">
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="updata">
+        <input type="submit" value="获取报价">
+    </div>
+</div>
+<div class="modal_box box1" style="display:none;">
+  <div class="modal_form">
+    <div class="modal_head">
+        <p class="mh_tit">发送报价到您的手机</p>
+        <!-- <a href="javascript:void(0);" class="mh_close iconfont" onclick="serviceShow(this);" title="关闭窗口"></a> -->
+        <i class="iconfont icon-close mh_close" title="关闭窗口"></i>
+    </div>
+    <div class="modal_content">
+        <div class="mc_item">
+            <input id="uname" type="text" placeholder="您的称呼" class="username_input username">
+            <input type="text" id="phone" placeholder="手机号码" class="telphone_input phone js_mobile" maxlength="11">
+        </div>
+        <div class="mc_item">
+            <input type="text" id="verifycode" placeholder="验证码" class="telphone_input phone js_mobile" maxlength="8">
+            <button style="width: 43%;display: inline-block;" id="send_verify" type="button" class="btn primary_btn">发送验证码</button>
+        </div>
+        <div class="mc_item">
+            <button type="button" class="btn primary_btn" id="getprice">获取报价</button>
+        </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="geetest_challenge" value="">
+<input type="hidden" id="geetest_validate" value="">
+<input type="hidden" id="geetest_seccode" value="">
+<div class="modal_box baojia_box" style="display:none">
+    <div class="baojia_detail">
+        <div class="top-logo"><img src="/static/images/logo.png"></div>
+        <div class="baojia_detail_content">
+            <i style="top:10px;" class="iconfont icon-close mh_close" title="关闭窗口"></i>
+            <div class="baojia_detail_tit">报价单</div>
+            <p class="baojia_detail_tip">尊敬的业主，根据您的家居需求以及所在地的价格行情，斜厍舒适集成为您预估的报价已新鲜出炉，详情如下：</p>
+            <div class="baojia_products">
+            </div>
+            <div class="clearfix baojia_bottom">
+                <div>
+                    <div class="clearfix" id="baojiao_zdy">
+                        <p class="baojia_bottom_price f-l">套餐系统总报价：<span id="totals"></span>元</p></div>
+                    <p class="baojia_bottom_link">报价已发送至您的手机，您还可以选择去<a target="_blank" href="/mall">商城</a>查看产品详情</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="price_templete" style="display: none">
+    <dl class="clearfix">
+        <dt></dt>
+        <dd class="clearfix">
+            <div class="f-l bp_tit"></div>
+            <div class="f-r cword bp_price"></div>
+        </dd>
+    </dl>
+</div>
+<script src="/static/js/price.js"></script>
+{include file="index@public/footer"}
+</body>
+</html>

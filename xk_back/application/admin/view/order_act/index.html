@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>订单管理({$OrderCount})</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input id="search_keyword" value="{$Keyword}" type="text" placeholder="按订单号搜索" class="input-sm form-control"> <span class="input-group-btn">
+                                <button id="search_button" type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>订单号</th>
+                                <th>购买会员昵称</th>
+                                <th>订单积分</th>
+                                <th>订单状态</th>
+                                <th>所属活动</th>
+                                <th>订单创建时间</th>
+                                <th>订单完成时间</th>
+                                <th style="text-align: center">操作</th>
+                            </tr>
+                            </thead>
+                            {volist name="OrderList" id="orders"}
+                            <tr>
+                                <td class="project-title">{$orders.id}</td>
+                                <td class="project-title">{$orders.order_number}</td>
+                                <td class="project-title">
+                                    <a href="{:url('admin/orderAct/index',['uid'=>$orders.users_id])}">{$orders.nickName}</a>
+                                    <br/>
+                                </td>
+                                <td class="project-title">{$orders.intregral}</td>
+                                <td class="project-title">{$orders.status}</td>
+                                <td class="project-title">
+                                    <a href="{:url('admin/orderAct/index',['activity_id'=>$orders.activity_id])}">{$orders.activity_name}</a>
+                                    <br/>
+                                </td>
+                                <td class="project-title">{$orders.create_time}</td>
+                                <td class="project-title">{if $orders.status=='已完成'}{$orders.update_time}{/if}</td>
+                                <td class="project-actions">
+                                    {if $orders.logistics_number}<a style="display: block" href="{:url('admin/orderAct/logistics',['order_sn'=>$orders.logistics_number,'com'=>$orders.logistics_id])}"  class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看物流信息 </a>{/if}
+                                    <a style="display: block" href="{:url('admin/orderAct/detail',['id'=>$orders.id])}"  class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看详情 </a>
+                                    <a style="display: block" href="{:url('admin/orderAct/edit',['id'=>$orders.id])}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 修改订单状态 </a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        <div class="hr-line-dashed"></div>
+                        <div class="text-center">
+                            <div class="btn-group">
+                                {if condition="$NowPage neq 1"}<button style="height:34px;" class="btn btn-white prev_page" type="button"><i class="fa fa-chevron-left"></i>
+                            </button>{/if}
+                                {for start="1" end="$PageCount+1"}
+                                <button class="btn btn-white page_button{if condition='$i eq $NowPage'} active{/if}">{$i}</button>
+                                {/for}
+                                {if condition="$NowPage lt $PageCount"}<button style="height:34px;" class="btn btn-white next_page" type="button"><i class="fa fa-chevron-right"></i>
+                            </button>{/if}
+                            </div>
+                        </div>
+                        <form id="page_controller" method="post" action="{:url('admin/orderAct/index')}">
+                            <input type="hidden" id="page" name="nowPage" value="{$NowPage}">
+                            <input type="hidden" id="search" name="search" value="{$Keyword}">
+                            <input type="hidden" id="uid" name="uid" value="{$uid}">
+                            <input type="hidden" id="activity_id" name="activity_id" value="{$activity_id}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+<script>
+    var NowPage = {$NowPage};
+    $(function(){
+        $(".page_button").on("click",function () {
+            $("#page").val($(this).html());
+            $("#page_controller").submit();
+        });
+        $(".next_page").on("click",function () {
+            $("#page").val(NowPage + 1);
+            $("#page_controller").submit();
+        });
+        $(".prev_page").on("click",function () {
+            $("#page").val(NowPage - 1);
+            $("#page_controller").submit();
+        });
+        $("#search_button").on("click",function(){
+            keyword = $("#search_keyword").val().trim();
+            $("#search").val(keyword);
+            $("#page").val(1);
+            $("#page_controller").submit();
+        });
+    });
+</script>
+</body>
+</html>

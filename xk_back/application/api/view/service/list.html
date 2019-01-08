@@ -1,0 +1,28 @@
+<div class="list">
+    <ul>
+        <li class="on1">一站式服务</li>
+        <li><a href="javascript:;" id="bzgf">- 安装标准与规范</a>
+            <ul style="display:none">
+                {volist name="categoryList" id="category"}
+                <li><a href="{:url('m/service/help',['typeid'=>$category['id']])}">· {$category.name}系统</a></li>
+                {/volist}
+            </ul>
+        </li>
+        <li><a href="{:url('m/service/view',['id'=>3])}">- 安装服务流程</a></li>
+        <li><a href="{:url('m/service/view',['id'=>4])}">- 售后服务流程</a></li>
+    </ul>
+</div>
+<script>
+    $(function(){
+        $(".list>ul>li").each(function(){
+            var url = "{$type_link}";
+            var link = $(this).find("a");
+            if(link.attr("href")==url){
+                $(this).addClass("on2");
+            }
+        });
+        $('#bzgf').on('click',function(){
+            $(this).parent().find("ul").slideToggle();
+        });
+    });
+</script>

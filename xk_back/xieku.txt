@@ -1,0 +1,5 @@
+服务器登陆用户：root服务器登陆密码：Google168790宝塔控制面板http://47.105.37.246:8888用户：lonview密码：Google188
+
+git地址：git clone root@47.105.37.246:/srv/xieku/xieku.git xieku
+
+数据库密码 ： 96520849432f8b31

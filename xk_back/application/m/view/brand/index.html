@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>合作品牌 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/brand.css">
+    <link rel="stylesheet" href="/static/m/css/list.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="brand-list center">
+    {volist name="categoryList" id="category"}
+    <div class="intro">
+        <title>{$category.name}</title>
+        {volist name="brandList" id="brand"}
+        {if condition="in_array($category.id,$brand.category)"}
+        <div class="brand inline">
+            <div><img src="{$brand.logo}"></div>
+        </div>
+        {/if}
+        {/volist}
+    </div>
+    {/volist}
+</div>
+{include file="public/list"}
+{include file="public/footer"}
+</body>
+</html>

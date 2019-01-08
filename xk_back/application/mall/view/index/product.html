@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$goods.title} - 产品详情 - 商城 - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css//mall-header.css">
+    <link rel="stylesheet" href="/static/css//product.css">
+    <link rel="stylesheet" href="/static/css//footer.css">
+    <script type="text/javascript" src="/static/js//jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/static/js//choice.js"></script>
+</head>
+<body>
+{include file="index@public/header"}
+<div class="top center">
+    <a href="{:url('mall/index/index')}">首页</a><em> > </em>
+    功能类别<em> > </em>
+    <a href="{:url('mall/index/category',['t'=>$goods['categoryid']])}">{:GetCategoryName($goods['categoryid'])} </a><em> > </em>
+    <a href="#">{$goods.title} </a>
+</div>
+<div class="center">
+    <div class="left-img inline">
+        <div id="big-img" class="big-img inline" >
+            <img src="{$goods.cover1}" alt="">
+        </div>
+        <div class="s-img inline">
+            {volist name="cover_list" id="cover"}
+            <div class="thumb inline">
+                <img src="{$cover}">
+            </div>
+            {/volist}
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(".thumb:eq(0)").css("border","2px #B4A078 solid");;
+        $(".thumb").mouseover(function(){
+            $(".thumb").css("border","1px #E8E8E8 solid");
+            $(this).css("border","2px #B4A078 solid");
+            var imgsrc=$(this).find("img").attr("src");
+            $("#big-img>img").attr("src",imgsrc);
+        });
+    </script>
+    <div class="right-text inline">
+        <div class="name">{$goods.title}</div>
+        <div class="model">{$goods.model} </div>
+        <div class="intro">{$goods.introduce}</div>
+        {if condition="sizeof($spec_list) gt 0"}
+        <div class="parameter-block">
+            <div class="parameter-title">规格参数</div>
+            <div class="parameter-content" style="padding:0;">
+                <ul>
+                    {volist name="spec_list" id="spec"}
+                    <li>
+                        <span>{$spec[0]}:</span><span>{$spec[1]}</span>
+                    </li>
+                    {/volist}
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        {/if}
+        <form>
+            <div class="submit">
+                <div class="order inline"><a href="{:url('design/index/free')}">预约订购</a></div>
+                <div class="love inline"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="parameter">
+    <div class="parameter-block">
+        <div class="parameter-title">产品详情</div>
+        <div class="parameter-content image">
+            {$goods.detail}
+        </div>
+    </div>
+</div>
+{include file="index@public/footer"}
+</body>
+</html>

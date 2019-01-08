@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><a href=""> 菜单模块列表(开发人员系统项，不可轻易操作)</a></small></h5>
+                        <div class="ibox-tools">
+                            <a href="{:url('admin/Authority/addAuthority')}" class="btn btn-primary btn-xs"> 新增模块菜单项</a>
+                        </div>
+                    </div>
+
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>模块ID</th>
+                                    <th>模块名</th>
+                                    <th>创建时间</th>
+                                    <th>更新时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               {foreach $list as $val}
+                                <tr>
+                                    <td class="project-title">{$val.id}</td>
+                                    <td class="project-title">{$val.model_name}</td>
+                                    <td class="project-title">{$val.create_time}</td>
+                                    <td class="project-title">{$val.update_time}</td>
+                                    <td class="project-title">
+                                        <button  onclick="myDelete({$val.id})" >删除</button>
+                                        <a href="{:url('menuIndex')}?parent_id={$val.id}">
+                                            <button>查看子菜单</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                        <div class="hr-line-dashed"></div>
+
+
+                    </div>
+                </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/static/admin_res/js/ajaxfileupload.js"></script>
+    <script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+    <script src="/static/admin_res/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="/static/admin_res/js/plugins/toastr/toastr.min.js"></script>
+    <script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>   
+    <script type="text/javascript">
+        function myDelete(id){
+             
+            $.ajax({
+                url     : "{:url('admin/Authority/deleteMenuModel')}",
+                type    : 'POST',
+                data    : {
+                    id : id
+                },
+                success : function(rsf)
+                {
+                    console.log(rsf);
+                    if( rsf.code = 400 )
+                    {
+                        alert(rsf.msg);
+                    }else{
+                        location.reload();
+                    }
+                }
+            });
+        }          
+    </script>    
+</body>
+</html>

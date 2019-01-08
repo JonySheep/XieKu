@@ -1,0 +1,20 @@
+﻿<div class="header">
+    <a href="{:url('m/index/index')}"><img src="/static/m/images/logo.fw.png"></a>
+    <div class="nav-ico" id="nav-ico"></div>
+    <div class="nav" id="nav" style="display:none">
+        <ul>
+            <a href="{:url('m/index/index')}"><li>首页</li></a>
+            <a href="{:url('m/swa/index')}"><li>斜厍舒适集成</li></a>
+            <a href="{:url('m/cases/index')}"><li>应用案例</li></a>
+            <a href="{:url('m/store/index')}"><li>线下门店</li></a>
+            <a href="{:url('m/service/index')}"><li>一站式服务</li></a>
+	    <a target="_blank" href="http://act.swahouse.com/user"><li>质量巡检管理后台</li></a>
+        </ul>
+    </div>
+</div>
+<div class="yellow-line"></div>
+<script type="text/javascript">
+    $("#nav-ico").on("click",function(){
+        $("#nav").toggle();
+    });
+</script>

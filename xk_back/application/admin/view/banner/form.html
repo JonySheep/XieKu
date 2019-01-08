@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        {present name="editmode"}
+                        <h5><a href="{:url('admin/banner/index',['type'=>$banner_type_id])}"><i class="fa fa-chevron-left"></i></a> Banner编辑</small></h5>
+                        <div class="ibox-tools">
+                            <a href="javascript:;" onclick="deleteBrand();" class="btn btn-danger btn-outline btn-xs"><span class="fa fa-trash" aria-hidden="true"></span> 删除该Banner</a>
+                        </div>
+                        {else/}
+                        <h5><a href="{:url('admin/banner/index',['type'=>$banner_type_id])}"><i class="fa fa-chevron-left"></i></a> 新增Banner</h5>
+                        {/present}
+                    </div>
+                    <div class="ibox-content">
+                        <form method="post" action="{:url('admin/banner/update')}" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Banner图像</label>
+                                <div class="col-sm-3">
+                                    <img id="banner_img" style="cursor: pointer;max-height:200px;" onclick="banner_file.click();" src="{empty name='$banner.banneraddress'}/static/admin_res/img/webuploader.png{else/}{$banner.banneraddress}{/empty}">
+                                    <input onchange="ajaxFileUpload('banner_file')" id="banner_file" name="banner_file" style="display:none;" type="file" class="form-control"> <span class="help-block m-b-none">尺寸建议在 1920 x 667 像素</span>
+                                    <input type="hidden" value="{present name='$banner.banneraddress'}{$banner.banneraddress}{/present}" name="banneraddress" id="banner_address">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Banner链接</label>
+                                <div class="col-sm-10">
+                                    <input value="{present name='editmode'}{$banner.link}{/present}" name="link" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序权重</label>
+                                <div class="col-sm-2">
+                                    <input value="{present name='editmode'}{$banner.sort}{else/}0{/present}" type="text" class="form-control" name="sort">
+                                    <span class="help-block m-b-none">权重越小排序越靠前</span>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <input type="hidden" value="{$banner_type_id}" name="type">
+                            {present name='editmode'}<input type="hidden" value="{$banner.id}" name="edit_id">{/present}
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/static/admin_res/js/ajaxfileupload.js"></script>
+    <script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+    <script src="/static/admin_res/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="/static/admin_res/js/plugins/toastr/toastr.min.js"></script>
+    <script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>
+    {present name='editmode'}
+    <script>
+        function deleteBrand(){
+            swal({
+                title: "您确定要删除该Banner吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            }, function () {
+                window.location.href="{:url('admin/banner/delete',['type'=>$banner_type_id,'id'=>$banner['id']])}";
+            });
+        }
+    </script>
+    {/present}
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+        });
+        function ShowToastr(title,msg,type){
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "7000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "slideDown",
+                "hideMethod": "fadeOut"
+            }
+            toastr[type](msg,title);
+        }
+        function ajaxFileUpload(fileinput,type)
+        {
+            url = '{:url("admin/banner/upload")}';
+            $.ajaxFileUpload({
+                url:url,
+                secureuri:false,
+                fileElementId:fileinput,
+                dataType: 'json',
+                success: function (data, status)
+                {
+                    switch(data.result){
+                        case -1:
+                            ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+                            break;
+                        case 0:
+                            ShowToastr("请求未成功",data.msg,"warning");
+                            break;
+                        case 1:
+                            $("#banner_img").attr('src',data.src);
+                            $("#banner_address").val(data.src);
+                            break;
+                    }
+                },
+                error: function (data, status, e)
+                {
+                    ShowToastr("发生错误","服务器内部出错,请联系开发商","error");
+                }
+            });
+            return true;
+        }
+    </script>
+</body>
+</html>

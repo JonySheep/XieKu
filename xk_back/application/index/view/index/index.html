@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/css/mall-header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/banner.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" href="/static/m/css/swiper-3.4.2.min.css">
+
+    <script type="text/javascript" src="/static/m/js/swiper-3.4.2.jquery.min.js"></script>
+
+    <style>
+        .swiper-container {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .swiper-wrapper img {
+            width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+{include file="public/header"}
+<!-- <div class="banner">
+    <div class="roll">
+        <div style="width:100%;">
+            <div id="focus" class="focus">
+                <ul id="img-count">
+                    {volist name="bannerlist" id="banner"}
+                    <li>
+                        {empty name="$banner.link"}
+                            <img src="{$banner.banneraddress}">
+                        {else/}
+                            <a target="_blank" href="{$banner.link}"><img src="{$banner.banneraddress}"></a>
+                        {/empty}
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        {volist name="bannerlist" id="banner"}
+        <div class="swiper-slide">
+            {empty name="$banner.link"}
+                <img src="{$banner.banneraddress}">
+            {else/}
+                <a target="_blank" href="{$banner.link}"><img src="{$banner.banneraddress}"></a>
+            {/empty}</div>
+        {/volist}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Arrows -->
+</div>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 3000,
+        loop: true,
+        autoplayDisableOnInteraction : false,
+    });
+</script>
+
+<!-- <div class="follow">
+    <div class="follow-us">
+        <a href="{:url('swa/context/view','id=2')}">FOLLOW US</a>
+    </div>
+</div> -->
+
+<div class="main">
+    <div class="main-top">
+        <div class="news inline">
+            <div class="board-title">最新资讯</div>
+            <ul>
+                {volist name="articlelist" id="article"}
+                <li><span><a href="{:url('swa/article/view',['id'=>$article[0]])}">{$article[1]}</a></span><span class="f-r">{$article[3]}</span></li>
+                {/volist}
+            </ul>
+            <div class="more"><a href="{:url('swa/article/index',['type'=>1])}">了解更多》</a></div>
+        </div>
+        <div class="contact inline">
+            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3211202927&site=qq&menu=yes">
+                <div class="block">
+                    <img class="inline" src="/static/images/order.png">
+                    <div class="inline">
+                        <div class="contact-title on">快速预约</div>
+                        <span>遍布全城的专业门店与团队为您服务</span>
+                    </div>
+                </div>
+            </a>
+            <a href="{:url('design/index/free')}">
+                <div class="block">
+                    <img class="inline" src="/static/images/server.png">
+                    <div class="inline">
+                        <div class="contact-title">免费方案设计 </div>
+                        <span>您的舒适家居专业顾问</span>
+                    </div>
+                </div>
+            </a>
+            <a href="{:url('design/index/oneminute')}">
+                <div class="block">
+                    <img class="inline" src="/static/images/consult.png">
+                    <div class="inline">
+                        <div class="contact-title">一分钟报价</div>
+                        <span>简单几步，快速响应</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+
+        <script type="text/javascript">
+            $(".block:eq(0)").mouseover(function(){
+                $(this).css("border","1px #F29900 solid");
+                $(this).find(".contact-title").css("color","#F29900");
+                $(this).find("img").attr("src","/static/images/order-on.png");
+            });
+            $(".block:eq(0)").mouseout(function(){
+                $(this).css("border","1px #999 solid");
+                $(this).find(".contact-title").css("color","#999");
+                $(this).find("img").attr("src","/static/images/order.png");
+            });
+            $(".block:eq(1)").mouseover(function(){
+                $(this).css("border","1px #F29900 solid");
+                $(this).find(".contact-title").css("color","#F29900");
+                $(this).find("img").attr("src","/static/images/server-on.png");
+            });
+            $(".block:eq(1)").mouseout(function(){
+                $(this).css("border","1px #999 solid");
+                $(this).find(".contact-title").css("color","#999");
+                $(this).find("img").attr("src","/static/images/server.png");
+            });
+            $(".block:eq(2)").mouseover(function(){
+                $(this).css("border","1px #F29900 solid");
+                $(this).find(".contact-title").css("color","#F29900");
+                $(this).find("img").attr("src","/static/images/consult-on.png");
+            });
+            $(".block:eq(2)").mouseout(function(){
+                $(this).css("border","1px #999 solid");
+                $(this).find(".contact-title").css("color","#999");
+                $(this).find("img").attr("src","/static/images/consult.png");
+            });
+        </script>
+
+    </div>
+
+    <div class="about">
+        <a href="{:url('swa/article/index',['type'=>3])}">
+            <div class="block-about inline">
+                <img src="/static/images/about1.png">
+                <div class="about-title">家装新风尚</div>
+                <span>引领家居装修潮流</span>
+            </div>
+        </a>
+        <a href="{:url('cases/index/index')}">
+            <div class="block-about inline">
+                <img src="/static/images/about2.png">
+                <div class="about-title">案例分享</div>
+                <span>专业案例，与您分享</span>
+            </div>
+        </a>
+        <a href="{:url('swa/article/index',['type'=>2])}">
+            <div class="block-about inline">
+                <img src="/static/images/about3.png">
+                <div class="about-title">舒适家居小常识</div>
+                <span>舒适小技巧，生活大不同</span>
+            </div>
+        </a>
+    </div>
+</div>
+{include file="public/footer"}
+</body>
+</html>

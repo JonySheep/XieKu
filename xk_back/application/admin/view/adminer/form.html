@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斜厍舒适集成后台</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/static/admin_res/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin_res/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/admin_res/css/animate.css" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/admin_res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/static/admin_res/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改管理员密码</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" action="{:url('admin/adminer/update')}" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">管理员用户名</label>
+                            <div class="col-sm-3">
+                                <input value="{$Think.session.admin_name}" name="admin_n" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">原密码</label>
+                            <div class="col-sm-3">
+                                <input value="" name="old_p" type="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">新密码</label>
+                            <div class="col-sm-3">
+                                <input value="" name="new_p" type="password" class="form-control">
+                            </div>
+                            <div>
+                                <span>* 新密码长度至少需要6位</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">确认密码</label>
+                            <div class="col-sm-3">
+                                <input value="" name="new_p2" type="password" class="form-control">
+                            </div>
+                            <div>
+                                <span>* 新密码长度至少需要6位</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <button class="btn btn-primary" type="submit">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin_res/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin_res/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin_res/js/content.js?v=1.0.0"></script>
+<script src="/static/admin_res/js/plugins/toastr/toastr.min.js"></script>
+<script src="/static/admin_res/js/plugins/sweetalert/sweetalert.min.js"></script>
+</body>
+</html>

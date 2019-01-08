@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>商城 -斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/filter.css">
+    <link rel="stylesheet" href="/static/m/css/brand1.css">
+    <link rel="stylesheet" href="/static/m/css/page.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/base64.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="filter">
+
+    <div class="filter-item">
+        <div class="filter-item-title">类别：</div>
+        <div class="filter-item-list">
+            <ul>
+                {volist name="categoryList" id="categorys"}
+                <li class="{if condition='$nowCategoryId eq $categorys.id'} on{/if}"><a href="{:url('m/mall/brand',['type'=>$categorys['id']])}">{$categorys.name}</a></li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+
+
+    {volist name="attributeList" id="attribute"}
+    <div class="filter-item">
+        <div class="filter-item-title">{$attribute.name}：</div>
+        <div class="filter-item-list">
+            <ul class="attribute filter-item-list-jg" data-aid="{$attribute.id}">
+                <li data-vid="0" class="options">全部</li>
+                {volist name="attribute.value" id="value"}
+                <li data-vid="{$i}" class="options">{$value}</li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+    {/volist}
+
+    <div class="filter-item">
+        <div class="filter-item-title">品牌：</div>
+        <div class="filter-item-list">
+            <select id="brand_option">
+                <option {if condition='$NowBrand eq 0'}selected{/if} value="0">全部</option>
+                {volist name="BrandList" id="brand"}
+                <option value="{$brand.id}" {if condition='$NowBrand eq $brand.id'}selected{/if}>{$brand.name}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="brand-list center">
+    <div class="list-items">
+        <ul>
+            {volist name="GoodsList" id="goods"}
+            <li>
+                <a href="{:url('m/mall/product',['id'=>$goods['id']])}">
+                    <img src="{$goods.cover1}">
+                    <title>{$goods.title}</title>
+                    <div>
+                        <p>{if condition="$goods.customized eq 1"}<span>可定制</span>{/if}</p>
+                    </div>
+                </a>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+    {include file="mall/page"}
+</div>
+
+<form id="controller_form" method="get">
+    <input type="hidden" id="attributes" name="attr" value="{$attributes_base64}">
+    <input type="hidden" name="page" id="pg" value="{$NowPage}">
+    <input type="hidden" name="brand" id="bd" value="{$NowBrand}">
+</form>
+<script>
+    var bs64 = new Base64();
+    var options = {$attributes_json};
+    var NowPage = {$NowPage};
+    updateOption();
+    $(function(){
+        $("li.options").on('click',function(){
+            options[$(this).parent().data('aid')]=$(this).data('vid');
+            attributes_bs = bs64.encode(JSON.stringify(options));
+            $("#attributes").val(attributes_bs);
+            controller_form.submit();
+        });
+        $("li.brand_options").on('click',function(){
+            $("#bd").val(($(this).data('bid')).toString());
+            controller_form.submit();
+        });
+        $(".page_button").on("click",function () {
+            $("#pg").val($(this).html());
+            controller_form.submit();
+        });
+        $(".nextPage").on("click",function () {
+            $("#pg").val(NowPage + 1);
+            controller_form.submit();
+        });
+        $(".prevPage").on("click",function () {
+            $("#pg").val(NowPage - 1);
+            controller_form.submit();
+        });
+        $("#brand_option").on("change",function(){
+            $("#bd").val($(this).val());
+            controller_form.submit();
+        })
+    });
+    function updateOption(){
+        $("ul.attribute>li[data-vid='0']").addClass("on");
+        for(key in options){
+            $("ul:[data-aid="+key+"]>li").removeClass("on");
+            $("ul:[data-aid="+key+"]>li:eq("+parseInt(options[key])+")").addClass("on");
+        }
+    }
+</script>
+{include file="public/footer"}
+</body>
+</html>

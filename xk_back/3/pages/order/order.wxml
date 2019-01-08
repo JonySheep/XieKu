@@ -1,0 +1,32 @@
+<!--pages/order/order.wxml-->
+<import src="/pages/common/lib/templet.wxml"/>
+<view class="swiper-tab">  
+ <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">未完成</view>  
+ <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已完成</view>  
+ 
+</view>  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px; " bindchange="bindChange">  
+ <swiper-item>  
+  <view>
+    <scroll-view scroll-y style="height: 1100rpx;" >
+      <block wx:for="{{ceshi}}" wx:for-item="item" wx:key="*this">
+        <!-- is就是模板名字name值 -->
+        <template is="dingdan" data="{{...item}}" />
+      </block>
+      </scroll-view>
+  
+  
+  </view>  
+ </swiper-item>  
+ <swiper-item>  
+  <view>
+    <scroll-view scroll-y style="height: 1100rpx;" >
+      <block wx:for="{{ceshi}}" wx:for-item="item" wx:key="*this">
+        <!-- is就是模板名字name值 -->
+        <template is="dingdan" data="{{...item}}" />
+      </block>
+    </scroll-view>  
+  </view>  
+ </swiper-item>  
+ 
+</swiper>  

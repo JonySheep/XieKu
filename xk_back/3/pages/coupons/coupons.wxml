@@ -1,0 +1,29 @@
+<view class='page'>
+
+  
+    <view class='main' wx:for="{{coupons}}" wx:for-item="coupon" wx:key="index">
+        <image src='{{coupon.back_img}}' class='main-background'></image>
+        <view class='main-div'>
+          <text class='main-dollar'>
+            <text class="yangzong">￥</text>
+          </text> 
+          <text class='main-number'>{{coupon.face_money}} </text>
+          <text class='main-price'>优惠券</text>   
+        </view>
+        <view>
+           <image src='../../image/time.png' class='main-image1'></image>          
+          <text class='main-text1'>使用门槛：{{coupon.top_money ? '满'+coupon.top_money+'元即可使用' : '无使用门槛' }}</text>
+        </view>
+        <view>
+
+           <image src='../../image/money.png' class='main-image2'></image>
+          <text class='main-text2'>使用时间：即日起至{{coupon.end_time}}{{coupon.is_use}}</text>
+        </view>
+        <button class="{{coupon.is_use?'main-button-use':'main-button'}}" bindtap='addCoupons'  data-couponId="{{coupon.id}}">{{coupon.is_use?'已领取':'立即领取'}}</button>
+        <!-- img 已经领取-->       
+        <image wx:if="{{coupon.is_use}}" src="https://www.swahouse.com/image/aaa.png" class="yjlq"></image>
+        
+    </view>
+ 
+  
+</view>

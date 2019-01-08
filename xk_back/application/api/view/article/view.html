@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>{$article.title} - {$article_typename} - 斜厍舒适集成</title>
+    <link rel="stylesheet" href="/static/m/css/header.css">
+    <link rel="stylesheet" href="/static/m/css/fashion-contg.css">
+    <link rel="stylesheet" href="/static/m/css/list.css">
+    <link rel="stylesheet" href="/static/m/css/footer.css">
+    <script type="text/javascript" src="/static/m/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="main">
+    <div class="fashion-list">
+        <div class="in_page_right">
+            <div class="intro">
+                <div class="intro-top">
+                    <div class="intro-title">{$article.title}</div>
+                    <div class="intro-other">
+                        <span class="time">{$article.updatetime}</span>
+                        <span class="author">发布者：{$article.user}</span>
+                    </div>
+                </div>
+
+                <div class="intro-content">
+                    {$article.body}
+                </div>
+            </div>
+
+            <div class="prev-next">
+                {if condition="$Before eq null"}
+                <div class="prev"><span>上一篇：</span>没有了</div>
+                {else/}
+                <div class="prev"><span>上一篇：</span><a href="{:url('m/article/view',['id'=>$Before[0]])}">{$Before[1]}</a></div>
+                {/if}
+                {if condition="$Next eq null"}
+                <div class="next"><span>下一篇：</span>没有了</div>
+                {else/}
+                <div class="next"><span>下一篇：</span><a href="{:url('m/article/view',['id'=>$Next[0]])}">{$Next[1]}</a></div>
+                {/if}
+            </div>
+        </div>
+
+    </div>
+</div>
+{include file="public/list"}
+{include file="public/footer"}
+</body>
+</html>

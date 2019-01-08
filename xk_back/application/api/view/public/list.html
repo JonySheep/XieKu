@@ -1,0 +1,22 @@
+<div class="list">
+    <ul>
+        <li class="on1">斜厍舒适集成</li>
+        <li><a href="{:url('m/page/view',['id'=>1])}">- 公司介绍</a></li>
+        <li><a href="{:url('m/brand/index')}">- 合作品牌</a></li>
+        <li><a href="{:url('m/article/index',['type'=>1])}">- 活动与资讯</a></li>
+        <li><a href="{:url('m/article/index',['type'=>3])}">- 家装新风尚</a></li>
+        <li><a href="{:url('m/article/index',['type'=>2])}">- 舒适家居小常识</a></li>
+        <li><a href="{:url('m/page/view',['id'=>2])}">- 联系我们</a></li>
+    </ul>
+</div>
+<script>
+    $(function(){
+        $(".list>ul>li").each(function(){
+            var url = "{$type_link}";
+            var link = $(this).find("a");
+            if(link.attr("href")==url){
+                $(this).addClass("on2");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,87 @@
+/* pages/newAdd/newAdd.wxss */
+
+page {
+  font-size: 14px;
+  background-color: #f8f8f8;
+}
+
+.new-add {
+  background-color: #fff;
+}
+
+.new-add-list {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.new-add-list text {
+  width: 26%;
+}
+
+.new-add-list input {
+  padding-right: 126rpx;
+}
+
+.new-add-list image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.new-add-list .add-api {
+  display: flex;
+  align-items: center;
+  width: 74%;
+  justify-content: space-between;
+}
+
+.new-add-list .add-api textarea {
+  width: 500rpx;
+  height: 80rpx;
+}
+
+.add-btn {
+  width: 94%;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 30rpx auto;
+  background-color: #00a0e9;
+  color: #fff;
+}
+
+.new-add-list:last-child {
+  justify-content: space-between;
+}
+
+.new-add-list .switch-btn {
+  color: #00a0e9;
+}
+.affirmCancel > view{
+  width: 45%;
+  float: left;
+  height: 100%;
+  line-height: 40px;
+}
+.affirm{
+  text-align: right;
+  padding-right: 4%;
+  color: #1ac120
+}
+.affirmCancel{
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index:9;
+    font-size:30rpx;
+    font-weight:900;
+}
+.alertSelect{
+  position: relative;
+}
+.cancel{
+  padding-left: 4%;
+  color: #666
+}
