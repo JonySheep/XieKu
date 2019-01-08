@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    promptList:["待付款", "待发货", "待收获", "", "", "已完成"],
+    promptList:["待付款", "待发货", "待收货", "", "", "已完成"],
     appurl: getApp().globalData.globalUrl,
     imgUrl: getApp().globalData.globalStaticUrl,
     ceshi:[],

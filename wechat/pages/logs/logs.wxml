@@ -13,9 +13,9 @@
       <view bindtap="dhjl" >兑换记录</view>
     </view>
     <view class="functional2">
-      <view>
-        <image src='https://www.swahouse.com/image/welfare2.png' style="width:120rpx;" mode="widthFix" bindtap="scoreDeclare" ></image>
-        <text style='display:block;line-height:2rpx;'>积分说明</text>
+      <view >
+        <image src='https://www.swahouse.com/image/welfare2.png' style="width:120rpx;" mode="widthFix" bindtap="toShopCenter" ></image>
+        <text style='display:block;line-height:2rpx;'>商城中心</text>
         
       </view>
     

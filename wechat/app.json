@@ -2,7 +2,6 @@
   "pages": [
     
     "pages/center/center",
-    
     "pages/home/home",
     "pages/gainintegral/gainintegral",
     "pages/score/score",

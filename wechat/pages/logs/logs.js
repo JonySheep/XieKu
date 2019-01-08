@@ -181,9 +181,9 @@ Page({
         url: '../score/score',
       })
   },
-  scoreDeclare : function() {
-    wx.navigateTo({
-      url: '../webview/webview?type=scoreDeclare',
+  toShopCenter : function() {
+    wx.switchTab({
+      url: '../home/home',
     })
   },
   //特惠套餐
