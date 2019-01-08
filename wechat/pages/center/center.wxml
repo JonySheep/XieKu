@@ -148,14 +148,14 @@
       <text>预约服务\t</text>
       <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
     </view>
-    <view bindtap="goToQuestion" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+    <view bindtap="goToOurs" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
       <image class='left' src="https://www.swahouse.com/../../image/question.png"></image>
-      <text>常见问题\t</text>
+      <text>关于我们\t</text>
       <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
     </view>
-    <view bindtap="goToOurs" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
+    <view bindtap="goToQuestion" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">
       <image class='left' src="https://www.swahouse.com/../../image/mine.png"></image>
-      <text>关于我们\t</text>
+      <text>常见问题\t</text>
       <image class='right' src="https://www.swahouse.com/../../image/go_icon.png"></image>
     </view>
     <view bindtap="toFeedback" data-id="{{id}}" hover-class="tapclass" class="myInfo-item bb">

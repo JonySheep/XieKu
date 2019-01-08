@@ -17,13 +17,17 @@ Page({
     var type = options.type;
     var that = this;
     if (type == 'ours'){
+      wx.setNavigationBarTitle({
+        title: '关于我们',
+      })
       that.setData({
-        url: that.data.appurl +"/page/view/id/6",
+        url: that.data.appurl + "/page/view/id/5",
+        
       });
     } else if (type == 'question'){
       // todo
       that.setData({
-        url: that.data.appurl + "/page/view/id/5",
+        url: that.data.appurl + "/page/view/id/6",
       });
     } else if (type == 'banner') {
       // todo 
