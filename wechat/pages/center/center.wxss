@@ -14,6 +14,13 @@ page {
   font-weight: bold;
   background-color: red;
   float: right;
+  padding: 0px;
+}
+
+.order-icon {
+  display:flex;
+  margin-bottom:10rpx;
+  margin-left: 10rpx;
 }
 
 .common-wrapper {
