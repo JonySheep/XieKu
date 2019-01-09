@@ -160,6 +160,7 @@ page {
   font-size: 30rpx;
   text-align: center;
   padding-top: 40rpx;
+  
 }
 .model-box-bottom{
   height: 79rpx;

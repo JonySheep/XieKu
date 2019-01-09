@@ -165,7 +165,8 @@
 <view class='model' wx:if="{{isshowmodel}}">
     <view class='model-box'>
        <view class='model-box-top'>
-          确认分享此商品？
+          <view style='margin: 10rpx'>确认分享此商品？</view>
+           <view style='color:red;fontSize:16rpx'>分享成功 +100 积分</view>
        </view>
        <view class='model-box-bottom'>
           <button class='cancel button' bindtap='closeModelFn'>取消</button>

@@ -29,6 +29,7 @@
      isshowmodel:false,
      shareId:'',
      typech: true,
+     
    },
    moveFn(){
      

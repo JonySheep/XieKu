@@ -175,7 +175,7 @@ Page({
   getGoodIntegral: function(goodId) {
     var goodList = this.data.category;
     for (var i=0; i<goodList.length; i++) {
-      if (goodId = goodList[i].id) {
+      if (goodId === goodList[i].id) {
         return goodList[i].integral;
       }
     }
