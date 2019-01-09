@@ -3,8 +3,9 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
+    appurl: getApp().globalData.globalUrl,
     integral : 0,
-    imgUrls: [],
+    banners: [],
     indicatorDots: true,
     autoplay:true,
     interval: 5000,
@@ -28,19 +29,27 @@ Page({
   {   
       var that = this
       wx.request({
-          url : 'https://www.swahouse.com/index.php/api/Activity/getActivityBanner',
+        url: that.data.appurl + 'banner?type=4',
           header: {
             'content-type': 'application/json'
           },
           success : function(ref)
           {
-            // console.log(ref)
              that.setData({
-                imgUrls : ref.data.data
+                banners : ref.data.data
              })
           }
       });
   },
+
+  bannerTo : function(e) {
+    console.log("!!")
+    console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: '../activitydetails/activitydetails?id=' + e.currentTarget.dataset.id,
+    })
+  },
+
   //获取活动
   getActivity : function(genre)
   {   

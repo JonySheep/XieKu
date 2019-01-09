@@ -1,12 +1,13 @@
 
-  <swiper indicator-dots="{{indicatorDots}}"
-    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{imgUrls}}" indicator-active-color="#ffe202"> 
-      <swiper-item>
-        <image src="{{item}}" class="slide-image" mode='widthFix'  style="width:100%;" />
-      </swiper-item>
-    </block>
-  </swiper>
+<swiper indicator-dots="false" class='banner' indicator-color="#dddcdc" indicator-active-color="#ffe202" autoplay="true" interval="5000" duration="1000">
+  <block>
+    <swiper-item wx:for="{{banners}}" wx:for-item="banner" wx:key="*this">
+      <image src="{{imgUrl}}{{banner['banneraddress']}}" class="slide-image" data-id='{{banner.link}}' bindtap='bannerTo'/>
+    </swiper-item>
+
+  </block>
+</swiper>
+
   <view class="functional">
     <view class="functional1">
       <view>我的积分：<span style="color:red;">{{integral}}</span></view>

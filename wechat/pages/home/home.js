@@ -25,9 +25,29 @@ Page({
   },
 
   bannerTo(e){
+    // wx.navigateTo({
+    //   url: '../webview/webview?type=banner&url=' + e.currentTarget.dataset.url,
+    // })
+
+    var goodName = e.currentTarget.dataset.id;
+    var goodId = this.getGoodId(goodName);
+    console.log(goodId)
+    // todo
     wx.navigateTo({
-      url: '../webview/webview?type=banner&url=' + e.currentTarget.dataset.url,
+      url: '../productdetails/productdetails?id=' + goodId,
     })
+      
+  },
+
+  getGoodId(goodName) {
+    var list = this.data.categories;
+    for (var i =0; i<list.length; i++ ) {
+      for (var j=0;j<list[i].goods.length; j++) {
+        if (goodName === list[i].goods[j].title) {
+          return list[i].goods[j].id;
+        }
+      }
+    }
   },
 
   /**
@@ -80,6 +100,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+
         self.setData({
           categories: res.data.data
         });

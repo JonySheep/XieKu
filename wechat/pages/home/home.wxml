@@ -16,7 +16,7 @@
 <swiper indicator-dots="false" class='banner' indicator-color="#dddcdc" indicator-active-color="#ffe202" autoplay="true" interval="5000" duration="1000">
   <block>
     <swiper-item wx:for="{{banners}}" wx:for-item="banner" wx:key="*this">
-      <image src="{{imgUrl}}{{banner['banneraddress']}}" class="slide-image" data-url='{{banner.link}}' bindtap='bannerTo'/>
+      <image src="{{imgUrl}}{{banner['banneraddress']}}" class="slide-image" data-id='{{banner.link}}' bindtap='bannerTo'/>
     </swiper-item>
 
   </block>

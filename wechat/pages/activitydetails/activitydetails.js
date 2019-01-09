@@ -50,6 +50,8 @@ Page({
               console.log(rsf)
           }
       })
+
+      console.log(activityId)
   },
   //获取单个活动
   getActivityFind : function(activityId)
