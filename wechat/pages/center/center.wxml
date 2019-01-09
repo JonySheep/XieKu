@@ -88,7 +88,6 @@
        <view class='order-icon'>
         <image src='/image/dui.png'>
         </image>
-        <view wx:if="{{finishCount > 0}}" class="counter">{{finishCount}}</view>
         </view>
         <view style='color:#666666'>已完成</view>
       </view>

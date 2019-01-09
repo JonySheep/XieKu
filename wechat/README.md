@@ -1,2 +1,0 @@
-# XieKu
-xieku app

@@ -15,7 +15,6 @@ Page({
     readyPayCount: 0,
     readySendCount: 0,
     readyReceiveCount: 0,
-    finishCount: 0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -45,15 +44,7 @@ Page({
         that.setData({ readyReceiveCount: data.data.length })
       })
 
-      common.httpG('order/orderList', {
-        openid: wx.getStorageSync('openid'),
-        status: 5
-      }, function (data) {
-        that.setData({ finishCount: data.data.length })
-      })
     }
-
-    
   },
 
   //用户授权

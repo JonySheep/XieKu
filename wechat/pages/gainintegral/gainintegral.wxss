@@ -9,8 +9,8 @@ page {
   display: flex;
   width: 100%;   
   white-space: nowrap;
-  /* height: 60px ;  */
-  line-height: 60rpx; 
+  height: 105rpx ; 
+  line-height: 105rpx; 
   top: 0rpx;
   left: 0rpx;
   z-index: 998;
